@@ -36,7 +36,7 @@ namespace inst::ui {
         this->installInfoText->SetFont(pu::ui::MakeDefaultFontName(33));
         this->installInfoText->SetColor(COLOR("#FFFFFFFF"));
         this->installBar = pu::ui::elm::ProgressBar::New(15, 900, 1275, 60, 100.0f);
-        this->installBar->SetProgressColor(COLOR("#222222FF"));
+        this->installBar->SetBackgroundColor(COLOR("#222222FF"));
         if (std::filesystem::exists(inst::config::appDir + "/awoo_inst.png")) this->awooImage = Image::New(615, 285, inst::util::loadTex(inst::config::appDir + "/awoo_inst.png"));
         else this->awooImage = Image::New(765, 249, inst::util::loadTex("romfs:/images/awoos/7d8a05cddfef6da4901b20d2698d5a71.png"));
         this->awooImage->SetWidth(1146);
