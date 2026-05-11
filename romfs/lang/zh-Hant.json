@@ -131,7 +131,10 @@
         "complete_desc": "請重新啟動主機以套用變更",
         "restart": "重新啟動",
         "later": "稍後",
-        "generic_error": "安裝 Ultrahand Overlay 與 sys-patch 失敗!"
+        "generic_error": "安裝 Ultrahand Overlay 與 sys-patch 失敗!",
+        "top_info": "正在安裝 Ultrahand Overlay 與 sys-patch",
+        "downloading": "正在下載 ",
+        "extracting": "正在解壓縮 "
     },
     "options": {
         "menu_items": {

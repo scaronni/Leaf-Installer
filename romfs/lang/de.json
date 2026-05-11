@@ -128,7 +128,10 @@
         "complete_desc": "Starte deine Konsole neu, um die Änderungen anzuwenden",
         "restart": "Neustart",
         "later": "Später",
-        "generic_error": "Installation von Ultrahand Overlay und sys-patch fehlgeschlagen!"
+        "generic_error": "Installation von Ultrahand Overlay und sys-patch fehlgeschlagen!",
+        "top_info": "Ultrahand Overlay und sys-patch werden installiert",
+        "downloading": "Lade herunter ",
+        "extracting": "Extrahiere "
     },
     "options": {
         "menu_items": {

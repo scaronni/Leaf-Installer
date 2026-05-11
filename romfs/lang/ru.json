@@ -128,7 +128,10 @@
         "complete_desc": "Перезагрузите консоль для применения",
         "restart": "Перезагрузить",
         "later": "Позже",
-        "generic_error": "Не удалось установить Ultrahand Overlay и sys-patch!"
+        "generic_error": "Не удалось установить Ultrahand Overlay и sys-patch!",
+        "top_info": "Установка Ultrahand Overlay и sys-patch",
+        "downloading": "Загрузка ",
+        "extracting": "Распаковка "
     },
     "options": {
         "menu_items": {

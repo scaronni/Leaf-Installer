@@ -131,7 +131,10 @@
         "complete_desc": "请重启主机以应用更改",
         "restart": "重启",
         "later": "稍后",
-        "generic_error": "安装 Ultrahand Overlay 和 sys-patch 失败!"
+        "generic_error": "安装 Ultrahand Overlay 和 sys-patch 失败!",
+        "top_info": "正在安装 Ultrahand Overlay 和 sys-patch",
+        "downloading": "正在下载 ",
+        "extracting": "正在解压 "
     },
     "options": {
         "menu_items": {

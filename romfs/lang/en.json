@@ -131,7 +131,10 @@
         "complete_desc": "Restart your console to apply",
         "restart": "Restart",
         "later": "I'll do it later",
-        "generic_error": "Failed to install Ultrahand Overlay and sys-patch!"
+        "generic_error": "Failed to install Ultrahand Overlay and sys-patch!",
+        "top_info": "Installing Ultrahand Overlay and sys-patch",
+        "downloading": "Downloading ",
+        "extracting": "Extracting "
     },
     "options": {
         "menu_items": {

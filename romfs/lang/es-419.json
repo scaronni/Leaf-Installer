@@ -128,7 +128,10 @@
         "complete_desc": "Reinicia la consola para aplicar los cambios",
         "restart": "Reiniciar",
         "later": "Más tarde",
-        "generic_error": "¡Error al instalar Ultrahand Overlay y sys-patch!"
+        "generic_error": "¡Error al instalar Ultrahand Overlay y sys-patch!",
+        "top_info": "Instalando Ultrahand Overlay y sys-patch",
+        "downloading": "Descargando ",
+        "extracting": "Extrayendo "
     },
     "options": {
         "menu_items": {

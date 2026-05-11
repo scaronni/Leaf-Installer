@@ -13,8 +13,14 @@ namespace inst::ui {
 }
 
 namespace sig {
-    static bool downloadAndExtract(const std::string& url, const std::string& zipPath) {
-        if (!inst::curl::downloadFile(url, zipPath.c_str())) return false;
+    static bool installComponent(const std::string& displayName, const std::string& version, const std::string& url, const std::string& zipPath) {
+        inst::ui::instPage::setInstBarPerc(0);
+        inst::ui::instPage::setInstInfoText("sig.downloading"_lang + displayName + " " + version);
+        if (!inst::curl::downloadFile(url, zipPath.c_str(), 0, true)) {
+            std::filesystem::remove(zipPath);
+            return false;
+        }
+        inst::ui::instPage::setInstInfoText("sig.extracting"_lang + displayName);
         const bool ok = inst::zip::extractFile(zipPath, "sdmc:/");
         std::filesystem::remove(zipPath);
         return ok;
@@ -47,16 +53,18 @@ namespace sig {
                 return;
             }
 
-            const std::string ultraZip = inst::config::appDir + "/ultrahand.zip";
-            const std::string sysZip = inst::config::appDir + "/sys-patch.zip";
+            inst::ui::instPage::loadInstallScreen();
+            inst::ui::instPage::setTopInstInfoText("sig.top_info"_lang);
 
-            if (!downloadAndExtract(ultrahandInfo[1], ultraZip)) {
+            if (!installComponent("Ultrahand Overlay", ultrahandInfo[0], ultrahandInfo[1], inst::config::appDir + "/ultrahand.zip")) {
                 inst::ui::mainApp->CreateShowDialog("sig.download_failed"_lang, "Ultrahand Overlay", {"common.ok"_lang}, true);
+                inst::ui::instPage::loadMainMenu();
                 bpcExit();
                 return;
             }
-            if (!downloadAndExtract(sysPatchInfo[1], sysZip)) {
+            if (!installComponent("sys-patch", sysPatchInfo[0], sysPatchInfo[1], inst::config::appDir + "/sys-patch.zip")) {
                 inst::ui::mainApp->CreateShowDialog("sig.download_failed"_lang, "sys-patch", {"common.ok"_lang}, true);
+                inst::ui::instPage::loadMainMenu();
                 bpcExit();
                 return;
             }
@@ -64,11 +72,13 @@ namespace sig {
             if (inst::ui::mainApp->CreateShowDialog("sig.install_complete"_lang, "sig.complete_desc"_lang, {"sig.restart"_lang, "sig.later"_lang}, false) == 0) {
                 bpcRebootSystem();
             }
+            inst::ui::instPage::loadMainMenu();
         }
         catch (std::exception& e) {
             LOG_DEBUG("Failed to install Ultrahand Overlay and sys-patch");
             LOG_DEBUG("%s", e.what());
             inst::ui::mainApp->CreateShowDialog("sig.generic_error"_lang, (std::string)e.what(), {"common.ok"_lang}, true);
+            inst::ui::instPage::loadMainMenu();
         }
         bpcExit();
     }

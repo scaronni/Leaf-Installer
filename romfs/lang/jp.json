@@ -128,7 +128,10 @@
         "complete_desc": "適用するにはコンソールを再起動してください",
         "restart": "再起動",
         "later": "後で",
-        "generic_error": "Ultrahand Overlay と sys-patch のインストールに失敗しました!"
+        "generic_error": "Ultrahand Overlay と sys-patch のインストールに失敗しました!",
+        "top_info": "Ultrahand Overlay と sys-patch をインストール中",
+        "downloading": "ダウンロード中: ",
+        "extracting": "展開中: "
     },
     "options": {
         "menu_items": {

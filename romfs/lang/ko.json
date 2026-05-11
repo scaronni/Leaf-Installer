@@ -128,7 +128,10 @@
         "complete_desc": "변경 사항을 적용하려면 콘솔을 재부팅하세요",
         "restart": "재시작",
         "later": "나중에",
-        "generic_error": "Ultrahand Overlay 및 sys-patch 설치 실패!"
+        "generic_error": "Ultrahand Overlay 및 sys-patch 설치 실패!",
+        "top_info": "Ultrahand Overlay 및 sys-patch 설치 중",
+        "downloading": "다운로드 중: ",
+        "extracting": "압축 해제 중: "
     },
     "options": {
         "menu_items": {

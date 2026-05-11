@@ -128,7 +128,10 @@
         "complete_desc": "Redémarrez votre console pour appliquer",
         "restart": "Redémarrer",
         "later": "Plus tard",
-        "generic_error": "Échec de l'installation d'Ultrahand Overlay et sys-patch !"
+        "generic_error": "Échec de l'installation d'Ultrahand Overlay et sys-patch !",
+        "top_info": "Installation de Ultrahand Overlay et sys-patch",
+        "downloading": "Téléchargement de ",
+        "extracting": "Extraction de "
     },
     "options": {
         "menu_items": {
