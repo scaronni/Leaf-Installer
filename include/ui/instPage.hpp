@@ -18,6 +18,7 @@ namespace inst::ui {
             TextBlock::Ref appVersionText;
             static void setTopInstInfoText(std::string ourText);
             static void setFileNameText(std::string ourText);
+            static void setTopInfo(std::string topText, std::string fileName);
             static void setInstInfoText(std::string ourText);
             static void setInstBarPerc(double ourPercent);
             static void loadMainMenu();

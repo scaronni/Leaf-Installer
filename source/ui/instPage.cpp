@@ -66,6 +66,16 @@ namespace inst::ui {
         mainApp->CallForRender();
     }
 
+    // Updates both header texts with a single CallForRender. Do not split this into
+    // setTopInstInfoText + setFileNameText at install-loop sites: the second render
+    // between selecting a file and the install task's Prepare() desyncs NS-USBloader
+    // and BufferData hits its 5s read timeout. One render per iteration is required.
+    void instPage::setTopInfo(std::string topText, std::string fileName){
+        mainApp->instpage->pageInfoText->SetText(topText);
+        mainApp->instpage->fileNameText->SetText(fileName);
+        mainApp->CallForRender();
+    }
+
     void instPage::setInstInfoText(std::string ourText){
         mainApp->instpage->installInfoText->SetText(ourText);
         mainApp->CallForRender();

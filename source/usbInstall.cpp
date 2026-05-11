@@ -112,8 +112,7 @@ namespace usbInstStuff {
 
         try {
             for (fileItr = 0; fileItr < ourTitleList.size(); fileItr++) {
-                inst::ui::instPage::setTopInstInfoText("inst.info_page.top_info0"_lang + "inst.usb.source_string"_lang);
-                inst::ui::instPage::setFileNameText(fileNames[fileItr]);
+                inst::ui::instPage::setTopInfo("inst.info_page.top_info0"_lang + "inst.usb.source_string"_lang, fileNames[fileItr]);
                 std::unique_ptr<tin::install::Install> installTask;
 
                 if (ourTitleList[fileItr].compare(ourTitleList[fileItr].size() - 3, 2, "xc") == 0) {

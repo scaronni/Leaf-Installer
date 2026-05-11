@@ -67,8 +67,7 @@ namespace nspInstStuff {
         try
         {
             for (titleItr = 0; titleItr < ourTitleList.size(); titleItr++) {
-                inst::ui::instPage::setTopInstInfoText("inst.info_page.top_info0"_lang + "inst.sd.source_string"_lang);
-                inst::ui::instPage::setFileNameText(ourTitleList[titleItr].filename().string());
+                inst::ui::instPage::setTopInfo("inst.info_page.top_info0"_lang + "inst.sd.source_string"_lang, ourTitleList[titleItr].filename().string());
                 std::unique_ptr<tin::install::Install> installTask;
 
                 if (ourTitleList[titleItr].extension() == ".xci" || ourTitleList[titleItr].extension() == ".xcz") {

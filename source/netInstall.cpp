@@ -150,8 +150,7 @@ namespace netInstStuff{
         try {
             for (urlItr = 0; urlItr < ourUrlList.size(); urlItr++) {
                 LOG_DEBUG("%s %s\n", "Install request from", ourUrlList[urlItr].c_str());
-                inst::ui::instPage::setTopInstInfoText("inst.info_page.top_info0"_lang + ourSource);
-                inst::ui::instPage::setFileNameText(urlNames[urlItr]);
+                inst::ui::instPage::setTopInfo("inst.info_page.top_info0"_lang + ourSource, urlNames[urlItr]);
                 std::unique_ptr<tin::install::Install> installTask;
 
                 if (inst::curl::downloadToBuffer(ourUrlList[urlItr], 0x100, 0x103) == "HEAD") {
