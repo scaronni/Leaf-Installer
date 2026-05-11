@@ -67,7 +67,8 @@ namespace nspInstStuff {
         try
         {
             for (titleItr = 0; titleItr < ourTitleList.size(); titleItr++) {
-                inst::ui::instPage::setTopInstInfoText("inst.info_page.top_info0"_lang + inst::util::shortenString(ourTitleList[titleItr].filename().string(), 40, true) + "inst.sd.source_string"_lang);
+                inst::ui::instPage::setTopInstInfoText("inst.info_page.top_info0"_lang + "inst.sd.source_string"_lang);
+                inst::ui::instPage::setFileNameText(ourTitleList[titleItr].filename().string());
                 std::unique_ptr<tin::install::Install> installTask;
 
                 if (ourTitleList[titleItr].extension() == ".xci" || ourTitleList[titleItr].extension() == ".xcz") {
@@ -90,13 +91,13 @@ namespace nspInstStuff {
             LOG_DEBUG("Failed to install");
             LOG_DEBUG("%s", e.what());
             fprintf(stdout, "%s", e.what());
-            inst::ui::instPage::setInstInfoText("inst.info_page.failed"_lang + inst::util::shortenString(ourTitleList[titleItr].filename().string(), 42, true));
+            inst::ui::instPage::setInstInfoText("inst.info_page.failed"_lang);
             inst::ui::instPage::setInstBarPerc(0);
             std::string audioPath = "romfs:/audio/bark.wav";
             if (inst::config::gayMode) audioPath = "";
             if (std::filesystem::exists(inst::config::appDir + "/bark.wav")) audioPath = inst::config::appDir + "/bark.wav";
             std::thread audioThread(inst::util::playAudio,audioPath);
-            inst::ui::mainApp->CreateShowDialog("inst.info_page.failed"_lang + inst::util::shortenString(ourTitleList[titleItr].filename().string(), 42, true) + "!", "inst.info_page.failed_desc"_lang + "\n\n" + (std::string)e.what(), {"common.ok"_lang}, true);
+            inst::ui::mainApp->CreateShowDialog("inst.info_page.failed"_lang, "inst.info_page.failed_desc"_lang + "\n\n" + (std::string)e.what(), {"common.ok"_lang}, true);
             audioThread.join();
             nspInstalled = false;
         }
@@ -128,14 +129,14 @@ namespace nspInstStuff {
                 } else inst::ui::mainApp->CreateShowDialog(std::to_string(ourTitleList.size()) + "inst.info_page.desc0"_lang, Language::GetRandomMsg(), {"common.ok"_lang}, true);
             } else {
                 if (inst::config::deletePrompt) {
-                    if(inst::ui::mainApp->CreateShowDialog(inst::util::shortenString(ourTitleList[0].filename().string(), 32, true) + "inst.sd.delete_info"_lang, "inst.sd.delete_desc"_lang, {"common.no"_lang,"common.yes"_lang}, false) == 1) {
+                    if(inst::ui::mainApp->CreateShowDialog("inst.sd.delete_info"_lang, "inst.sd.delete_desc"_lang, {"common.no"_lang,"common.yes"_lang}, false) == 1) {
                         if (std::filesystem::exists(ourTitleList[0])) {
                             try {
                                 std::filesystem::remove(ourTitleList[0]);
                             } catch (...){ };
                         }
                     }
-                } else inst::ui::mainApp->CreateShowDialog(inst::util::shortenString(ourTitleList[0].filename().string(), 42, true) + "inst.info_page.desc1"_lang, Language::GetRandomMsg(), {"common.ok"_lang}, true);
+                } else inst::ui::mainApp->CreateShowDialog("inst.info_page.desc1"_lang, Language::GetRandomMsg(), {"common.ok"_lang}, true);
             }
             audioThread.join();
         }

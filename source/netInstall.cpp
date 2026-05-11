@@ -132,11 +132,11 @@ namespace netInstStuff{
         std::vector<std::string> urlNames;
         if (urlListAltNames.size() > 0) {
             for (long unsigned int i = 0; i < urlListAltNames.size(); i++) {
-                urlNames.push_back(inst::util::shortenString(urlListAltNames[i], 38, true));
+                urlNames.push_back(urlListAltNames[i]);
             }
         } else {
             for (long unsigned int i = 0; i < ourUrlList.size(); i++) {
-                urlNames.push_back(inst::util::shortenString(inst::util::formatUrlString(ourUrlList[i]), 38, true));
+                urlNames.push_back(inst::util::formatUrlString(ourUrlList[i]));
             }
         }
 
@@ -150,7 +150,8 @@ namespace netInstStuff{
         try {
             for (urlItr = 0; urlItr < ourUrlList.size(); urlItr++) {
                 LOG_DEBUG("%s %s\n", "Install request from", ourUrlList[urlItr].c_str());
-                inst::ui::instPage::setTopInstInfoText("inst.info_page.top_info0"_lang + urlNames[urlItr] + ourSource);
+                inst::ui::instPage::setTopInstInfoText("inst.info_page.top_info0"_lang + ourSource);
+                inst::ui::instPage::setFileNameText(urlNames[urlItr]);
                 std::unique_ptr<tin::install::Install> installTask;
 
                 if (inst::curl::downloadToBuffer(ourUrlList[urlItr], 0x100, 0x103) == "HEAD") {
@@ -172,13 +173,13 @@ namespace netInstStuff{
             LOG_DEBUG("Failed to install");
             LOG_DEBUG("%s", e.what());
             fprintf(stdout, "%s", e.what());
-            inst::ui::instPage::setInstInfoText("inst.info_page.failed"_lang + urlNames[urlItr]);
+            inst::ui::instPage::setInstInfoText("inst.info_page.failed"_lang);
             inst::ui::instPage::setInstBarPerc(0);
             std::string audioPath = "romfs:/audio/bark.wav";
             if (inst::config::gayMode) audioPath = "";
             if (std::filesystem::exists(inst::config::appDir + "/bark.wav")) audioPath = inst::config::appDir + "/bark.wav";
             std::thread audioThread(inst::util::playAudio,audioPath);
-            inst::ui::mainApp->CreateShowDialog("inst.info_page.failed"_lang + urlNames[urlItr] + "!", "inst.info_page.failed_desc"_lang + "\n\n" + (std::string)e.what(), {"common.ok"_lang}, true);
+            inst::ui::mainApp->CreateShowDialog("inst.info_page.failed"_lang, "inst.info_page.failed_desc"_lang + "\n\n" + (std::string)e.what(), {"common.ok"_lang}, true);
             audioThread.join();
             nspInstalled = false;
         }
@@ -200,7 +201,7 @@ namespace netInstStuff{
             if (std::filesystem::exists(inst::config::appDir + "/awoo.wav")) audioPath = inst::config::appDir + "/awoo.wav";
             std::thread audioThread(inst::util::playAudio,audioPath);
             if (ourUrlList.size() > 1) inst::ui::mainApp->CreateShowDialog(std::to_string(ourUrlList.size()) + "inst.info_page.desc0"_lang, Language::GetRandomMsg(), {"common.ok"_lang}, true);
-            else inst::ui::mainApp->CreateShowDialog(urlNames[0] + "inst.info_page.desc1"_lang, Language::GetRandomMsg(), {"common.ok"_lang}, true);
+            else inst::ui::mainApp->CreateShowDialog("inst.info_page.desc1"_lang, Language::GetRandomMsg(), {"common.ok"_lang}, true);
             audioThread.join();
         }
         

@@ -68,7 +68,7 @@
             },
             "top_info": "選擇想要安裝的文件，然後按  安裝！",
             "source_string": " 從SD卡",
-            "delete_info": " 安裝完成！要將原文件從SD卡刪除嗎？",
+            "delete_info": "已安裝! 從 SD 卡刪除原始檔案?",
             "delete_info_multi": " 所有文件已安裝！要把所有原文件從SD卡刪除嗎？",
             "delete_desc": "安裝成功後已經不需要原文件。",
             "buttons": " 選擇文件  全選  安裝  幫助  取消"
@@ -86,21 +86,21 @@
             "buttons2": " 選擇文件  全選  安裝文件  取消"
         },
         "target": {
-            "desc0": "將 ",
-            "desc1": " 安裝到哪？",
-            "desc00": "將已選擇的 ",
-            "desc01": " 文件安裝到哪?",
+            "desc0": "標題",
+            "desc1": "應該安裝到哪裡?",
+            "desc00": "選擇的 ",
+            "desc01": " 個檔案要安裝到哪裡?",
             "opt0": "SD卡",
             "opt1": "內部閃存"
         },
         "info_page": {
-            "top_info0": "正在安裝 ",
+            "top_info0": "正在安裝標題",
             "preparing": "初始化安裝...",
-            "failed": "安裝失敗 ",
+            "failed": "標題安裝失敗",
             "failed_desc": "可以從系統設置中刪除部分安裝的內容。",
             "complete": "安裝完成",
             "desc0": " 安裝成功!",
-            "desc1": " 已安裝!",
+            "desc1": "標題已安裝!",
             "downloading": "下載中 ",
             "at": " 在 "
         },

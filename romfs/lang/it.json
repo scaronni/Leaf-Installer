@@ -65,7 +65,7 @@
             },
             "top_info": "Seleziona quali file vuoi installare, poi premi Il tasto Più!",
             "source_string": " dalla SD",
-            "delete_info": " installato! Cancellarlo dalla SD?",
+            "delete_info": "Installato! Eliminare l'originale dalla SD?",
             "delete_info_multi": " file installati correttamente! Cancellarli dalla SD?",
             "delete_desc": "I file originali non sono più necessari dopo averli installati",
             "buttons": " Seleziona File     Seleziona tutto     Installa i File     Aiuto     Annulla"
@@ -83,21 +83,21 @@
             "buttons2": " Seleziona File     Seleziona tutto     Installa i File     Annulla"
         },
         "target": {
-            "desc0": "Dove vuoi installare ",
-            "desc1": " ?",
-            "desc00": "Dove vuoi installare ",
-            "desc01": " file?",
+            "desc0": "Dove deve essere",
+            "desc1": " installato il titolo?",
+            "desc00": "Dove installare i ",
+            "desc01": " file selezionati?",
             "opt0": "SD",
             "opt1": "Memoria interna"
         },
         "info_page": {
-            "top_info0": "Sto installando ",
+            "top_info0": "Installazione del titolo",
             "preparing": "Preparando l'installazione...",
-            "failed": "Installazione fallita ",
+            "failed": "Installazione del titolo fallita",
             "failed_desc": "I contenuti parzialmente installati possono essere rimossi dalle Impostazioni di sistema.",
             "complete": "Installazione completa",
             "desc0": " file installati correttamente!",
-            "desc1": " installato!",
+            "desc1": "Titolo installato!",
             "downloading": "Sto scaricando ",
             "at": " in "
         },

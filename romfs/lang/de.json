@@ -65,7 +65,7 @@
             },
             "top_info": "Wähle Dateien zur Installation aus und drücke dann !",
             "source_string": " von der SD Karte",
-            "delete_info": " installiert! Soll es von der SD-Karte gelöscht werden?",
+            "delete_info": "Installiert! Original von SD-Karte löschen?",
             "delete_info_multi": " Dateien erfolgreich installiert! Sollen diese von der SD-Karte gelöscht werden?",
             "delete_desc": "Die originalen Dateien werden nach der Installation nicht mehr benötigt",
             "buttons": " Datei auswählen     Alle auswählen     Datei(en) installieren     Abbrechen"
@@ -83,21 +83,21 @@
             "buttons2": " Datei auswählen     Alle auswählen     Datei(en) installieren     Abbrechen"
         },
         "target": {
-            "desc0": "Wo soll ",
+            "desc0": "Wo soll der Titel",
             "desc1": " installiert werden?",
-            "desc00": "Wo sollen die ",
+            "desc00": "Wo sollen die ausgewählten ",
             "desc01": " Dateien installiert werden?",
             "opt0": "SD Karte",
             "opt1": "Interner Speicher"
         },
         "info_page": {
-            "top_info0": "Installiere ",
+            "top_info0": "Installiere Titel",
             "preparing": "Bereite Installation vor...",
-            "failed": "Installation fehlgeschlagen ",
+            "failed": "Installation des Titels fehlgeschlagen",
             "failed_desc": "Teilweise installierte Inhalte können in den Systemeinstellungen (Datenverwaltung) entfernt werden.",
             "complete": "Installation abgeschlossen",
             "desc0": " Dateien erfolgreich installiert!",
-            "desc1": " installiert!",
+            "desc1": "Titel installiert!",
             "downloading": "Übertrage ",
             "at": " mit "
         },

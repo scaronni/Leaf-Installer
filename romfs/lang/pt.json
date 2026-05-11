@@ -65,7 +65,7 @@
             },
             "top_info": "Selecione os ficheiros que deseja instalar, depois pressione o botão Mais!",
             "source_string": " através do cartão SD",
-            "delete_info": " instalado! Eliminar do cartão SD?",
+            "delete_info": "Instalado! Excluir o original do cartão SD?",
             "delete_info_multi": " instalados com sucesso! Eliminar do cartão SD?",
             "delete_desc": "Os ficheiros originais não são necessários depois de instalados",
             "buttons": " Selecionar Ficheiro     Selecionar Todos     Instalar Ficheiro(s)     Ajuda     Cancelar"
@@ -83,21 +83,21 @@
             "buttons2": " Selecionar Ficheiro     Selecionar Todos     Instalar Ficheiro(s)     Cancelar"
         },
         "target": {
-            "desc0": "Onde será o ",
-            "desc1": " instalado?",
-            "desc00": "Onde serão os ",
-            "desc01": " ficheiros selecionados instalados?",
+            "desc0": "Onde o título",
+            "desc1": " deve ser instalado?",
+            "desc00": "Onde instalar os ",
+            "desc01": " arquivos selecionados?",
             "opt0": "Cartão SD",
             "opt1": "Memória Interna"
         },
         "info_page": {
-            "top_info0": "A instalar ",
+            "top_info0": "Instalando título",
             "preparing": "A preparar a instalação...",
-            "failed": "Instalação falhada ",
+            "failed": "Falha ao instalar o título",
             "failed_desc": "Parcialmente instalado o conteúdo poderá ser removido através da applet Definições do Sistema.",
             "complete": "Instalação completa",
             "desc0": " ficheiros instalados com sucesso!",
-            "desc1": " instalado!",
+            "desc1": "Título instalado!",
             "downloading": "A transferir ",
             "at": " às "
         },

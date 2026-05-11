@@ -32,6 +32,9 @@ namespace inst::ui {
         this->pageInfoText = TextBlock::New(15, 164, "");
         this->pageInfoText->SetFont(pu::ui::MakeDefaultFontName(45));
         this->pageInfoText->SetColor(COLOR("#FFFFFFFF"));
+        this->fileNameText = TextBlock::New(22, 250, "");
+        this->fileNameText->SetFont(pu::ui::MakeDefaultFontName(33));
+        this->fileNameText->SetColor(COLOR("#FFFFFFFF"));
         this->installInfoText = TextBlock::New(22, 852, "");
         this->installInfoText->SetFont(pu::ui::MakeDefaultFontName(33));
         this->installInfoText->SetColor(COLOR("#FFFFFFFF"));
@@ -46,6 +49,7 @@ namespace inst::ui {
         this->Add(this->titleImage);
         this->Add(this->appVersionText);
         this->Add(this->pageInfoText);
+        this->Add(this->fileNameText);
         this->Add(this->installInfoText);
         this->Add(this->installBar);
         this->Add(this->awooImage);
@@ -54,6 +58,11 @@ namespace inst::ui {
 
     void instPage::setTopInstInfoText(std::string ourText){
         mainApp->instpage->pageInfoText->SetText(ourText);
+        mainApp->CallForRender();
+    }
+
+    void instPage::setFileNameText(std::string ourText){
+        mainApp->instpage->fileNameText->SetText(ourText);
         mainApp->CallForRender();
     }
 
@@ -74,6 +83,7 @@ namespace inst::ui {
 
     void instPage::loadInstallScreen(){
         mainApp->instpage->pageInfoText->SetText("");
+        mainApp->instpage->fileNameText->SetText("");
         mainApp->instpage->installInfoText->SetText("");
         mainApp->instpage->installBar->SetProgress(0);
         mainApp->instpage->installBar->SetVisible(false);

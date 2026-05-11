@@ -65,7 +65,7 @@
             },
             "top_info": "¡Selecciona los archivos que quieres instalar, y pulsa el botón +!",
             "source_string": " desde la tarjeta SD",
-            "delete_info": " instalado. ¿Borrarlo de la tarjeta SD?",
+            "delete_info": "¡Instalado! ¿Eliminar el original de la SD?",
             "delete_info_multi": " archivos instalados con éxito. ¿Borrarlos de la tarjeta SD?",
             "delete_desc": "Los archivos originales no hacen falta después de ser instalados",
             "buttons": " Selecionar Archivo     Seleccionar Todo     Instalar Archivo(s)     Ayuda     Cancelar"
@@ -83,21 +83,21 @@
             "buttons2": " Selecionar Archivo     Seleccionar Todo     Instalar Archivo(s)     Cancelar"
         },
         "target": {
-            "desc0": "¿Dónde debería instalarse ",
-            "desc1": "?",
-            "desc00": "¿Dónde deberían instalarse los ",
+            "desc0": "¿Dónde debe",
+            "desc1": " instalarse el título?",
+            "desc00": "¿Dónde instalar los ",
             "desc01": " archivos seleccionados?",
             "opt0": "Tarjeta SD",
             "opt1": "Almacenamiento Interno"
         },
         "info_page": {
-            "top_info0": "Instalando ",
+            "top_info0": "Instalando título",
             "preparing": "Preparando la instalación...",
-            "failed": "Fallo al instalar ",
+            "failed": "Error al instalar el título",
             "failed_desc": "Los contenidos parcialmente instalados pueden ser eliminados en el menú de Configuración de la consola.",
             "complete": "Instalación exitosa",
             "desc0": " archivos fueron instalados satisfactoriamente.",
-            "desc1": " instalado.",
+            "desc1": "¡Título instalado!",
             "downloading": "Descargando ",
             "at": " en "
         },

@@ -65,7 +65,7 @@
             },
             "top_info": "Sélectionnez les fichiers que vous voulez installer, puis appuyez sur le bouton Plus !",
             "source_string": " à partir de la carte SD",
-            "delete_info": " Installation réussie! Supprimer de la carte SD?",
+            "delete_info": "Installé ! Supprimer l'original de la carte SD ?",
             "delete_info_multi": " fichiers installés avec succès ! Les supprimer de la carte SD ?",
             "delete_desc": "Les fichiers originaux ne sont plus nécessaires une fois qu'ils ont été installés.",
             "buttons": " Sélectionnez un fichier     Tout sélectionner     Installer un/des fichier(s)     Aide     Annuler"
@@ -83,21 +83,21 @@
             "buttons2": " Sélectionnez un fichier     Tout sélectionner     Installer un/des fichier(s)     Annuler"
         },
         "target": {
-            "desc0": "Où ",
-            "desc1": " doit-il être installé?",
-            "desc00": "Où les fichier sélectionnés",
-            "desc01": " doivent-ils aller ?",
+            "desc0": "Où le titre doit-il",
+            "desc1": " être installé ?",
+            "desc00": "Où installer les ",
+            "desc01": " fichiers sélectionnés ?",
             "opt0": "Carte SD",
             "opt1": "Stockage Interne"
         },
         "info_page": {
-            "top_info0": "Installation ",
+            "top_info0": "Installation du titre",
             "preparing": "Préparation de l'installation...",
-            "failed": "Installation échouée ",
+            "failed": "Échec de l'installation du titre",
             "failed_desc": "Le contenu partiellement installé peut être supprimé depuis les paramètres systèmes de l'applet.",
             "complete": "Installation complète",
             "desc0": " fichiers installés avec succès !",
-            "desc1": " installé !",
+            "desc1": "Le titre est installé !",
             "downloading": "Téléchargement ",
             "at": " à "
         },

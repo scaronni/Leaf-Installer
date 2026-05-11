@@ -68,7 +68,7 @@
             },
             "top_info": "选择将要安装的文件，然后按  以安装！",
             "source_string": " 通过 SD 卡",
-            "delete_info": " 安装完成！是否从 SD 卡中删除安装文件？",
+            "delete_info": "已安装! 从 SD 卡中删除原始文件?",
             "delete_info_multi": " 文件安装成功！是否从 SD 卡中删除安装文件？",
             "delete_desc": "安装完成后不再需要安装文件",
             "buttons": " 选择     全选     安装     帮助     取消"
@@ -86,21 +86,21 @@
             "buttons2": " 选择     全选     安装     取消"
         },
         "target": {
-            "desc0": "请选择 ",
-            "desc1": " 安装位置？",
-            "desc00": "请选择选定 ",
-            "desc01": " 个文件安装位置？",
+            "desc0": "标题",
+            "desc1": "应该安装到哪里?",
+            "desc00": "所选 ",
+            "desc01": " 个文件安装到哪里?",
             "opt0": "SD 卡",
             "opt1": "内部存储"
         },
         "info_page": {
-            "top_info0": "正在安装 ",
+            "top_info0": "正在安装标题",
             "preparing": "正在准备安装...",
-            "failed": "安装失败 ",
+            "failed": "标题安装失败",
             "failed_desc": "部分安装的内容可以从系统设置中删除。",
             "complete": "安装完成",
             "desc0": " 个文件安装成功！",
-            "desc1": " 安装完成！",
+            "desc1": "标题已安装!",
             "downloading": "正在下载 ",
             "at": " 以 "
         },

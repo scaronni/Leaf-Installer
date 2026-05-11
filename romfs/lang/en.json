@@ -68,7 +68,7 @@
             },
             "top_info": "Select what files you want to install, then press the Plus button!",
             "source_string": " from SD card",
-            "delete_info": " installed! Delete it from the SD card?",
+            "delete_info": "Installed! Delete the original from the SD card?",
             "delete_info_multi": " files installed successfully! Delete them from the SD card?",
             "delete_desc": "The original files aren't needed anymore after they've been installed",
             "buttons": " Select File     Select All     Install File(s)     Help     Cancel"
@@ -86,21 +86,21 @@
             "buttons2": " Select File     Select All     Install File(s)     Cancel"
         },
         "target": {
-            "desc0": "Where should ",
+            "desc0": "Where should the title",
             "desc1": " be installed to?",
-            "desc00": "Where should the selected ",
-            "desc01": " files be installed to?",
+            "desc00": "Where to install the selected ",
+            "desc01": " files?",
             "opt0": "SD Card",
             "opt1": "Internal Storage"
         },
         "info_page": {
-            "top_info0": "Installing ",
+            "top_info0": "Installing title",
             "preparing": "Preparing installation...",
-            "failed": "Failed to install ",
+            "failed": "Failed to install the title",
             "failed_desc": "Partially installed contents can be removed from the System Settings applet.",
             "complete": "Install complete",
             "desc0": " files installed successfully!",
-            "desc1": " installed!",
+            "desc1": "The title installed!",
             "downloading": "Downloading ",
             "at": " at "
         },

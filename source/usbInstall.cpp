@@ -100,7 +100,7 @@ namespace usbInstStuff {
 
         std::vector<std::string> fileNames;
         for (long unsigned int i = 0; i < ourTitleList.size(); i++) {
-            fileNames.push_back(inst::util::shortenString(inst::util::formatUrlString(ourTitleList[i]), 40, true));
+            fileNames.push_back(inst::util::formatUrlString(ourTitleList[i]));
         }
 
         std::vector<int> previousClockValues;
@@ -112,7 +112,8 @@ namespace usbInstStuff {
 
         try {
             for (fileItr = 0; fileItr < ourTitleList.size(); fileItr++) {
-                inst::ui::instPage::setTopInstInfoText("inst.info_page.top_info0"_lang + fileNames[fileItr] + "inst.usb.source_string"_lang);
+                inst::ui::instPage::setTopInstInfoText("inst.info_page.top_info0"_lang + "inst.usb.source_string"_lang);
+                inst::ui::instPage::setFileNameText(fileNames[fileItr]);
                 std::unique_ptr<tin::install::Install> installTask;
 
                 if (ourTitleList[fileItr].compare(ourTitleList[fileItr].size() - 3, 2, "xc") == 0) {
@@ -135,13 +136,13 @@ namespace usbInstStuff {
             LOG_DEBUG("Failed to install");
             LOG_DEBUG("%s", e.what());
             fprintf(stdout, "%s", e.what());
-            inst::ui::instPage::setInstInfoText("inst.info_page.failed"_lang + fileNames[fileItr]);
+            inst::ui::instPage::setInstInfoText("inst.info_page.failed"_lang);
             inst::ui::instPage::setInstBarPerc(0);
             std::string audioPath = "romfs:/audio/bark.wav";
             if (inst::config::gayMode) audioPath = "";
             if (std::filesystem::exists(inst::config::appDir + "/bark.wav")) audioPath = inst::config::appDir + "/bark.wav";
             std::thread audioThread(inst::util::playAudio,audioPath);
-            inst::ui::mainApp->CreateShowDialog("inst.info_page.failed"_lang + fileNames[fileItr] + "!", "inst.info_page.failed_desc"_lang + "\n\n" + (std::string)e.what(), {"common.ok"_lang}, true);
+            inst::ui::mainApp->CreateShowDialog("inst.info_page.failed"_lang, "inst.info_page.failed_desc"_lang + "\n\n" + (std::string)e.what(), {"common.ok"_lang}, true);
             audioThread.join();
             nspInstalled = false;
         }
@@ -161,7 +162,7 @@ namespace usbInstStuff {
             if (std::filesystem::exists(inst::config::appDir + "/awoo.wav")) audioPath = inst::config::appDir + "/awoo.wav";
             std::thread audioThread(inst::util::playAudio,audioPath);
             if (ourTitleList.size() > 1) inst::ui::mainApp->CreateShowDialog(std::to_string(ourTitleList.size()) + "inst.info_page.desc0"_lang, Language::GetRandomMsg(), {"common.ok"_lang}, true);
-            else inst::ui::mainApp->CreateShowDialog(fileNames[0] + "inst.info_page.desc1"_lang, Language::GetRandomMsg(), {"common.ok"_lang}, true);
+            else inst::ui::mainApp->CreateShowDialog("inst.info_page.desc1"_lang, Language::GetRandomMsg(), {"common.ok"_lang}, true);
             audioThread.join();
         }
         

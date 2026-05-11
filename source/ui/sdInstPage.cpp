@@ -125,7 +125,7 @@ namespace inst::ui {
     void sdInstPage::startInstall() {
         int dialogResult = -1;
         if (this->selectedTitles.size() == 1) {
-            dialogResult = mainApp->CreateShowDialog("inst.target.desc0"_lang + inst::util::shortenString(std::filesystem::path(this->selectedTitles[0]).filename().string(), 32, true) + "inst.target.desc1"_lang, "common.cancel_desc"_lang, {"inst.target.opt0"_lang, "inst.target.opt1"_lang}, false);
+            dialogResult = mainApp->CreateShowDialog("inst.target.desc0"_lang + "inst.target.desc1"_lang, "common.cancel_desc"_lang, {"inst.target.opt0"_lang, "inst.target.opt1"_lang}, false);
         } else dialogResult = mainApp->CreateShowDialog("inst.target.desc00"_lang + std::to_string(this->selectedTitles.size()) + "inst.target.desc01"_lang, "common.cancel_desc"_lang, {"inst.target.opt0"_lang, "inst.target.opt1"_lang}, false);
         if (dialogResult == -1) return;
         nspInstStuff::installNspFromFile(this->selectedTitles, dialogResult);
