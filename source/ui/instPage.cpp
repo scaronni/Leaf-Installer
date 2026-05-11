@@ -2,6 +2,7 @@
 #include "ui/MainApplication.hpp"
 #include "ui/instPage.hpp"
 #include "util/config.hpp"
+#include "util/util.hpp"
 
 #define COLOR(hex) pu::ui::Color::FromHex(hex)
 
@@ -10,27 +11,36 @@ namespace inst::ui {
 
     instPage::instPage() : Layout::Layout() {
         this->SetBackgroundColor(COLOR("#670000FF"));
-        if (std::filesystem::exists(inst::config::appDir + "/background.png")) this->SetBackgroundImage(inst::config::appDir + "/background.png");
-        else this->SetBackgroundImage("romfs:/images/background.jpg");
-        this->topRect = Rectangle::New(0, 0, 1280, 94, COLOR("#170909FF"));
-        this->infoRect = Rectangle::New(0, 95, 1280, 60, COLOR("#17090980"));
+        this->Add(inst::util::makeBackgroundImage());
+        this->topRect = Rectangle::New(0, 0, 1920, 141, COLOR("#170909FF"));
+        this->infoRect = Rectangle::New(0, 142, 1920, 90, COLOR("#17090980"));
         if (inst::config::gayMode) {
-            this->titleImage = Image::New(-113, 0, "romfs:/images/logo.png");
-            this->appVersionText = TextBlock::New(367, 49, "v" + inst::config::appVersion, 22);
+            this->titleImage = Image::New(-170, 0, inst::util::loadTex("romfs:/images/logo.png"));
+            this->titleImage->SetWidth(720);
+            this->titleImage->SetHeight(140);
+            this->appVersionText = TextBlock::New(550, 74, "v" + inst::config::appVersion);
+            this->appVersionText->SetFont(pu::ui::MakeDefaultFontName(33));
         }
         else {
-            this->titleImage = Image::New(0, 0, "romfs:/images/logo.png");
-            this->appVersionText = TextBlock::New(480, 49, "v" + inst::config::appVersion, 22);
+            this->titleImage = Image::New(0, 0, inst::util::loadTex("romfs:/images/logo.png"));
+            this->titleImage->SetWidth(720);
+            this->titleImage->SetHeight(140);
+            this->appVersionText = TextBlock::New(720, 74, "v" + inst::config::appVersion);
+            this->appVersionText->SetFont(pu::ui::MakeDefaultFontName(33));
         }
         this->appVersionText->SetColor(COLOR("#FFFFFFFF"));
-        this->pageInfoText = TextBlock::New(10, 109, "", 30);
+        this->pageInfoText = TextBlock::New(15, 164, "");
+        this->pageInfoText->SetFont(pu::ui::MakeDefaultFontName(45));
         this->pageInfoText->SetColor(COLOR("#FFFFFFFF"));
-        this->installInfoText = TextBlock::New(15, 568, "", 22);
+        this->installInfoText = TextBlock::New(22, 852, "");
+        this->installInfoText->SetFont(pu::ui::MakeDefaultFontName(33));
         this->installInfoText->SetColor(COLOR("#FFFFFFFF"));
-        this->installBar = pu::ui::elm::ProgressBar::New(10, 600, 850, 40, 100.0f);
-        this->installBar->SetColor(COLOR("#222222FF"));
-        if (std::filesystem::exists(inst::config::appDir + "/awoo_inst.png")) this->awooImage = Image::New(410, 190, inst::config::appDir + "/awoo_inst.png");
-        else this->awooImage = Image::New(510, 166, "romfs:/images/awoos/7d8a05cddfef6da4901b20d2698d5a71.png");
+        this->installBar = pu::ui::elm::ProgressBar::New(15, 900, 1275, 60, 100.0f);
+        this->installBar->SetProgressColor(COLOR("#222222FF"));
+        if (std::filesystem::exists(inst::config::appDir + "/awoo_inst.png")) this->awooImage = Image::New(615, 285, inst::util::loadTex(inst::config::appDir + "/awoo_inst.png"));
+        else this->awooImage = Image::New(765, 249, inst::util::loadTex("romfs:/images/awoos/7d8a05cddfef6da4901b20d2698d5a71.png"));
+        this->awooImage->SetWidth(1146);
+        this->awooImage->SetHeight(831);
         this->Add(this->topRect);
         this->Add(this->infoRect);
         this->Add(this->titleImage);
@@ -72,6 +82,6 @@ namespace inst::ui {
         mainApp->CallForRender();
     }
 
-    void instPage::onInput(u64 Down, u64 Up, u64 Held, pu::ui::Touch Pos) {
+    void instPage::onInput(u64 Down, u64 Up, u64 Held, pu::ui::TouchPoint Pos) {
     }
 }

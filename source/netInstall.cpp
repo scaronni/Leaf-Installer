@@ -249,7 +249,6 @@ namespace netInstStuff{
                 }
 
                 // Break on input pressed
-                inst::ui::mainApp->UpdateButtons();
                 u64 kDown = inst::ui::mainApp->GetButtonsDown();
 
                 if (kDown & HidNpadButton_B)

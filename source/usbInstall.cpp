@@ -63,7 +63,7 @@ namespace usbInstStuff {
         TUSHeader header;
         while(true) {
             if (bufferData(&header, sizeof(TUSHeader), 500000000) != 0) break;
-            inst::ui::mainApp->UpdateButtons();
+            inst::ui::mainApp->CallForRender();
             u64 kDown = inst::ui::mainApp->GetButtonsDown();
             if (kDown & HidNpadButton_B) return {};
             if (kDown & HidNpadButton_X) inst::ui::mainApp->CreateShowDialog("inst.usb.help.title"_lang, "inst.usb.help.desc"_lang, {"common.ok"_lang}, true);

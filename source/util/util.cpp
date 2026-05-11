@@ -2,6 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include <fstream>
+#include <unordered_map>
 #include <unistd.h>
 #include <curl/curl.h>
 #include <regex>
@@ -18,9 +19,25 @@
 #include "nx/usbhdd.h"
 
 namespace inst::util {
+    pu::sdl2::TextureHandle::Ref loadTex(const std::string& path) {
+        static std::unordered_map<std::string, pu::sdl2::TextureHandle::Ref> cache;
+        auto it = cache.find(path);
+        if (it != cache.end()) return it->second;
+        auto tex = pu::sdl2::TextureHandle::New(pu::ui::render::LoadImageFromFile(path));
+        cache.emplace(path, tex);
+        return tex;
+    }
+
+    pu::ui::elm::Image::Ref makeBackgroundImage() {
+        const std::string custom = inst::config::appDir + "/background.png";
+        const std::string path = std::filesystem::exists(custom) ? custom : "romfs:/images/background.jpg";
+        auto img = pu::ui::elm::Image::New(0, 0, loadTex(path));
+        img->SetWidth(1920);
+        img->SetHeight(1080);
+        return img;
+    }
+
     void initApp () {
-        // Seethe
-        if (!pu::IsReiNX()) pu::IsAtmosphere();
         if (!std::filesystem::exists("sdmc:/switch")) std::filesystem::create_directory("sdmc:/switch");
         if (!std::filesystem::exists(inst::config::appDir)) std::filesystem::create_directory(inst::config::appDir);
         inst::config::parseConfig();

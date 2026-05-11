@@ -254,8 +254,8 @@ namespace tin::network
         size_t written = 0;
 
         while (written < len)
-        {            
-            inst::ui::mainApp->UpdateButtons();
+        {
+            inst::ui::mainApp->CallForRender();
             u64 kDown = inst::ui::mainApp->GetButtonsDown();
             if (kDown & HidNpadButton_B)  // Break if user clicks 'B'
                 break;

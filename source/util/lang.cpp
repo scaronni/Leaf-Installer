@@ -47,12 +47,9 @@ namespace Language {
             case SetLanguage_ZHCN:
             case SetLanguage_ZHHANS:
                 languagePath = "romfs:/lang/zh-CN.json";
-                // the default font will miss some chinese character, so use a chinese font (simplified)
-                pu::ui::render::SetDefaultFontFromShared(pu::ui::render::SharedFont::ChineseSimplified);
                 break;
             case SetLanguage_KO:
                 languagePath = "romfs:/lang/ko.json";
-                pu::ui::render::SetDefaultFontFromShared(pu::ui::render::SharedFont::Korean);
                 break;
             case SetLanguage_NL:
                 languagePath = "romfs:/lang/nl.json";
@@ -66,12 +63,9 @@ namespace Language {
                 break;
             case SetLanguage_ZHTW:
                 languagePath = "romfs:/lang/zh-TW.json";
-                // the default font will miss some chinese character, so use a chinese font (traditional)
-                pu::ui::render::SetDefaultFontFromShared(pu::ui::render::SharedFont::ChineseTraditional);
                 break;
             case SetLanguage_ZHHANT:
                 languagePath = "romfs:/lang/zh-Hant.json";
-                pu::ui::render::SetDefaultFontFromShared(pu::ui::render::SharedFont::ChineseTraditional);
                 break;
             case SetLanguage_ENUS:
             default:

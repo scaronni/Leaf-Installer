@@ -8,7 +8,7 @@ namespace inst::ui {
         public:
             instPage();
             PU_SMART_CTOR(instPage)
-            void onInput(u64 Down, u64 Up, u64 Held, pu::ui::Touch Pos);
+            void onInput(u64 Down, u64 Up, u64 Held, pu::ui::TouchPoint Pos);
             TextBlock::Ref pageInfoText;
             TextBlock::Ref installInfoText;
             pu::ui::elm::ProgressBar::Ref installBar;

@@ -14,26 +14,33 @@ namespace inst::ui {
 
     sdInstPage::sdInstPage() : Layout::Layout() {
         this->SetBackgroundColor(COLOR("#670000FF"));
-        if (std::filesystem::exists(inst::config::appDir + "/background.png")) this->SetBackgroundImage(inst::config::appDir + "/background.png");
-        else this->SetBackgroundImage("romfs:/images/background.jpg");
-        this->topRect = Rectangle::New(0, 0, 1280, 94, COLOR("#170909FF"));
-        this->infoRect = Rectangle::New(0, 95, 1280, 60, COLOR("#17090980"));
-        this->botRect = Rectangle::New(0, 660, 1280, 60, COLOR("#17090980"));
+        this->Add(inst::util::makeBackgroundImage());
+        this->topRect = Rectangle::New(0, 0, 1920, 141, COLOR("#170909FF"));
+        this->infoRect = Rectangle::New(0, 142, 1920, 90, COLOR("#17090980"));
+        this->botRect = Rectangle::New(0, 990, 1920, 90, COLOR("#17090980"));
         if (inst::config::gayMode) {
-            this->titleImage = Image::New(-113, 0, "romfs:/images/logo.png");
-            this->appVersionText = TextBlock::New(367, 49, "v" + inst::config::appVersion, 22);
+            this->titleImage = Image::New(-170, 0, inst::util::loadTex("romfs:/images/logo.png"));
+            this->titleImage->SetWidth(720);
+            this->titleImage->SetHeight(140);
+            this->appVersionText = TextBlock::New(550, 74, "v" + inst::config::appVersion);
+            this->appVersionText->SetFont(pu::ui::MakeDefaultFontName(33));
         }
         else {
-            this->titleImage = Image::New(0, 0, "romfs:/images/logo.png");
-            this->appVersionText = TextBlock::New(480, 49, "v" + inst::config::appVersion, 22);
+            this->titleImage = Image::New(0, 0, inst::util::loadTex("romfs:/images/logo.png"));
+            this->titleImage->SetWidth(720);
+            this->titleImage->SetHeight(140);
+            this->appVersionText = TextBlock::New(720, 74, "v" + inst::config::appVersion);
+            this->appVersionText->SetFont(pu::ui::MakeDefaultFontName(33));
         }
         this->appVersionText->SetColor(COLOR("#FFFFFFFF"));
-        this->pageInfoText = TextBlock::New(10, 109, "inst.sd.top_info"_lang, 30);
+        this->pageInfoText = TextBlock::New(15, 164, "inst.sd.top_info"_lang);
+        this->pageInfoText->SetFont(pu::ui::MakeDefaultFontName(45));
         this->pageInfoText->SetColor(COLOR("#FFFFFFFF"));
-        this->butText = TextBlock::New(10, 678, "inst.sd.buttons"_lang, 24);
+        this->butText = TextBlock::New(15, 1017, "inst.sd.buttons"_lang);
+        this->butText->SetFont(pu::ui::MakeDefaultFontName(36));
         this->butText->SetColor(COLOR("#FFFFFFFF"));
-        this->menu = pu::ui::elm::Menu::New(0, 156, 1280, COLOR("#FFFFFF00"), 84, (506 / 84));
-        this->menu->SetOnFocusColor(COLOR("#00000033"));
+        this->menu = pu::ui::elm::Menu::New(0, 234, 1920, COLOR("#FFFFFF00"), COLOR("#FFFFFF00"), 126, (506 / 84));
+        this->menu->SetItemsFocusColor(COLOR("#00000033"));
         this->menu->SetScrollbarColor(COLOR("#17090980"));
         this->Add(this->topRect);
         this->Add(this->infoRect);
@@ -61,24 +68,24 @@ namespace inst::ui {
         std::string itm = "..";
         auto ourEntry = pu::ui::elm::MenuItem::New(itm);
         ourEntry->SetColor(COLOR("#FFFFFFFF"));
-        ourEntry->SetIcon("romfs:/images/icons/folder-upload.png");
+        ourEntry->SetIcon(inst::util::loadTex("romfs:/images/icons/folder-upload.png"));
         this->menu->AddItem(ourEntry);
         for (auto& file: this->ourDirectories) {
             if (file == "..") break;
             std::string itm = file.filename().string();
             auto ourEntry = pu::ui::elm::MenuItem::New(itm);
             ourEntry->SetColor(COLOR("#FFFFFFFF"));
-            ourEntry->SetIcon("romfs:/images/icons/folder.png");
+            ourEntry->SetIcon(inst::util::loadTex("romfs:/images/icons/folder.png"));
             this->menu->AddItem(ourEntry);
         }
         for (auto& file: this->ourFiles) {
             std::string itm = file.filename().string();
             auto ourEntry = pu::ui::elm::MenuItem::New(itm);
             ourEntry->SetColor(COLOR("#FFFFFFFF"));
-            ourEntry->SetIcon("romfs:/images/icons/checkbox-blank-outline.png");
+            ourEntry->SetIcon(inst::util::loadTex("romfs:/images/icons/checkbox-blank-outline.png"));
             for (long unsigned int i = 0; i < this->selectedTitles.size(); i++) {
                 if (this->selectedTitles[i] == file) {
-                    ourEntry->SetIcon("romfs:/images/icons/check-box-outline.png");
+                    ourEntry->SetIcon(inst::util::loadTex("romfs:/images/icons/check-box-outline.png"));
                 }
             }
             this->menu->AddItem(ourEntry);
@@ -103,11 +110,11 @@ namespace inst::ui {
     void sdInstPage::selectNsp(int selectedIndex) {
         int dirListSize = this->ourDirectories.size();
         dirListSize++;
-        if (this->menu->GetItems()[selectedIndex]->GetIcon() == "romfs:/images/icons/check-box-outline.png") {
+        if (this->menu->GetItems()[selectedIndex]->GetIconTexture() == inst::util::loadTex("romfs:/images/icons/check-box-outline.png")) {
             for (long unsigned int i = 0; i < this->selectedTitles.size(); i++) {
                 if (this->selectedTitles[i] == this->ourFiles[selectedIndex - dirListSize]) this->selectedTitles.erase(this->selectedTitles.begin() + i);
             }
-        } else if (this->menu->GetItems()[selectedIndex]->GetIcon() == "romfs:/images/icons/checkbox-blank-outline.png") this->selectedTitles.push_back(this->ourFiles[selectedIndex - dirListSize]);
+        } else if (this->menu->GetItems()[selectedIndex]->GetIconTexture() == inst::util::loadTex("romfs:/images/icons/checkbox-blank-outline.png")) this->selectedTitles.push_back(this->ourFiles[selectedIndex - dirListSize]);
         else {
             this->followDirectory();
             return;
@@ -124,11 +131,11 @@ namespace inst::ui {
         nspInstStuff::installNspFromFile(this->selectedTitles, dialogResult);
     }
 
-    void sdInstPage::onInput(u64 Down, u64 Up, u64 Held, pu::ui::Touch Pos) {
+    void sdInstPage::onInput(u64 Down, u64 Up, u64 Held, pu::ui::TouchPoint Pos) {
         if (Down & HidNpadButton_B) {
             mainApp->LoadLayout(mainApp->mainPage);
         }
-        if ((Down & HidNpadButton_A) || (Up & TouchPseudoKey)) {
+        if ((Down & HidNpadButton_A) || (Up & pu::ui::TouchPseudoKey)) {
             this->selectNsp(this->menu->GetSelectedIndex());
             if (this->ourFiles.size() == 1 && this->selectedTitles.size() == 1) {
                 this->startInstall();
@@ -140,7 +147,7 @@ namespace inst::ui {
                 int topDir = 0;
                 topDir++;
                 for (long unsigned int i = this->ourDirectories.size() + topDir; i < this->menu->GetItems().size(); i++) {
-                    if (this->menu->GetItems()[i]->GetIcon() == "romfs:/images/icons/check-box-outline.png") continue;
+                    if (this->menu->GetItems()[i]->GetIconTexture() == inst::util::loadTex("romfs:/images/icons/check-box-outline.png")) continue;
                     else this->selectNsp(i);
                 }
                 this->drawMenuItems(false, currentDir);
@@ -150,7 +157,7 @@ namespace inst::ui {
             inst::ui::mainApp->CreateShowDialog("inst.sd.help.title"_lang, "inst.sd.help.desc"_lang, {"common.ok"_lang}, true);
         }
         if (Down & HidNpadButton_Plus) {
-            if (this->selectedTitles.size() == 0 && this->menu->GetItems()[this->menu->GetSelectedIndex()]->GetIcon() == "romfs:/images/icons/checkbox-blank-outline.png") {
+            if (this->selectedTitles.size() == 0 && this->menu->GetItems()[this->menu->GetSelectedIndex()]->GetIconTexture() == inst::util::loadTex("romfs:/images/icons/checkbox-blank-outline.png")) {
                 this->selectNsp(this->menu->GetSelectedIndex());
             }
             if (this->selectedTitles.size() > 0) this->startInstall();

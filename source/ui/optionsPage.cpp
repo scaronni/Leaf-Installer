@@ -20,26 +20,33 @@ namespace inst::ui {
 
     optionsPage::optionsPage() : Layout::Layout() {
         this->SetBackgroundColor(COLOR("#670000FF"));
-        if (std::filesystem::exists(inst::config::appDir + "/background.png")) this->SetBackgroundImage(inst::config::appDir + "/background.png");
-        else this->SetBackgroundImage("romfs:/images/background.jpg");
-        this->topRect = Rectangle::New(0, 0, 1280, 94, COLOR("#170909FF"));
-        this->infoRect = Rectangle::New(0, 95, 1280, 60, COLOR("#17090980"));
-        this->botRect = Rectangle::New(0, 660, 1280, 60, COLOR("#17090980"));
+        this->Add(inst::util::makeBackgroundImage());
+        this->topRect = Rectangle::New(0, 0, 1920, 141, COLOR("#170909FF"));
+        this->infoRect = Rectangle::New(0, 142, 1920, 90, COLOR("#17090980"));
+        this->botRect = Rectangle::New(0, 990, 1920, 90, COLOR("#17090980"));
         if (inst::config::gayMode) {
-            this->titleImage = Image::New(-113, 0, "romfs:/images/logo.png");
-            this->appVersionText = TextBlock::New(367, 49, "v" + inst::config::appVersion, 22);
+            this->titleImage = Image::New(-170, 0, inst::util::loadTex("romfs:/images/logo.png"));
+            this->titleImage->SetWidth(720);
+            this->titleImage->SetHeight(140);
+            this->appVersionText = TextBlock::New(550, 74, "v" + inst::config::appVersion);
+            this->appVersionText->SetFont(pu::ui::MakeDefaultFontName(33));
         }
         else {
-            this->titleImage = Image::New(0, 0, "romfs:/images/logo.png");
-            this->appVersionText = TextBlock::New(480, 49, "v" + inst::config::appVersion, 22);
+            this->titleImage = Image::New(0, 0, inst::util::loadTex("romfs:/images/logo.png"));
+            this->titleImage->SetWidth(720);
+            this->titleImage->SetHeight(140);
+            this->appVersionText = TextBlock::New(720, 74, "v" + inst::config::appVersion);
+            this->appVersionText->SetFont(pu::ui::MakeDefaultFontName(33));
         }
         this->appVersionText->SetColor(COLOR("#FFFFFFFF"));
-        this->pageInfoText = TextBlock::New(10, 109, "options.title"_lang, 30);
+        this->pageInfoText = TextBlock::New(15, 164, "options.title"_lang);
+        this->pageInfoText->SetFont(pu::ui::MakeDefaultFontName(45));
         this->pageInfoText->SetColor(COLOR("#FFFFFFFF"));
-        this->butText = TextBlock::New(10, 678, "options.buttons"_lang, 24);
+        this->butText = TextBlock::New(15, 1017, "options.buttons"_lang);
+        this->butText->SetFont(pu::ui::MakeDefaultFontName(36));
         this->butText->SetColor(COLOR("#FFFFFFFF"));
-        this->menu = pu::ui::elm::Menu::New(0, 156, 1280, COLOR("#FFFFFF00"), 84, (506 / 84));
-        this->menu->SetOnFocusColor(COLOR("#00000033"));
+        this->menu = pu::ui::elm::Menu::New(0, 234, 1920, COLOR("#FFFFFF00"), COLOR("#FFFFFF00"), 126, (506 / 84));
+        this->menu->SetItemsFocusColor(COLOR("#00000033"));
         this->menu->SetScrollbarColor(COLOR("#17090980"));
         this->Add(this->topRect);
         this->Add(this->infoRect);
@@ -116,27 +123,27 @@ namespace inst::ui {
         this->menu->ClearItems();
         auto ignoreFirmOption = pu::ui::elm::MenuItem::New("options.menu_items.ignore_firm"_lang);
         ignoreFirmOption->SetColor(COLOR("#FFFFFFFF"));
-        ignoreFirmOption->SetIcon(this->getMenuOptionIcon(inst::config::ignoreReqVers));
+        ignoreFirmOption->SetIcon(inst::util::loadTex(this->getMenuOptionIcon(inst::config::ignoreReqVers)));
         this->menu->AddItem(ignoreFirmOption);
         auto validateOption = pu::ui::elm::MenuItem::New("options.menu_items.nca_verify"_lang);
         validateOption->SetColor(COLOR("#FFFFFFFF"));
-        validateOption->SetIcon(this->getMenuOptionIcon(inst::config::validateNCAs));
+        validateOption->SetIcon(inst::util::loadTex(this->getMenuOptionIcon(inst::config::validateNCAs)));
         this->menu->AddItem(validateOption);
         auto overclockOption = pu::ui::elm::MenuItem::New("options.menu_items.boost_mode"_lang);
         overclockOption->SetColor(COLOR("#FFFFFFFF"));
-        overclockOption->SetIcon(this->getMenuOptionIcon(inst::config::overClock));
+        overclockOption->SetIcon(inst::util::loadTex(this->getMenuOptionIcon(inst::config::overClock)));
         this->menu->AddItem(overclockOption);
         auto deletePromptOption = pu::ui::elm::MenuItem::New("options.menu_items.ask_delete"_lang);
         deletePromptOption->SetColor(COLOR("#FFFFFFFF"));
-        deletePromptOption->SetIcon(this->getMenuOptionIcon(inst::config::deletePrompt));
+        deletePromptOption->SetIcon(inst::util::loadTex(this->getMenuOptionIcon(inst::config::deletePrompt)));
         this->menu->AddItem(deletePromptOption);
         auto autoUpdateOption = pu::ui::elm::MenuItem::New("options.menu_items.auto_update"_lang);
         autoUpdateOption->SetColor(COLOR("#FFFFFFFF"));
-        autoUpdateOption->SetIcon(this->getMenuOptionIcon(inst::config::autoUpdate));
+        autoUpdateOption->SetIcon(inst::util::loadTex(this->getMenuOptionIcon(inst::config::autoUpdate)));
         this->menu->AddItem(autoUpdateOption);
         auto gayModeOption = pu::ui::elm::MenuItem::New("options.menu_items.gay_option"_lang);
         gayModeOption->SetColor(COLOR("#FFFFFFFF"));
-        gayModeOption->SetIcon(this->getMenuOptionIcon(inst::config::gayMode));
+        gayModeOption->SetIcon(inst::util::loadTex(this->getMenuOptionIcon(inst::config::gayMode)));
         this->menu->AddItem(gayModeOption);
         auto sigPatchesUrlOption = pu::ui::elm::MenuItem::New("options.menu_items.sig_url"_lang + inst::util::shortenString(inst::config::sigPatchesUrl, 42, false));
         sigPatchesUrlOption->SetColor(COLOR("#FFFFFFFF"));
@@ -152,11 +159,11 @@ namespace inst::ui {
         this->menu->AddItem(creditsOption);
     }
 
-    void optionsPage::onInput(u64 Down, u64 Up, u64 Held, pu::ui::Touch Pos) {
+    void optionsPage::onInput(u64 Down, u64 Up, u64 Held, pu::ui::TouchPoint Pos) {
         if (Down & HidNpadButton_B) {
             mainApp->LoadLayout(mainApp->mainPage);
         }
-        if ((Down & HidNpadButton_A) || (Up & TouchPseudoKey)) {
+        if ((Down & HidNpadButton_A) || (Up & pu::ui::TouchPseudoKey)) {
             std::string keyboardResult;
             int rc;
             std::vector<std::string> downloadUrl;
@@ -195,34 +202,34 @@ namespace inst::ui {
                         mainApp->mainPage->awooImage->SetVisible(true);
                         mainApp->instpage->awooImage->SetVisible(true);
                         mainApp->instpage->titleImage->SetX(0);
-                        mainApp->instpage->appVersionText->SetX(480);
+                        mainApp->instpage->appVersionText->SetX(720);
                         mainApp->mainPage->titleImage->SetX(0);
-                        mainApp->mainPage->appVersionText->SetX(480);
+                        mainApp->mainPage->appVersionText->SetX(720);
                         mainApp->netinstPage->titleImage->SetX(0);
-                        mainApp->netinstPage->appVersionText->SetX(480);
+                        mainApp->netinstPage->appVersionText->SetX(720);
                         mainApp->optionspage->titleImage->SetX(0);
-                        mainApp->optionspage->appVersionText->SetX(480);
+                        mainApp->optionspage->appVersionText->SetX(720);
                         mainApp->sdinstPage->titleImage->SetX(0);
-                        mainApp->sdinstPage->appVersionText->SetX(480);
+                        mainApp->sdinstPage->appVersionText->SetX(720);
                         mainApp->usbinstPage->titleImage->SetX(0);
-                        mainApp->usbinstPage->appVersionText->SetX(480);
+                        mainApp->usbinstPage->appVersionText->SetX(720);
                     }
                     else {
                         inst::config::gayMode = true;
                         mainApp->mainPage->awooImage->SetVisible(false);
                         mainApp->instpage->awooImage->SetVisible(false);
-                        mainApp->instpage->titleImage->SetX(-113);
-                        mainApp->instpage->appVersionText->SetX(367);
-                        mainApp->mainPage->titleImage->SetX(-113);
-                        mainApp->mainPage->appVersionText->SetX(367);
-                        mainApp->netinstPage->titleImage->SetX(-113);
-                        mainApp->netinstPage->appVersionText->SetX(367);
-                        mainApp->optionspage->titleImage->SetX(-113);
-                        mainApp->optionspage->appVersionText->SetX(367);
-                        mainApp->sdinstPage->titleImage->SetX(-113);
-                        mainApp->sdinstPage->appVersionText->SetX(367);
-                        mainApp->usbinstPage->titleImage->SetX(-113);
-                        mainApp->usbinstPage->appVersionText->SetX(367);
+                        mainApp->instpage->titleImage->SetX(-170);
+                        mainApp->instpage->appVersionText->SetX(550);
+                        mainApp->mainPage->titleImage->SetX(-170);
+                        mainApp->mainPage->appVersionText->SetX(550);
+                        mainApp->netinstPage->titleImage->SetX(-170);
+                        mainApp->netinstPage->appVersionText->SetX(550);
+                        mainApp->optionspage->titleImage->SetX(-170);
+                        mainApp->optionspage->appVersionText->SetX(550);
+                        mainApp->sdinstPage->titleImage->SetX(-170);
+                        mainApp->sdinstPage->appVersionText->SetX(550);
+                        mainApp->usbinstPage->titleImage->SetX(-170);
+                        mainApp->usbinstPage->appVersionText->SetX(550);
                     }
                     inst::config::setConfig();
                     this->setMenuText();

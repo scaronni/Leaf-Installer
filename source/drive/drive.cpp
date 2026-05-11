@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "util/drive.hpp"
 #include "httpdir.hpp"
 

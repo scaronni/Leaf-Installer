@@ -8,7 +8,7 @@ namespace inst::ui {
         public:
             optionsPage();
             PU_SMART_CTOR(optionsPage)
-            void onInput(u64 Down, u64 Up, u64 Held, pu::ui::Touch Pos);
+            void onInput(u64 Down, u64 Up, u64 Held, pu::ui::TouchPoint Pos);
             static void askToUpdate(std::vector<std::string> updateInfo);
             Image::Ref titleImage;
             TextBlock::Ref appVersionText;

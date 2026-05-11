@@ -1,9 +1,12 @@
 #pragma once
 #include <filesystem>
+#include <pu/Plutonium>
 
 namespace inst::util {
     void initApp ();
     void deinitApp ();
+    pu::sdl2::TextureHandle::Ref loadTex(const std::string& path);
+    pu::ui::elm::Image::Ref makeBackgroundImage();
     void initInstallServices();
     void deinitInstallServices();
     bool ignoreCaseCompare(const std::string &a, const std::string &b);

@@ -14,28 +14,37 @@ namespace inst::ui {
 
     usbInstPage::usbInstPage() : Layout::Layout() {
         this->SetBackgroundColor(COLOR("#670000FF"));
-        if (std::filesystem::exists(inst::config::appDir + "/background.png")) this->SetBackgroundImage(inst::config::appDir + "/background.png");
-        else this->SetBackgroundImage("romfs:/images/background.jpg");
-        this->topRect = Rectangle::New(0, 0, 1280, 94, COLOR("#170909FF"));
-        this->infoRect = Rectangle::New(0, 95, 1280, 60, COLOR("#17090980"));
-        this->botRect = Rectangle::New(0, 660, 1280, 60, COLOR("#17090980"));
+        this->Add(inst::util::makeBackgroundImage());
+        this->topRect = Rectangle::New(0, 0, 1920, 141, COLOR("#170909FF"));
+        this->infoRect = Rectangle::New(0, 142, 1920, 90, COLOR("#17090980"));
+        this->botRect = Rectangle::New(0, 990, 1920, 90, COLOR("#17090980"));
         if (inst::config::gayMode) {
-            this->titleImage = Image::New(-113, 0, "romfs:/images/logo.png");
-            this->appVersionText = TextBlock::New(367, 49, "v" + inst::config::appVersion, 22);
+            this->titleImage = Image::New(-170, 0, inst::util::loadTex("romfs:/images/logo.png"));
+            this->titleImage->SetWidth(720);
+            this->titleImage->SetHeight(140);
+            this->appVersionText = TextBlock::New(550, 74, "v" + inst::config::appVersion);
+            this->appVersionText->SetFont(pu::ui::MakeDefaultFontName(33));
         }
         else {
-            this->titleImage = Image::New(0, 0, "romfs:/images/logo.png");
-            this->appVersionText = TextBlock::New(480, 49, "v" + inst::config::appVersion, 22);
+            this->titleImage = Image::New(0, 0, inst::util::loadTex("romfs:/images/logo.png"));
+            this->titleImage->SetWidth(720);
+            this->titleImage->SetHeight(140);
+            this->appVersionText = TextBlock::New(720, 74, "v" + inst::config::appVersion);
+            this->appVersionText->SetFont(pu::ui::MakeDefaultFontName(33));
         }
         this->appVersionText->SetColor(COLOR("#FFFFFFFF"));
-        this->pageInfoText = TextBlock::New(10, 109, "", 30);
+        this->pageInfoText = TextBlock::New(15, 164, "");
+        this->pageInfoText->SetFont(pu::ui::MakeDefaultFontName(45));
         this->pageInfoText->SetColor(COLOR("#FFFFFFFF"));
-        this->butText = TextBlock::New(10, 678, "", 24);
+        this->butText = TextBlock::New(15, 1017, "");
+        this->butText->SetFont(pu::ui::MakeDefaultFontName(36));
         this->butText->SetColor(COLOR("#FFFFFFFF"));
-        this->menu = pu::ui::elm::Menu::New(0, 156, 1280, COLOR("#FFFFFF00"), 84, (506 / 84));
-        this->menu->SetOnFocusColor(COLOR("#00000033"));
+        this->menu = pu::ui::elm::Menu::New(0, 234, 1920, COLOR("#FFFFFF00"), COLOR("#FFFFFF00"), 126, (506 / 84));
+        this->menu->SetItemsFocusColor(COLOR("#00000033"));
         this->menu->SetScrollbarColor(COLOR("#17090980"));
-        this->infoImage = Image::New(460, 332, "romfs:/images/icons/usb-connection-waiting.png");
+        this->infoImage = Image::New(690, 498, inst::util::loadTex("romfs:/images/icons/usb-connection-waiting.png"));
+        this->infoImage->SetWidth(540);
+        this->infoImage->SetHeight(129);
         this->Add(this->topRect);
         this->Add(this->infoRect);
         this->Add(this->botRect);
@@ -54,10 +63,10 @@ namespace inst::ui {
             std::string itm = inst::util::shortenString(inst::util::formatUrlString(url), 56, true);
             auto ourEntry = pu::ui::elm::MenuItem::New(itm);
             ourEntry->SetColor(COLOR("#FFFFFFFF"));
-            ourEntry->SetIcon("romfs:/images/icons/checkbox-blank-outline.png");
+            ourEntry->SetIcon(inst::util::loadTex("romfs:/images/icons/checkbox-blank-outline.png"));
             for (long unsigned int i = 0; i < this->selectedTitles.size(); i++) {
                 if (this->selectedTitles[i] == url) {
-                    ourEntry->SetIcon("romfs:/images/icons/check-box-outline.png");
+                    ourEntry->SetIcon(inst::util::loadTex("romfs:/images/icons/check-box-outline.png"));
                 }
             }
             this->menu->AddItem(ourEntry);
@@ -65,7 +74,7 @@ namespace inst::ui {
     }
 
     void usbInstPage::selectTitle(int selectedIndex) {
-        if (this->menu->GetItems()[selectedIndex]->GetIcon() == "romfs:/images/icons/check-box-outline.png") {
+        if (this->menu->GetItems()[selectedIndex]->GetIconTexture() == inst::util::loadTex("romfs:/images/icons/check-box-outline.png")) {
             for (long unsigned int i = 0; i < this->selectedTitles.size(); i++) {
                 if (this->selectedTitles[i] == this->ourTitles[selectedIndex]) this->selectedTitles.erase(this->selectedTitles.begin() + i);
             }
@@ -107,12 +116,12 @@ namespace inst::ui {
         return;
     }
 
-    void usbInstPage::onInput(u64 Down, u64 Up, u64 Held, pu::ui::Touch Pos) {
+    void usbInstPage::onInput(u64 Down, u64 Up, u64 Held, pu::ui::TouchPoint Pos) {
         if (Down & HidNpadButton_B) {
             tin::util::USBCmdManager::SendExitCmd();
             mainApp->LoadLayout(mainApp->mainPage);
         }
-        if ((Down & HidNpadButton_A) || (Up & TouchPseudoKey)) {
+        if ((Down & HidNpadButton_A) || (Up & pu::ui::TouchPseudoKey)) {
             this->selectTitle(this->menu->GetSelectedIndex());
             if (this->menu->GetItems().size() == 1 && this->selectedTitles.size() == 1) {
                 this->startInstall();
@@ -122,7 +131,7 @@ namespace inst::ui {
             if (this->selectedTitles.size() == this->menu->GetItems().size()) this->drawMenuItems(true);
             else {
                 for (long unsigned int i = 0; i < this->menu->GetItems().size(); i++) {
-                    if (this->menu->GetItems()[i]->GetIcon() == "romfs:/images/icons/check-box-outline.png") continue;
+                    if (this->menu->GetItems()[i]->GetIconTexture() == inst::util::loadTex("romfs:/images/icons/check-box-outline.png")) continue;
                     else this->selectTitle(i);
                 }
                 this->drawMenuItems(false);
