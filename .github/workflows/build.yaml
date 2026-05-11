@@ -51,8 +51,10 @@ jobs:
 
       - name: Create zip package (max compression)
         run: |
-          cd dist
-          zip -9 Awoo-Installer.zip Awoo-Installer.nro
+          mkdir -p staging/switch/Awoo-Installer
+          cp dist/Awoo-Installer.nro staging/switch/Awoo-Installer/Awoo-Installer.nro
+          cd staging
+          zip -9 -r ../dist/Awoo-Installer.zip switch
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v3
