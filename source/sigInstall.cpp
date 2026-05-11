@@ -1,4 +1,5 @@
 #include <switch.h>
+#include <filesystem>
 #include "util/error.hpp"
 #include "ui/MainApplication.hpp"
 #include "util/curl.hpp"
@@ -12,60 +13,61 @@ namespace inst::ui {
 }
 
 namespace sig {
+    static bool downloadAndExtract(const std::string& url, const std::string& zipPath) {
+        if (!inst::curl::downloadFile(url, zipPath.c_str())) return false;
+        const bool ok = inst::zip::extractFile(zipPath, "sdmc:/");
+        std::filesystem::remove(zipPath);
+        return ok;
+    }
+
     void installSigPatches () {
         bpcInitialize();
         try {
-            std::string patchesVersion = inst::util::readTextFromFile("sdmc:/atmosphere/exefs_patches/es_patches/patches.txt");
-            std::string versionText = "";
-            std::string installButtonText = "sig.install"_lang;
-            if (patchesVersion != "") {
-                versionText = "\n\n" + "sig.version_text"_lang + patchesVersion + ".";
-                installButtonText = "sig.update"_lang;
-            }
-            int ourResult = inst::ui::mainApp->CreateShowDialog("sig.title0"_lang, "sig.desc0"_lang + versionText, {installButtonText, "sig.uninstall"_lang, "common.cancel"_lang}, true);
-            if (ourResult == 0) {
-                if (inst::util::getIPAddress() == "1.0.0.127") {
-                    inst::ui::mainApp->CreateShowDialog("main.net.title"_lang, "main.net.desc"_lang, {"common.ok"_lang}, true);
-                    return;
-                }
-                if (!inst::util::copyFile("sdmc:/bootloader/patches.ini", inst::config::appDir + "/patches.ini.old")) {
-                    if (inst::ui::mainApp->CreateShowDialog("sig.backup_failed"_lang, "sig.backup_failed_desc"_lang, {"common.yes"_lang, "common.no"_lang}, false)) return;
-                }
-                std::string ourPath = inst::config::appDir + "/patches.zip";
-                bool didDownload = inst::curl::downloadFile(inst::config::sigPatchesUrl, ourPath.c_str());
-                bool didExtract = false;
-                if (didDownload) didExtract = inst::zip::extractFile(ourPath, "sdmc:/");
-                else {
-                    inst::ui::mainApp->CreateShowDialog("sig.download_failed"_lang, "sig.download_failed_desc"_lang, {"common.ok"_lang}, true);
-                    return;
-                }
-                std::filesystem::remove(ourPath);
-                if (didExtract) {
-                    patchesVersion = inst::util::readTextFromFile("sdmc:/atmosphere/exefs_patches/es_patches/patches.txt");
-                    versionText = "";
-                    if (patchesVersion != "") versionText = "sig.version_text2"_lang + patchesVersion + "! ";
-                    if (inst::ui::mainApp->CreateShowDialog("sig.install_complete"_lang, versionText + "\n\n" + "sig.complete_desc"_lang, {"sig.restart"_lang, "sig.later"_lang}, false) == 0) bpcRebootSystem();
-                }
-                else {
-                    inst::ui::mainApp->CreateShowDialog("sig.extract_failed"_lang, "", {"common.ok"_lang}, true);
-                    return;
-                }
+            if (inst::util::getIPAddress() == "1.0.0.127") {
+                inst::ui::mainApp->CreateShowDialog("main.net.title"_lang, "main.net.desc"_lang, {"common.ok"_lang}, true);
+                bpcExit();
                 return;
-            } else if (ourResult == 1) {
-                if (!inst::util::copyFile( inst::config::appDir + "/patches.ini.old", "sdmc:/bootloader/patches.ini")) {
-                    if (inst::ui::mainApp->CreateShowDialog("sig.restore_failed"_lang, "", {"common.yes"_lang, "common.no"_lang}, false)) return;
-                } else std::filesystem::remove(inst::config::appDir + "/patches.ini.old");
-                if (inst::util::removeDirectory("sdmc:/atmosphere/exefs_patches/es_patches")) {
-                    if (inst::ui::mainApp->CreateShowDialog("sig.uninstall_complete"_lang, "sig.complete_desc"_lang, {"sig.restart"_lang, "sig.later"_lang}, false) == 0) bpcRebootSystem();
-                }
-                else inst::ui::mainApp->CreateShowDialog("sig.remove_failed"_lang, "sig.remove_failed_desc"_lang, {"common.ok"_lang}, true);
-            } else return;
+            }
+
+            auto ultrahandInfo = inst::util::fetchLatestRelease(inst::config::ultrahandUrl);
+            auto sysPatchInfo = inst::util::fetchLatestRelease(inst::config::sysPatchUrl);
+
+            if (ultrahandInfo.empty() || sysPatchInfo.empty()) {
+                inst::ui::mainApp->CreateShowDialog("sig.fetch_failed"_lang, "sig.fetch_failed_desc"_lang, {"common.ok"_lang}, true);
+                bpcExit();
+                return;
+            }
+
+            const std::string desc = "sig.confirm_desc"_lang + std::string("\n\n") +
+                                     "Ultrahand Overlay: " + ultrahandInfo[0] + "\n" +
+                                     "sys-patch: " + sysPatchInfo[0];
+            const int rc = inst::ui::mainApp->CreateShowDialog("sig.confirm_title"_lang, desc, {"sig.install"_lang, "common.cancel"_lang}, false);
+            if (rc != 0) {
+                bpcExit();
+                return;
+            }
+
+            const std::string ultraZip = inst::config::appDir + "/ultrahand.zip";
+            const std::string sysZip = inst::config::appDir + "/sys-patch.zip";
+
+            if (!downloadAndExtract(ultrahandInfo[1], ultraZip)) {
+                inst::ui::mainApp->CreateShowDialog("sig.download_failed"_lang, "Ultrahand Overlay", {"common.ok"_lang}, true);
+                bpcExit();
+                return;
+            }
+            if (!downloadAndExtract(sysPatchInfo[1], sysZip)) {
+                inst::ui::mainApp->CreateShowDialog("sig.download_failed"_lang, "sys-patch", {"common.ok"_lang}, true);
+                bpcExit();
+                return;
+            }
+
+            if (inst::ui::mainApp->CreateShowDialog("sig.install_complete"_lang, "sig.complete_desc"_lang, {"sig.restart"_lang, "sig.later"_lang}, false) == 0) {
+                bpcRebootSystem();
+            }
         }
-        catch (std::exception& e)
-        {
-            LOG_DEBUG("Failed to install Signature Patches");
+        catch (std::exception& e) {
+            LOG_DEBUG("Failed to install Ultrahand Overlay and sys-patch");
             LOG_DEBUG("%s", e.what());
-            fprintf(stdout, "%s", e.what());
             inst::ui::mainApp->CreateShowDialog("sig.generic_error"_lang, (std::string)e.what(), {"common.ok"_lang}, true);
         }
         bpcExit();

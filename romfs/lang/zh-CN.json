@@ -1,10 +1,10 @@
 {
-    "main":{
+    "main": {
         "menu": {
             "sd": "通过 SD 卡安装",
             "net": "通过局域网或网络安装",
             "usb": "通过 USB/USB HDD 安装",
-            "sig": "管理签名补丁",
+            "sig": "安装 Ultrahand Overlay 和 sys-patch",
             "set": "设置",
             "exit": "退出"
         },
@@ -25,9 +25,9 @@
         },
         "applet": {
             "title": "不支持 Applet 模式",
-            "desc": "在 Applet 模式下使用 Awoo Installer 可能会遇到问题，\n如果遇到问题，请切换 Awoo Installer 的运行模式！\n(退回主界面，按住 \ue0e5 并打开任意游戏，进入 hbmenu 后再打开 Awoo Installer 即可)"
+            "desc": "在 Applet 模式下使用 Awoo Installer 可能会遇到问题，\n如果遇到问题，请切换 Awoo Installer 的运行模式！\n(退回主界面，按住  并打开任意游戏，进入 hbmenu 后再打开 Awoo Installer 即可)"
         },
-        "buttons": "\ue0e0 选择    \ue0e1 退出"
+        "buttons": " 选择     退出"
     },
     "inst": {
         "net": {
@@ -53,25 +53,25 @@
             },
             "qr_new": "请用手机 App 扫码",
             "qr_scaned": "扫描成功, 请在手机上根据提示确认登录",
-            "top_info": "在服务器中选择将要安装的文件，然后按 \ue0ef 以安装！",
+            "top_info": "在服务器中选择将要安装的文件，然后按  以安装！",
             "top_info1": "正在等待连接… Switch 的 IP 地址是：",
             "failed": "远程安装失败！",
             "transfer_interput": "数据传输发生错误，检查网络连接。",
             "source_string": " 通过本地网络",
-            "buttons": "\ue0e3 网络安装    \ue0e2 帮助    \ue0e1 取消",
-            "buttons1": "\ue0e0 选择    \ue0e3 全选    \ue0ef 安装    \ue0e1 取消"
+            "buttons": " 网络安装     帮助     取消",
+            "buttons1": " 选择     全选     安装     取消"
         },
         "sd": {
             "help": {
                 "title": "帮助",
-                "desc": "复制 NSP、NSZ、XCI 或 XCZ 文件到 SD 卡，\n浏览并选择将要安装的文件，然后按 \ue0ef 以安装。"
+                "desc": "复制 NSP、NSZ、XCI 或 XCZ 文件到 SD 卡，\n浏览并选择将要安装的文件，然后按  以安装。"
             },
-            "top_info": "选择将要安装的文件，然后按 \ue0ef 以安装！",
+            "top_info": "选择将要安装的文件，然后按  以安装！",
             "source_string": " 通过 SD 卡",
             "delete_info": " 安装完成！是否从 SD 卡中删除安装文件？",
             "delete_info_multi": " 文件安装成功！是否从 SD 卡中删除安装文件？",
             "delete_desc": "安装完成后不再需要安装文件",
-            "buttons": "\ue0e0 选择    \ue0e3 全选    \ue0ef 安装    \ue0e2 帮助    \ue0e1 取消"
+            "buttons": " 选择     全选     安装     帮助     取消"
         },
         "usb": {
             "help": {
@@ -79,11 +79,11 @@
                 "desc": "可以使用下列工具通过 USB 安装文件，例如在 Tinfoil 模式下使用 NS-USBloader。\n如想向 Switch 发送文件，打开电脑或移动设备上任一工具软件，\n选择文件，然后上传到您的主机即可！\n\n不幸的是，USB 安装在一些平台上可能需要特别的设置，这可能会引发更多的问题。\n如果以上无效，试试通过局域网或网络安装，\n或者复制文件到 SD 卡并在主菜单中选择\"通过 SD 卡安装\"！"
             },
             "top_info": "USB 连接成功！正在等待发送文件列表...",
-            "top_info2": "选择将要通过 USB 安装的文件，然后按 \ue0ef 以安装！",
+            "top_info2": "选择将要通过 USB 安装的文件，然后按  以安装！",
             "error": "USB 传输超时或失败",
             "source_string": " 通过 USB",
-            "buttons": "\ue0e2 (按住) 帮助    \ue0e1 (按住) 取消",
-            "buttons2": "\ue0e0 选择    \ue0e3 全选    \ue0ef 安装    \ue0e1 取消"
+            "buttons": " (按住) 帮助     (按住) 取消",
+            "buttons2": " 选择     全选     安装     取消"
         },
         "target": {
             "desc0": "请选择 ",
@@ -121,27 +121,17 @@
         ]
     },
     "sig": {
+        "confirm_title": "安装 Ultrahand Overlay 和 sys-patch?",
+        "confirm_desc": "将下载并安装以下版本,然后重启主机。",
         "install": "安装",
-        "uninstall": "卸载",
-        "update": "更新",
-        "version_text": "您已安装适用于 HOS 版本的签名补丁 ",
-        "title0": "安装签名补丁？",
-        "desc0": "安装和运行官方软件需要签名补丁。",
-        "backup_failed": "无法备份 Hekate patch.ini！是否继续？",
-        "backup_failed_desc": "如果您不使用 Hekate，请忽略此警告。",
-        "download_failed": "无法下载签名补丁",
-        "download_failed_desc": "您可能在 Awoo Installer 设置中设定了无效来源，\n或者来源可能暂时无法访问。",
-        "version_text2": "您的签名补丁已更新到适配 HOS 版本 ",
-        "install_complete": "安装完成！",
-        "complete_desc": "重启主机并应用",
-        "restart": "立即重启",
-        "later": "稍后重启",
-        "extract_failed": "无法解压文件！",
-        "restore_failed": "无法恢复原始 Hekate patch.ini！是否继续？",
-        "uninstall_complete": "卸载完成",
-        "remove_failed": "无法删除签名补丁",
-        "remove_failed_desc": "文件可能已被重命名或删除",
-        "generic_error": "安装签名补丁失败！"
+        "fetch_failed": "无法获取最新版本信息",
+        "fetch_failed_desc": "请检查设置中的网址或您的互联网连接。",
+        "download_failed": "下载失败",
+        "install_complete": "安装完成!",
+        "complete_desc": "请重启主机以应用更改",
+        "restart": "重启",
+        "later": "稍后",
+        "generic_error": "安装 Ultrahand Overlay 和 sys-patch 失败!"
     },
     "options": {
         "menu_items": {
@@ -151,7 +141,9 @@
             "ask_delete": "安装后询问文件删除",
             "auto_update": "自动检查 Awoo Installer 更新",
             "gay_option": "基友模式",
-            "sig_url": "签名补丁源链接 (URL)：",
+            "awoo_url": "Awoo Installer 网址：",
+            "ultrahand_url": "Ultrahand Overlay 网址：",
+            "sys_patch_url": "sys-patch 网址：",
             "language": "语言：",
             "check_update": "检查 Awoo Installer 更新",
             "credits": "致谢"
@@ -161,7 +153,6 @@
             "desc": "一些安装文件可能包含恶意内容！\n只有在您确信安装文件绝对可靠的情况下\n才可以禁用此功能！\n\n是否仍然禁用 NCA 签名验证？",
             "opt1": "是的，我不怕变砖"
         },
-        "sig_hint": "输入签名补丁源链接 (URL)",
         "update": {
             "title": "有更新可用",
             "desc0": "Awoo Installer ",
@@ -182,11 +173,14 @@
         },
         "language": {
             "title": "选择 Awoo Installer 语言",
-            "desc": "软件将在更改语言后关闭，按 \ue0e1 取消。",
+            "desc": "软件将在更改语言后关闭，按  取消。",
             "system_language": "系统默认"
         },
         "title": "更改 Awoo Installer 设置！",
-        "buttons": "\ue0e0 选择/更改    \ue0e1 取消"
+        "buttons": " 选择/更改     取消",
+        "ultrahand_hint": "输入 Ultrahand Overlay 的 GitHub releases 网址",
+        "sys_patch_hint": "输入 sys-patch 的 GitHub releases 网址",
+        "awoo_hint": "输入 Awoo Installer 的 GitHub releases 网址"
     },
     "common": {
         "ok": "确定",
@@ -194,6 +188,6 @@
         "close": "关闭",
         "yes": "是",
         "no": "否",
-        "cancel_desc": "按 \ue0e1 取消"
+        "cancel_desc": "按  取消"
     }
 }

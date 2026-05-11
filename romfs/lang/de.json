@@ -1,10 +1,10 @@
 {
-    "main":{
+    "main": {
         "menu": {
             "sd": "Von SD-Karte installieren",
             "net": "Über LAN oder Internet installieren",
             "usb": "Über USB/USB HDD installieren",
-            "sig": "Verwalte Signatur-Patches",
+            "sig": "Ultrahand Overlay und sys-patch installieren",
             "set": "Einstellungen",
             "exit": "Beenden"
         },
@@ -27,7 +27,7 @@
             "title": "Applet-Modus wird nicht unterstützt",
             "desc": "Es kann zu Problemen bei der Verwendung des Awoo Installer im Applet-Modus kommen.\nWenn du Probleme hast, starte den Awoo Installer über einen installierten Titel (halte R gedrückt, während du ein Spiel startest)!"
         },
-        "buttons": "\ue0e0 Auswählen    \ue0e1 Beenden"
+        "buttons": " Auswählen     Beenden"
     },
     "inst": {
         "net": {
@@ -50,25 +50,25 @@
                 "alt_name": "Google Drive Datei",
                 "source_string": " von Google Drive"
             },
-            "top_info": "Wähle Dateien zur Installation vom Server aus und drücke dann \ue0b3 !",
+            "top_info": "Wähle Dateien zur Installation vom Server aus und drücke dann  !",
             "top_info1": "Warte auf eine Verbindung... Die IP Adresse deiner Switch ist: ",
             "failed": "Ferninstallation fehlgeschlagen!",
             "transfer_interput": "Bei der Dateiübertragung ist ein Fehler aufgetreten.",
             "source_string": " über das lokale Netzwerk",
-            "buttons": "\ue0e3 Installation über das Internet    \ue0e2 Hilfe    \ue0e1 Abbrechen",
-            "buttons1": "\ue0e0 Datei auswählen    \ue0e3 Alle auswählen    \ue0ef Datei(en) installieren    \ue0e1 Abbrechen"
+            "buttons": " Installation über das Internet     Hilfe     Abbrechen",
+            "buttons1": " Datei auswählen     Alle auswählen     Datei(en) installieren     Abbrechen"
         },
         "sd": {
             "help": {
                 "title": "Hilfe",
-                "desc": "Kopiere NSP, NSZ, XCI oder XCZ Dateien auf deine SD Karte,\nsuche nach ihnen und wähle die zu installierenden Titel aus und drücke dann \ue0b3."
+                "desc": "Kopiere NSP, NSZ, XCI oder XCZ Dateien auf deine SD Karte,\nsuche nach ihnen und wähle die zu installierenden Titel aus und drücke dann ."
             },
-            "top_info": "Wähle Dateien zur Installation aus und drücke dann \ue0b3!",
+            "top_info": "Wähle Dateien zur Installation aus und drücke dann !",
             "source_string": " von der SD Karte",
             "delete_info": " installiert! Soll es von der SD-Karte gelöscht werden?",
             "delete_info_multi": " Dateien erfolgreich installiert! Sollen diese von der SD-Karte gelöscht werden?",
             "delete_desc": "Die originalen Dateien werden nach der Installation nicht mehr benötigt",
-            "buttons": "\ue0e0 Datei auswählen    \ue0e3 Alle auswählen    \ue0ef Datei(en) installieren    \ue0e1 Abbrechen"
+            "buttons": " Datei auswählen     Alle auswählen     Datei(en) installieren     Abbrechen"
         },
         "usb": {
             "help": {
@@ -76,11 +76,11 @@
                 "desc": "Dateien können mit Tools, wie NS-USBloader im Tinfoil-Modus\nvon anderen Geräten aus installiert werden.\nUm Dateien an deine Switch zu senden, öffne\neins dieser Programme auf deinem PC oder mobilen Gerät, wähle die Dateien\naus und übertrage sie dann auf die Konsole!\n\nLeider erfordern USB-Installationen auf einigen Plattformen ein spezielles\nSetup und können manchmal ziemlich fehlerhaft sein. Falls das nicht klappt,\nversuche es mit LAN/Internet Installation oder kopiere deine Dateien auf\ndeine SD-Karte und versuche die Option \"Von SD-Karte installieren\" im Hauptmenü!"
             },
             "top_info": "USB verbunden! Warte auf die Dateiliste...",
-            "top_info2": "Wähle Dateien zur Installation aus und drücke dann \ue0b3 !",
+            "top_info2": "Wähle Dateien zur Installation aus und drücke dann  !",
             "error": "USB Übertragung ist zeitlich abgelaufen oder fehlgeschlagen",
             "source_string": " über USB",
-            "buttons": "\ue0e2 (Halten) Hilfe    \ue0e1 (Halte) Abbrechen",
-            "buttons2": "\ue0e0 Datei auswählen    \ue0e3 Alle auswählen    \ue0ef Datei(en) installieren    \ue0e1 Abbrechen"
+            "buttons": " (Halten) Hilfe     (Halte) Abbrechen",
+            "buttons2": " Datei auswählen     Alle auswählen     Datei(en) installieren     Abbrechen"
         },
         "target": {
             "desc0": "Wo soll ",
@@ -118,27 +118,17 @@
         ]
     },
     "sig": {
+        "confirm_title": "Ultrahand Overlay und sys-patch installieren?",
+        "confirm_desc": "Die folgenden Versionen werden heruntergeladen und installiert, anschließend wird die Konsole neu gestartet.",
         "install": "Installieren",
-        "uninstall": "Deinstallieren",
-        "update": "Aktualisieren",
-        "version_text": "Du hast die aktuellen Patches für die HOS Version installiert ",
-        "title0": "Installiere Signatur Patches?",
-        "desc0": "Signatur Patches werden benötigt, um offizielle Software zu installieren und zu spielen.",
-        "backup_failed": "Konnte die hekate patches.ini nicht finden! Trotzdem installieren?",
-        "backup_failed_desc": "Falls du hekate nicht nutzt, kannst du diese Warnung ignorieren.",
-        "download_failed": "Konnte die Signatur Patches nicht herunterladen",
-        "download_failed_desc": "Eventuell hast du eine ungültige Quelle in den Einstellung\nvom Awoo Installer eingestellt oder der Host ist derzeitig offline.",
-        "version_text2": "Deine Signatur Patches wurden für deine HOS Version aktualisiert ",
+        "fetch_failed": "Neueste Release-Informationen konnten nicht abgerufen werden",
+        "fetch_failed_desc": "Überprüfe die URLs in den Einstellungen oder deine Internetverbindung.",
+        "download_failed": "Download fehlgeschlagen",
         "install_complete": "Installation abgeschlossen!",
-        "complete_desc": "Starte die Konsole neu um die Änderung zu übernehmen",
-        "restart": "Neustarten",
-        "later": "Mach ich später",
-        "extract_failed": "Konnte die Dateien nicht entpacken!",
-        "restore_failed": "Konnte die originale hekate patches.ini nicht wiederherstellen! Deinstallation fortsetzen?",
-        "uninstall_complete": "Deinstallation vollständig",
-        "remove_failed": "Konnte die Signatur Patches nicht entfernen",
-        "remove_failed_desc": "Dateien müssen möglicherweise umbenannt oder entfernt werden",
-        "generic_error": "Installation der Signatur Patches fehlgeschlagen!"
+        "complete_desc": "Starte deine Konsole neu, um die Änderungen anzuwenden",
+        "restart": "Neustart",
+        "later": "Später",
+        "generic_error": "Installation von Ultrahand Overlay und sys-patch fehlgeschlagen!"
     },
     "options": {
         "menu_items": {
@@ -148,7 +138,9 @@
             "ask_delete": "Frage ob installierte Titel gelöscht werden sollen",
             "auto_update": "Suche automatisch nach Updates für Awoo Installer",
             "gay_option": "Entferne Anime",
-            "sig_url": "Signatur Patches URL: ",
+            "awoo_url": "Awoo Installer URL: ",
+            "ultrahand_url": "Ultrahand Overlay URL: ",
+            "sys_patch_url": "sys-patch URL: ",
             "language": "Sprache: ",
             "check_update": "Suche nach Updates für Awoo Installer",
             "credits": "Anerkennung"
@@ -158,7 +150,6 @@
             "desc": "Einige installierbare Dateien können bösartige Inhalte enthalten! Deaktiviere\ndiese Funktion nur, wenn du absolut sicher bist, dass die zu installierende\nSoftware vertrauenswürdig ist! Willst du die NCA-Signaturprüfung immer noch deaktivieren?",
             "opt1": "Ja, ich möchte mein Gerät bricken"
         },
-        "sig_hint": "Gib eine URL an, um Signatur Patches zu beziehen",
         "update": {
             "title": "Neue Version verfügbar",
             "desc0": "Awoo Installer ",
@@ -183,7 +174,10 @@
             "system_language": "System"
         },
         "title": "Ändere Awoo Installer Einstellungen!",
-        "buttons": "\ue0e0 Auswählen/Ändern    \ue0e1 Abbrechen "
+        "buttons": " Auswählen/Ändern     Abbrechen ",
+        "ultrahand_hint": "GitHub-Releases-URL für Ultrahand Overlay eingeben",
+        "sys_patch_hint": "GitHub-Releases-URL für sys-patch eingeben",
+        "awoo_hint": "GitHub-Releases-URL für Awoo Installer eingeben"
     },
     "common": {
         "ok": "OK",
@@ -191,6 +185,6 @@
         "close": "Schließen",
         "yes": "Ja",
         "no": "Nein",
-        "cancel_desc": "Drücke \ue0e1 zum Abbrechen "
+        "cancel_desc": "Drücke  zum Abbrechen "
     }
 }

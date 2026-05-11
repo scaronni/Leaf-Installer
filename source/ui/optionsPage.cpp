@@ -145,9 +145,15 @@ namespace inst::ui {
         gayModeOption->SetColor(COLOR("#FFFFFFFF"));
         gayModeOption->SetIcon(inst::util::loadTex(this->getMenuOptionIcon(inst::config::gayMode)));
         this->menu->AddItem(gayModeOption);
-        auto sigPatchesUrlOption = pu::ui::elm::MenuItem::New("options.menu_items.sig_url"_lang + inst::util::shortenString(inst::config::sigPatchesUrl, 42, false));
-        sigPatchesUrlOption->SetColor(COLOR("#FFFFFFFF"));
-        this->menu->AddItem(sigPatchesUrlOption);
+        auto awooUrlOption = pu::ui::elm::MenuItem::New("options.menu_items.awoo_url"_lang + inst::util::shortenString(inst::config::awooUrl, 80, false));
+        awooUrlOption->SetColor(COLOR("#FFFFFFFF"));
+        this->menu->AddItem(awooUrlOption);
+        auto ultrahandUrlOption = pu::ui::elm::MenuItem::New("options.menu_items.ultrahand_url"_lang + inst::util::shortenString(inst::config::ultrahandUrl, 80, false));
+        ultrahandUrlOption->SetColor(COLOR("#FFFFFFFF"));
+        this->menu->AddItem(ultrahandUrlOption);
+        auto sysPatchUrlOption = pu::ui::elm::MenuItem::New("options.menu_items.sys_patch_url"_lang + inst::util::shortenString(inst::config::sysPatchUrl, 80, false));
+        sysPatchUrlOption->SetColor(COLOR("#FFFFFFFF"));
+        this->menu->AddItem(sysPatchUrlOption);
         auto languageOption = pu::ui::elm::MenuItem::New("options.menu_items.language"_lang + this->getMenuLanguage(inst::config::languageSetting));
         languageOption->SetColor(COLOR("#FFFFFFFF"));
         this->menu->AddItem(languageOption);
@@ -235,14 +241,30 @@ namespace inst::ui {
                     this->setMenuText();
                     break;
                 case 6:
-                    keyboardResult = inst::util::softwareKeyboard("options.sig_hint"_lang, inst::config::sigPatchesUrl.c_str(), 500);
+                    keyboardResult = inst::util::softwareKeyboard("options.awoo_hint"_lang, inst::config::awooUrl.c_str(), 500);
                     if (keyboardResult.size() > 0) {
-                        inst::config::sigPatchesUrl = keyboardResult;
+                        inst::config::awooUrl = keyboardResult;
                         inst::config::setConfig();
                         this->setMenuText();
                     }
                     break;
                 case 7:
+                    keyboardResult = inst::util::softwareKeyboard("options.ultrahand_hint"_lang, inst::config::ultrahandUrl.c_str(), 500);
+                    if (keyboardResult.size() > 0) {
+                        inst::config::ultrahandUrl = keyboardResult;
+                        inst::config::setConfig();
+                        this->setMenuText();
+                    }
+                    break;
+                case 8:
+                    keyboardResult = inst::util::softwareKeyboard("options.sys_patch_hint"_lang, inst::config::sysPatchUrl.c_str(), 500);
+                    if (keyboardResult.size() > 0) {
+                        inst::config::sysPatchUrl = keyboardResult;
+                        inst::config::setConfig();
+                        this->setMenuText();
+                    }
+                    break;
+                case 9:
                     languageList = languageStrings;
                     languageList.push_back("options.language.system_language"_lang);
                     rc = inst::ui::mainApp->CreateShowDialog("options.language.title"_lang, "options.language.desc"_lang, languageList, false);
@@ -288,7 +310,7 @@ namespace inst::ui {
                     mainApp->FadeOut();
                     mainApp->Close();
                     break;
-                case 8:
+                case 10:
                     if (inst::util::getIPAddress() == "1.0.0.127") {
                         inst::ui::mainApp->CreateShowDialog("main.net.title"_lang, "main.net.desc"_lang, {"common.ok"_lang}, true);
                         break;
@@ -300,7 +322,7 @@ namespace inst::ui {
                     }
                     this->askToUpdate(downloadUrl);
                     break;
-                case 9:
+                case 11:
                     inst::ui::mainApp->CreateShowDialog("options.credits.title"_lang, "options.credits.desc"_lang, {"common.close"_lang}, true);
                     break;
                 default:

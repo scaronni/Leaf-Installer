@@ -1,10 +1,10 @@
 {
-    "main":{
+    "main": {
         "menu": {
             "sd": "Install from SD card",
             "net": "Install over LAN or internet",
             "usb": "Install over USB/USB HDD",
-            "sig": "Manage signature patches",
+            "sig": "Install Ultrahand Overlay and sys-patch",
             "set": "Settings",
             "exit": "Exit"
         },
@@ -27,7 +27,7 @@
             "title": "Applet Mode not supported",
             "desc": "You may experience issues using Awoo Installer in Applet Mode. If you do\nhave problems, please switch to running Awoo Installer over an installed\ntitle (hold R while starting a game)!"
         },
-        "buttons": "\ue0e0 Select    \ue0e1 Exit"
+        "buttons": " Select     Exit"
     },
     "inst": {
         "net": {
@@ -58,8 +58,8 @@
             "failed": "Failed to perform remote install!",
             "transfer_interput": "An error occured during data transfer. Check your network connection.",
             "source_string": " over local network",
-            "buttons": "\ue0e3 Install Over Internet    \ue0e2 Help    \ue0e1 Cancel",
-            "buttons1": "\ue0e0 Select File    \ue0e3 Select All    \ue0ef Install File(s)    \ue0e1 Cancel"
+            "buttons": " Install Over Internet     Help     Cancel",
+            "buttons1": " Select File     Select All     Install File(s)     Cancel"
         },
         "sd": {
             "help": {
@@ -71,7 +71,7 @@
             "delete_info": " installed! Delete it from the SD card?",
             "delete_info_multi": " files installed successfully! Delete them from the SD card?",
             "delete_desc": "The original files aren't needed anymore after they've been installed",
-            "buttons": "\ue0e0 Select File    \ue0e3 Select All    \ue0ef Install File(s)    \ue0e2 Help    \ue0e1 Cancel"
+            "buttons": " Select File     Select All     Install File(s)     Help     Cancel"
         },
         "usb": {
             "help": {
@@ -82,8 +82,8 @@
             "top_info2": "Select what files you want to install over USB, then press the Plus button!",
             "error": "USB transfer timed out or failed",
             "source_string": " over USB",
-            "buttons": "\ue0e2 (Hold) Help    \ue0e1 (Hold) Cancel",
-            "buttons2": "\ue0e0 Select File    \ue0e3 Select All    \ue0ef Install File(s)    \ue0e1 Cancel"
+            "buttons": " (Hold) Help     (Hold) Cancel",
+            "buttons2": " Select File     Select All     Install File(s)     Cancel"
         },
         "target": {
             "desc0": "Where should ",
@@ -121,27 +121,17 @@
         ]
     },
     "sig": {
+        "confirm_title": "Install Ultrahand Overlay and sys-patch?",
+        "confirm_desc": "The following versions will be downloaded and installed, then your console will reboot.",
         "install": "Install",
-        "uninstall": "Uninstall",
-        "update": "Update",
-        "version_text": "You currently have signature patches installed for up to HOS version ",
-        "title0": "Install signature patches?",
-        "desc0": "Signature patches are required for installing and playing official software.",
-        "backup_failed": "Could not back up Hekate patches.ini! Install anyway?",
-        "backup_failed_desc": "If you don't use Hekate you can ignore this warning.",
-        "download_failed": "Could not download signature patches",
-        "download_failed_desc": "You may have supplied an invalid source in Awoo Installer's settings,\nor the host may just be down right now.",
-        "version_text2": "Your signature patches have been updated for up to HOS version ",
+        "fetch_failed": "Could not fetch the latest release information",
+        "fetch_failed_desc": "Check the URLs in Settings or your internet connection.",
+        "download_failed": "Could not download",
         "install_complete": "Install complete!",
         "complete_desc": "Restart your console to apply",
         "restart": "Restart",
         "later": "I'll do it later",
-        "extract_failed": "Could not extract files!",
-        "restore_failed": "Unable to restore original Hekate patches.ini! Continue uninstalling?",
-        "uninstall_complete": "Uninstall complete",
-        "remove_failed": "Unable to remove signature patches",
-        "remove_failed_desc": "Files may have been renamed or deleted",
-        "generic_error": "Failed to install signature patches!"
+        "generic_error": "Failed to install Ultrahand Overlay and sys-patch!"
     },
     "options": {
         "menu_items": {
@@ -151,7 +141,9 @@
             "ask_delete": "Ask to delete original files after installation",
             "auto_update": "Check for updates to Awoo Installer automatically",
             "gay_option": "Remove anime",
-            "sig_url": "Signature patches source URL: ",
+            "awoo_url": "Awoo Installer URL: ",
+            "ultrahand_url": "Ultrahand Overlay URL: ",
+            "sys_patch_url": "sys-patch URL: ",
             "language": "Language: ",
             "check_update": "Check for updates to Awoo Installer",
             "credits": "Credits"
@@ -161,7 +153,6 @@
             "desc": "Some installable files may contain malicious contents! Only disable this\nfeature if you are absolutely certain the software you will be installing\nis trustworthy!\n\nDo you still want to disable NCA signature verification?",
             "opt1": "Yes, I want a brick"
         },
-        "sig_hint": "Enter the URL to obtain Signature Patches from",
         "update": {
             "title": "Update available",
             "desc0": "Awoo Installer ",
@@ -186,7 +177,10 @@
             "system_language": "System"
         },
         "title": "Change Awoo Installer's settings!",
-        "buttons": "\ue0e0 Select/Change    \ue0e1 Cancel"
+        "buttons": " Select/Change     Cancel",
+        "ultrahand_hint": "Enter the GitHub releases URL for Ultrahand Overlay",
+        "sys_patch_hint": "Enter the GitHub releases URL for sys-patch",
+        "awoo_hint": "Enter the GitHub releases URL for Awoo Installer"
     },
     "common": {
         "ok": "OK",

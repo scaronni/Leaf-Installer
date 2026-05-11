@@ -5,7 +5,9 @@
 
 namespace inst::config {
     std::string gAuthKey;
-    std::string sigPatchesUrl;
+    std::string awooUrl;
+    std::string ultrahandUrl;
+    std::string sysPatchUrl;
     std::string lastNetUrl;
     std::vector<std::string> updateInfo;
     int languageSetting;
@@ -26,7 +28,9 @@ namespace inst::config {
             {"ignoreReqVers", ignoreReqVers},
             {"languageSetting", languageSetting},
             {"overClock", overClock},
-            {"sigPatchesUrl", sigPatchesUrl},
+            {"awooUrl", awooUrl},
+            {"ultrahandUrl", ultrahandUrl},
+            {"sysPatchUrl", sysPatchUrl},
             {"usbAck", usbAck},
             {"validateNCAs", validateNCAs},
             {"lastNetUrl", lastNetUrl}
@@ -47,7 +51,9 @@ namespace inst::config {
             ignoreReqVers = j["ignoreReqVers"].get<bool>();
             languageSetting = j["languageSetting"].get<int>();
             overClock = j["overClock"].get<bool>();
-            sigPatchesUrl = j["sigPatchesUrl"].get<std::string>();
+            awooUrl = j["awooUrl"].get<std::string>();
+            ultrahandUrl = j["ultrahandUrl"].get<std::string>();
+            sysPatchUrl = j["sysPatchUrl"].get<std::string>();
             usbAck = j["usbAck"].get<bool>();
             validateNCAs = j["validateNCAs"].get<bool>();
             lastNetUrl = j["lastNetUrl"].get<std::string>();
@@ -55,7 +61,9 @@ namespace inst::config {
         catch (...) {
             // If loading values from the config fails, we just load the defaults and overwrite the old config
             gAuthKey = {0x41,0x49,0x7a,0x61,0x53,0x79,0x42,0x4d,0x71,0x76,0x34,0x64,0x58,0x6e,0x54,0x4a,0x4f,0x47,0x51,0x74,0x5a,0x5a,0x53,0x33,0x43,0x42,0x6a,0x76,0x66,0x37,0x34,0x38,0x51,0x76,0x78,0x53,0x7a,0x46,0x30};
-            sigPatchesUrl = "https://sigmapatches.coomer.party/sigpatches.zip";
+            awooUrl = "https://github.com/scaronni/Awoo-Installer/releases";
+            ultrahandUrl = "https://github.com/ppkantorski/Ultrahand-Overlay/releases";
+            sysPatchUrl = "https://github.com/impeeza/sys-patch/releases";
             languageSetting = 99;
             autoUpdate = true;
             deletePrompt = true;
@@ -67,7 +75,5 @@ namespace inst::config {
             lastNetUrl = "https://";
             setConfig();
         }
-        if (sigPatchesUrl == "https://github.com/Huntereb/Awoo-Installer/releases/download/SignaturePatches/patches.zip")
-            sigPatchesUrl = "https://sigmapatches.coomer.party/sigpatches.zip";
     }
 }

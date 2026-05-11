@@ -1,10 +1,10 @@
 {
-    "main":{
+    "main": {
         "menu": {
             "sd": "SDカードからインストール",
             "net": "ネットワーク経由でインストール",
             "usb": "USB/USB HDD経由でインストール",
-            "sig": "署名パッチを管理する",
+            "sig": "Ultrahand Overlay と sys-patch をインストール",
             "set": "設定",
             "exit": "終了"
         },
@@ -27,7 +27,7 @@
             "title": "アプレットモードはサポートされていません",
             "desc": "アプレットモードでAwoo Installerを使用すると問題が発生する場合があります。\n問題が発生した場合は、インストール済みのタイトルでAwoo Installerを実行するように切り替えてください\n(ゲームの開始中にRを押したままにしてください)!"
         },
-        "buttons": "\ue0e0 選択    \ue0e1 終了"
+        "buttons": " 選択     終了"
     },
     "inst": {
         "net": {
@@ -55,8 +55,8 @@
             "failed": "リモートインストールを実行できませんでした！",
             "transfer_interput": "データ転送中にエラーが発生しました。ネットワーク接続を確認してください。",
             "source_string": " ローカルネットワーク経由",
-            "buttons": "\ue0e3 インターネット経由でインストールする    \ue0e2 ヘルプ    \ue0e1 キャンセル",
-            "buttons1": "\ue0e0 ファイルを選択    \ue0e3 すべて選択    \ue0ef ファイルをインストール    \ue0e1 キャンセル"
+            "buttons": " インターネット経由でインストールする     ヘルプ     キャンセル",
+            "buttons1": " ファイルを選択     すべて選択     ファイルをインストール     キャンセル"
         },
         "sd": {
             "help": {
@@ -68,7 +68,7 @@
             "delete_info": " インストール完了！ SDカードから削除しますか？",
             "delete_info_multi": " ファイルが正常にインストールされました！ SDカードから削除しますか？",
             "delete_desc": "元のファイルはインストール後に不要になりました",
-            "buttons": "\ue0e0 ファイルを選択    \ue0e3 すべて選択    \ue0ef ファイルをインストール    \ue0e2 ヘルプ    \ue0e1 キャンセル"
+            "buttons": " ファイルを選択     すべて選択     ファイルをインストール     ヘルプ     キャンセル"
         },
         "usb": {
             "help": {
@@ -79,8 +79,8 @@
             "top_info2": "USB経由でインストールするファイルを選択し、＋ボタンを押します！",
             "error": "USB転送がタイムアウトまたは失敗した",
             "source_string": " USB経由",
-            "buttons": "\ue0e2 (押す) ヘルプ    \ue0e1 (押す) キャンセル",
-            "buttons2": "\ue0e0 ファイルを選択    \ue0e3 すべて選択    \ue0ef ファイルをインストール    \ue0e1 キャンセル"
+            "buttons": " (押す) ヘルプ     (押す) キャンセル",
+            "buttons2": " ファイルを選択     すべて選択     ファイルをインストール     キャンセル"
         },
         "target": {
             "desc0": "どこに ",
@@ -118,27 +118,17 @@
         ]
     },
     "sig": {
+        "confirm_title": "Ultrahand Overlay と sys-patch をインストールしますか?",
+        "confirm_desc": "以下のバージョンがダウンロードおよびインストールされ、その後コンソールが再起動します。",
         "install": "インストール",
-        "uninstall": "アンインストール",
-        "update": "アップデート",
-        "version_text": "現在、HOSバージョンまでの署名パッチがインストールされています ",
-        "title0": "署名パッチをインストールしますか?",
-        "desc0": "公式のソフトウェアをインストールして再生するには、署名パッチが必要です。",
-        "backup_failed": "Hekate patch.iniをバックアップできませんでした！それでもインストールしますか?",
-        "backup_failed_desc": "Hekateを使用しない場合、この警告は無視できます。",
-        "download_failed": "署名パッチをダウンロードできませんでした",
-        "download_failed_desc": "Awoo Installerの設定で無効なソースを指定したか、\nホストが現在ダウンしている可能性があります。",
-        "version_text2": "署名パッチがHOSバージョンまで更新されました ",
+        "fetch_failed": "最新リリース情報を取得できませんでした",
+        "fetch_failed_desc": "設定の URL またはインターネット接続を確認してください。",
+        "download_failed": "ダウンロードに失敗しました",
         "install_complete": "インストール完了!",
-        "complete_desc": "本体を再起動して適用します",
+        "complete_desc": "適用するにはコンソールを再起動してください",
         "restart": "再起動",
-        "later": "後でやります",
-        "extract_failed": "ファイルを抽出できませんでした！",
-        "restore_failed": "元のHekate patch.iniを復元できません！アンインストールを続行しますか？",
-        "uninstall_complete": "アンインストール完了",
-        "remove_failed": "署名パッチを削除できません",
-        "remove_failed_desc": "ファイルの名前が変更または削除された可能性があります",
-        "generic_error": "署名パッチのインストールに失敗しました!"
+        "later": "後で",
+        "generic_error": "Ultrahand Overlay と sys-patch のインストールに失敗しました!"
     },
     "options": {
         "menu_items": {
@@ -148,7 +138,9 @@
             "ask_delete": "インストール後に元のファイルを削除するか尋ねる",
             "auto_update": "Awoo Installerのアップデートを自動的に確認する",
             "gay_option": "絵を非表示にする",
-            "sig_url": "署名パッチのソースURL: ",
+            "awoo_url": "Awoo Installer URL: ",
+            "ultrahand_url": "Ultrahand Overlay URL: ",
+            "sys_patch_url": "sys-patch URL: ",
             "language": "言語: ",
             "check_update": "Awoo Installerのアップデートを確認",
             "credits": "クレジット"
@@ -158,7 +150,6 @@
             "desc": "一部のインストール可能なファイルには悪意のあるコンテンツが含まれている場合があります!\nこの機能は、インストールするソフトウェアが信頼できると確信している場合にのみ無効にしてください!\n\nそれでもNCA署名検証を無効にしますか?",
             "opt1": "はい、故障しても大丈夫です"
         },
-        "sig_hint": "署名パッチを取得するURLを入力します",
         "update": {
             "title": "更新可能",
             "desc0": "Awoo Installer ",
@@ -183,7 +174,10 @@
             "system_language": "システム"
         },
         "title": "Awoo Installerの設定を変更する",
-        "buttons": "\ue0e0 選択/変更    \ue0e1 キャンセル"
+        "buttons": " 選択/変更     キャンセル",
+        "ultrahand_hint": "Ultrahand Overlay の GitHub リリース URL を入力",
+        "sys_patch_hint": "sys-patch の GitHub リリース URL を入力",
+        "awoo_hint": "Awoo Installer の GitHub リリース URL を入力"
     },
     "common": {
         "ok": "OK",

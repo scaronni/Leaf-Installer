@@ -25,4 +25,5 @@ namespace inst::util {
     bool usbIsConnected();
     void playAudio(std::string audioPath);
     std::vector<std::string> checkForAppUpdate();
+    std::vector<std::string> fetchLatestRelease(const std::string& releasesPageUrl);
 }

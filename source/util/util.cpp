@@ -320,17 +320,42 @@ namespace inst::util {
     }
     
    std::vector<std::string> checkForAppUpdate () {
+        auto info = fetchLatestRelease(inst::config::awooUrl);
+        if (info.empty()) return {};
+        std::string tag = info[0];
+        if (!tag.empty() && (tag[0] == 'v' || tag[0] == 'V')) tag.erase(0, 1);
+        if (tag == inst::config::appVersion) return {};
+        std::vector<std::string> ourUpdateInfo = {tag, info[1]};
+        inst::config::updateInfo = ourUpdateInfo;
+        return ourUpdateInfo;
+    }
+
+    std::vector<std::string> fetchLatestRelease(const std::string& releasesPageUrl) {
+        const std::string prefix = "https://github.com/";
+        const std::string suffix = "/releases";
+        if (releasesPageUrl.compare(0, prefix.size(), prefix) != 0) return {};
+        if (releasesPageUrl.size() < prefix.size() + suffix.size()) return {};
+        if (releasesPageUrl.compare(releasesPageUrl.size() - suffix.size(), suffix.size(), suffix) != 0) return {};
+        const std::string repo = releasesPageUrl.substr(prefix.size(), releasesPageUrl.size() - prefix.size() - suffix.size());
+        const std::string apiUrl = "https://api.github.com/repos/" + repo + "/releases/latest";
         try {
-            std::string jsonData = inst::curl::downloadToBuffer("https://api.github.com/repos/scaronni/Awoo-Installer/releases/latest", 0, 0, 1000L);
-            if (jsonData.size() == 0) return {};
-            nlohmann::json ourJson = nlohmann::json::parse(jsonData);
-            std::string tag = ourJson["tag_name"].get<std::string>();
-            if (!tag.empty() && (tag[0] == 'v' || tag[0] == 'V')) tag.erase(0, 1);
-            if (tag != inst::config::appVersion) {
-                std::vector<std::string> ourUpdateInfo = {tag, ourJson["assets"][0]["browser_download_url"].get<std::string>()};
-                inst::config::updateInfo = ourUpdateInfo;
-                return ourUpdateInfo;
+            std::string jsonData = inst::curl::downloadToBuffer(apiUrl, 0, 0, 1000L);
+            if (jsonData.empty()) return {};
+            nlohmann::json j = nlohmann::json::parse(jsonData);
+            std::string tag = j["tag_name"].get<std::string>();
+            std::string assetUrl;
+            for (const auto& asset : j["assets"]) {
+                const std::string name = asset["name"].get<std::string>();
+                if (name.size() >= 4 && name.compare(name.size() - 4, 4, ".zip") == 0) {
+                    assetUrl = asset["browser_download_url"].get<std::string>();
+                    break;
+                }
             }
+            if (assetUrl.empty() && !j["assets"].empty()) {
+                assetUrl = j["assets"][0]["browser_download_url"].get<std::string>();
+            }
+            if (assetUrl.empty()) return {};
+            return {tag, assetUrl};
         } catch (...) {}
         return {};
     }

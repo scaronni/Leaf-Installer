@@ -1,10 +1,10 @@
 {
-    "main":{
+    "main": {
         "menu": {
             "sd": "Instalar através do cartão SD",
             "net": "Instalar através da LAN ou da Internet",
             "usb": "Instalar atráves do USB/USB HDD",
-            "sig": "Gerir patches de assinaturas",
+            "sig": "Instalar Ultrahand Overlay e sys-patch",
             "set": "Definições",
             "exit": "Sair"
         },
@@ -27,7 +27,7 @@
             "title": "Modo applet não suportado",
             "desc": "Poderá ter problemas se usar o Awoo Installer em modo Applet. Se\ntiver problemas, execute o Awoo Installer através de um título\ninstalado (mantenha R primido enquanto inicia um jogo)!"
         },
-        "buttons": "\ue0e0 Selecionar    \ue0e1 Sair"
+        "buttons": " Selecionar     Sair"
     },
     "inst": {
         "net": {
@@ -55,8 +55,8 @@
             "failed": "A instalação remota falhou!",
             "transfer_interput": "Ocorreu um erro ao tranferir os dados. Verifique a sua ligação à rede.",
             "source_string": " através de rede local",
-            "buttons": "\ue0e3 Instalar através da Internet    \ue0e2 Ajuda    \ue0e1 Cancelar",
-            "buttons1": "\ue0e0 Selecionar Ficheiro    \ue0e3 Selecionar Todos    \ue0ef Instalar Ficheiro(s)    \ue0e1 Cancelar"
+            "buttons": " Instalar através da Internet     Ajuda     Cancelar",
+            "buttons1": " Selecionar Ficheiro     Selecionar Todos     Instalar Ficheiro(s)     Cancelar"
         },
         "sd": {
             "help": {
@@ -68,7 +68,7 @@
             "delete_info": " instalado! Eliminar do cartão SD?",
             "delete_info_multi": " instalados com sucesso! Eliminar do cartão SD?",
             "delete_desc": "Os ficheiros originais não são necessários depois de instalados",
-            "buttons": "\ue0e0 Selecionar Ficheiro    \ue0e3 Selecionar Todos    \ue0ef Instalar Ficheiro(s)    \ue0e2 Ajuda    \ue0e1 Cancelar"
+            "buttons": " Selecionar Ficheiro     Selecionar Todos     Instalar Ficheiro(s)     Ajuda     Cancelar"
         },
         "usb": {
             "help": {
@@ -79,8 +79,8 @@
             "top_info2": "Selecione os ficheiros que deseja instalar através do USB, depois pressione o botão Mais!",
             "error": "A transferência USB expirou ou falhou",
             "source_string": " através do USB",
-            "buttons": "\ue0e2 (Manter primido) Ajuda    \ue0e1 (Manter primido) Cancelar",
-            "buttons2": "\ue0e0 Selecionar Ficheiro    \ue0e3 Selecionar Todos    \ue0ef Instalar Ficheiro(s)    \ue0e1 Cancelar"
+            "buttons": " (Manter primido) Ajuda     (Manter primido) Cancelar",
+            "buttons2": " Selecionar Ficheiro     Selecionar Todos     Instalar Ficheiro(s)     Cancelar"
         },
         "target": {
             "desc0": "Onde será o ",
@@ -118,27 +118,17 @@
         ]
     },
     "sig": {
+        "confirm_title": "Instalar Ultrahand Overlay e sys-patch?",
+        "confirm_desc": "As seguintes versões serão baixadas e instaladas e, em seguida, o console será reiniciado.",
         "install": "Instalar",
-        "uninstall": "Desinstalar",
-        "update": "Atualizar",
-        "version_text": "Os patches de assinaturas instalado funcionam até à versão ",
-        "title0": "Instalar patches de assinaturas?",
-        "desc0": "Os patches de assinaturas são necessários para instalar e executar software oficial.",
-        "backup_failed": "Não foi possível salvaguardar o patches.ini do Hekate! Instalar mesmo assim?",
-        "backup_failed_desc": "Se não usar Hekate pode ignorar este aviso.",
-        "download_failed": "Impossível trasnferir os patches de assinaturas",
-        "download_failed_desc": "Talvez tenha definido uma fonte errada nas definições do Awoo Installer,\nou o servidor está apenas em baixo neste momento.",
-        "version_text2": "Os patches de assinaturas foram atualizados para funcionar até à versão ",
-        "install_complete": "Instalação completa!",
-        "complete_desc": "Reinicie a consola para aplicar",
+        "fetch_failed": "Não foi possível obter as informações da versão mais recente",
+        "fetch_failed_desc": "Verifique as URLs nas Configurações ou sua conexão com a internet.",
+        "download_failed": "Falha ao baixar",
+        "install_complete": "Instalação concluída!",
+        "complete_desc": "Reinicie o console para aplicar",
         "restart": "Reiniciar",
-        "later": "Farei isto mais tarde",
-        "extract_failed": "Impossível extrair os ficheiros!",
-        "restore_failed": "Impossível restaurar o patches.ini do Hekate! Continuar a desinstalação?",
-        "uninstall_complete": "Desinstalação completa",
-        "remove_failed": "Impossível remover os patches de assinaturas",
-        "remove_failed_desc": "Os ficheiros foram renomeados ou eliminados",
-        "generic_error": "Falha ao instalar os patches de assinaturas!"
+        "later": "Mais tarde",
+        "generic_error": "Falha ao instalar Ultrahand Overlay e sys-patch!"
     },
     "options": {
         "menu_items": {
@@ -148,7 +138,9 @@
             "ask_delete": "Questionar a eliminação dos ficheiros orginais depois da instalação",
             "auto_update": "Procurar atualizações do Awoo Installer automaticamente",
             "gay_option": "Remover animé",
-            "sig_url": "URL da fonte dos patches de assinaturas: ",
+            "awoo_url": "URL do Awoo Installer: ",
+            "ultrahand_url": "URL do Ultrahand Overlay: ",
+            "sys_patch_url": "URL do sys-patch: ",
             "language": "Idioma: ",
             "check_update": "Procurar atualizações do Awoo Installer",
             "credits": "Créditos"
@@ -158,7 +150,6 @@
             "desc": "Alguns ficheiros instaláveis podem conter conteúdo malicioso! Apenas desligue esta\nfuncionalidade se tiver a certeza que o software que instala\né fidedigno!\n\nTem a certeza que deseja desativar a verificação NCA?",
             "opt1": "Sim, Eu quero um tijolo"
         },
-        "sig_hint": "Introduza o URL para obter os patches de assinaturas",
         "update": {
             "title": "Atualização disponível",
             "desc0": "Awoo Installer ",
@@ -183,7 +174,10 @@
             "system_language": "Sistema"
         },
         "title": "Alteração de deifinições do Awoo Installer!",
-        "buttons": "\ue0e0 Selecionar/Alterar    \ue0e1 Cancelar"
+        "buttons": " Selecionar/Alterar     Cancelar",
+        "ultrahand_hint": "Insira a URL de releases do GitHub para o Ultrahand Overlay",
+        "sys_patch_hint": "Insira a URL de releases do GitHub para o sys-patch",
+        "awoo_hint": "Insira a URL de releases do GitHub para o Awoo Installer"
     },
     "common": {
         "ok": "OK",

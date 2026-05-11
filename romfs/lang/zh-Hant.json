@@ -1,10 +1,10 @@
 {
-    "main":{
+    "main": {
         "menu": {
             "sd": "使用SD卡進行安裝",
             "net": "使用網路進行安裝",
             "usb": "使用USB進行安裝",
-            "sig": "管理簽名修補程式",
+            "sig": "安裝 Ultrahand Overlay 與 sys-patch",
             "set": "設定",
             "exit": "退出"
         },
@@ -27,8 +27,8 @@
             "title": "不支援Applet模式",
             "desc": "在Applet模式下執行Awoo Installer可能會產生安裝錯誤。\n請在hbmenu模式(啟動任何一個遊戲時按住R)，再執行Awoo Installer！"
         },
-        "buttons": "\ue0e0 選擇    \ue0e1 退出"
-    },   
+        "buttons": " 選擇     退出"
+    },
     "inst": {
         "net": {
             "help": {
@@ -58,8 +58,8 @@
             "failed": "遠端安裝失敗！",
             "transfer_interput": "檔案傳輸時發生錯誤，請檢查網路連線狀態是否正常",
             "source_string": " 透過區網進行安裝",
-            "buttons": "\ue0e3 透過網路安裝    \ue0e2 說明    \ue0e1 取消",
-            "buttons1": "\ue0e0 選擇檔案    \ue0e3 全選    \ue0ef 安裝所選的檔案    \ue0e1 取消"
+            "buttons": " 透過網路安裝     說明     取消",
+            "buttons1": " 選擇檔案     全選     安裝所選的檔案     取消"
         },
         "sd": {
             "help": {
@@ -71,7 +71,7 @@
             "delete_info": " 安裝完成！是否將檔案從SD卡刪除？",
             "delete_info_multi": " 所選的檔案均安裝完成！是否將所選的檔案從SD卡刪除？",
             "delete_desc": "安裝完成後，不會再使用到原始檔案",
-            "buttons": "\ue0e0 選擇檔案    \ue0e3 全選    \ue0ef 安裝所選的檔案    \ue0e2 說明    \ue0e1 取消"
+            "buttons": " 選擇檔案     全選     安裝所選的檔案     說明     取消"
         },
         "usb": {
             "help": {
@@ -82,8 +82,8 @@
             "top_info2": "選定要從USB安裝的檔案後，請按+鈕",
             "error": "USB傳輸逾時或失敗",
             "source_string": " 透過USB",
-            "buttons": "\ue0e2 (長按) 說明    \ue0e1 (長按) 取消",
-            "buttons2": "\ue0e0 選擇檔案    \ue0e3 全選    \ue0ef 安裝所選的檔案    \ue0e1 取消"
+            "buttons": " (長按) 說明     (長按) 取消",
+            "buttons2": " 選擇檔案     全選     安裝所選的檔案     取消"
         },
         "target": {
             "desc0": "要將遊戲",
@@ -121,27 +121,17 @@
         ]
     },
     "sig": {
+        "confirm_title": "安裝 Ultrahand Overlay 與 sys-patch?",
+        "confirm_desc": "將下載並安裝以下版本,然後重新啟動主機。",
         "install": "安裝",
-        "uninstall": "移除",
-        "update": "更新",
-        "version_text": "目前已安裝適用於HOS版本的簽名修補程式",
-        "title0": "是否安裝簽名修補程式？",
-        "desc0": "必須先安裝簽名修補程式，才能正確安裝與執行官方遊戲",
-        "backup_failed": "無法備份Hekate的patches.ini！是否確認要繼續安裝？",
-        "backup_failed_desc": "如果並未使用Hekate，可略過此提醒通知！",
-        "download_failed": "無法下載簽名修補程式",
-        "download_failed_desc": "在Awoo Installer的設定內可能輸入了無效的來源，\n或者伺服器目前為離線狀態。",
-        "version_text2": "已將簽名修補程式更新為適用HOS的版本",
-        "install_complete": "安裝完成！",
-        "complete_desc": "需要重新啟動主機以套用更新",
-        "restart": "立即重啟",
-        "later": "稍後重啟",
-        "extract_failed": "無法將檔案解壓縮！",
-        "restore_failed": "無法復原Hekate的patches.ini！是否確認要繼續移除嗎？",
-        "uninstall_complete": "移除完成",
-        "remove_failed": "無法刪除簽名修補程式",
-        "remove_failed_desc": "檔案可能已被重新命名或刪除",
-        "generic_error": "安裝簽名修補程式失敗！"
+        "fetch_failed": "無法取得最新版本資訊",
+        "fetch_failed_desc": "請檢查設定中的網址或您的網路連線。",
+        "download_failed": "下載失敗",
+        "install_complete": "安裝完成!",
+        "complete_desc": "請重新啟動主機以套用變更",
+        "restart": "重新啟動",
+        "later": "稍後",
+        "generic_error": "安裝 Ultrahand Overlay 與 sys-patch 失敗!"
     },
     "options": {
         "menu_items": {
@@ -151,7 +141,9 @@
             "ask_delete": "在安裝完成後，詢問是否刪除原始檔案",
             "auto_update": "自動檢查Awoo Installer的更新版本",
             "gay_option": "移除程序介面的動漫圖案",
-            "sig_url": "簽名修補程式來源URL: ",
+            "awoo_url": "Awoo Installer 網址：",
+            "ultrahand_url": "Ultrahand Overlay 網址：",
+            "sys_patch_url": "sys-patch 網址：",
             "language": "介面語系： ",
             "check_update": "檢查Awoo Installer的更新版本",
             "credits": "感謝名單"
@@ -161,7 +153,6 @@
             "desc": "雖然是極少數的情況，但檔案還是有可能會被加入損害主機的惡意代碼！\n除非確保所有檔案都從可信任的來源下載，否則不建議關閉簽名驗證。\n\n是否確認要關閉NCA簽名驗證？",
             "opt1": "好，我已瞭解可能的風險"
         },
-        "sig_hint": "請輸入下載簽名修補程式的URL網路位址",
         "update": {
             "title": "有可用的更新版本",
             "desc0": "Awoo Installer ",
@@ -186,7 +177,10 @@
             "system_language": "系統預設"
         },
         "title": "變更Awoo Installer的設定！",
-        "buttons": "\ue0e0 選擇/變更    \ue0e1 取消"
+        "buttons": " 選擇/變更     取消",
+        "ultrahand_hint": "輸入 Ultrahand Overlay 的 GitHub releases 網址",
+        "sys_patch_hint": "輸入 sys-patch 的 GitHub releases 網址",
+        "awoo_hint": "輸入 Awoo Installer 的 GitHub releases 網址"
     },
     "common": {
         "ok": "確定",

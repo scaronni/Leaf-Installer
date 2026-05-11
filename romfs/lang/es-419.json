@@ -1,10 +1,10 @@
 {
-    "main":{
+    "main": {
         "menu": {
             "sd": "Instalar desde tarjeta SD",
             "net": "Instalar a través de red local o Internet",
             "usb": "Instalar por USB/USB HDD",
-            "sig": "Administrar sigpatches",
+            "sig": "Instalar Ultrahand Overlay y sys-patch",
             "set": "Ajustes",
             "exit": "Salir"
         },
@@ -27,7 +27,7 @@
             "title": "Modo Applet no soportado",
             "desc": "Puede que experimentes problemas al utilizar Awoo Installer en modo Applet.\nSi tienes problemas, por favor ejecuta Awoo Installer utilizando un título que tengas instalado\n(mantén pulsado R mientras abres un juego)!"
         },
-        "buttons": "\ue0e0 Seleccionar    \ue0e1 Salir"
+        "buttons": " Seleccionar     Salir"
     },
     "inst": {
         "net": {
@@ -55,8 +55,8 @@
             "failed": "¡No se pudo realizar la instalación remota!",
             "transfer_interput": "Ha ocurrido un error al transmitir los datos. Comprueba tu conexión de red.",
             "source_string": " a través de red local",
-            "buttons": "\ue0e3 Instalar Usando la Internet    \ue0e2 Ayuda    \ue0e1 Cancelar",
-            "buttons1": "\ue0e0 Selecionar Archivo    \ue0e3 Seleccionar Todos    \ue0ef Instalar Archivo(s)    \ue0e1 Cancelar"
+            "buttons": " Instalar Usando la Internet     Ayuda     Cancelar",
+            "buttons1": " Selecionar Archivo     Seleccionar Todos     Instalar Archivo(s)     Cancelar"
         },
         "sd": {
             "help": {
@@ -66,9 +66,9 @@
             "top_info": "¡Selecciona los archivos que quieres instalar, y pulsa el botón +!",
             "source_string": " desde la tarjeta SD",
             "delete_info": " instalado. ¿Borrarlo de la tarjeta SD?",
-	    "delete_info_multi": " archivos instalados con éxito. ¿Borrarlos de la tarjeta SD?",
+            "delete_info_multi": " archivos instalados con éxito. ¿Borrarlos de la tarjeta SD?",
             "delete_desc": "Los archivos originales no hacen falta después de ser instalados",
-            "buttons": "\ue0e0 Selecionar Archivo    \ue0e3 Seleccionar Todo    \ue0ef Instalar Archivo(s)    \ue0e2 Ayuda    \ue0e1 Cancelar"
+            "buttons": " Selecionar Archivo     Seleccionar Todo     Instalar Archivo(s)     Ayuda     Cancelar"
         },
         "usb": {
             "help": {
@@ -79,8 +79,8 @@
             "top_info2": "¡Selecciona los archivos que quieres instalar por USB y pulsa el botón +!",
             "error": "Tiempo de espera agotado o error de transferencia USB",
             "source_string": " por USB",
-            "buttons": "\ue0e2 (Mantener) Ayuda    \ue0e1 (Mantener) Cancelar",
-            "buttons2": "\ue0e0 Selecionar Archivo    \ue0e3 Seleccionar Todo    \ue0ef Instalar Archivo(s)    \ue0e1 Cancelar"
+            "buttons": " (Mantener) Ayuda     (Mantener) Cancelar",
+            "buttons2": " Selecionar Archivo     Seleccionar Todo     Instalar Archivo(s)     Cancelar"
         },
         "target": {
             "desc0": "¿Dónde debería instalarse ",
@@ -118,27 +118,17 @@
         ]
     },
     "sig": {
+        "confirm_title": "¿Instalar Ultrahand Overlay y sys-patch?",
+        "confirm_desc": "Se descargarán e instalarán las siguientes versiones y luego se reiniciará la consola.",
         "install": "Instalar",
-        "uninstall": "Desinstalar",
-        "update": "Actualizar",
-        "version_text": "Actualmente tienes sigpatches instalados para hasta la versión de HOS ",
-        "title0": "¿Instalar sigpatches?",
-        "desc0": "Los sigpatches son necesarios para instalar y jugar aplicaciones oficiales.",
-        "backup_failed": "¡No se pudo hacer una copia del archivo «patches.ini» de Hekate! ¡Instalar de todas formas?",
-        "backup_failed_desc": "Si no usas Hekate puedes ingorar este aviso",
-        "download_failed": "No se pudieron descargar los sigpatches",
-        "download_failed_desc": "Puede que hayas introducido una fuente incorrecta en los ajustes de Awoo Installer,\no que el servidor esté fuera de servicio en este momento.",
-        "version_text2": "Tus sigpatches han sido actualizados para hasta la versión de HOS ",
-        "install_complete": "¡Instalación completada!",
-        "complete_desc": "Reinicia la consola para que los cambios hagan efecto",
+        "fetch_failed": "No se pudo obtener la información de la última versión",
+        "fetch_failed_desc": "Verifica las URL en Configuración o tu conexión a internet.",
+        "download_failed": "Error al descargar",
+        "install_complete": "¡Instalación completa!",
+        "complete_desc": "Reinicia la consola para aplicar los cambios",
         "restart": "Reiniciar",
-        "later": "Lo haré más tarde",
-        "extract_failed": "¡Error extrayendo archivos!",
-        "restore_failed": "¡Imposible restaurar el archivo «patches.ini» original de Hekate! ¿Continuar con la desinstalación?",
-        "uninstall_complete": "Desinstalación completada",
-        "remove_failed": "No fue posible eliminar los sigpatches",
-        "remove_failed_desc": "Puede que los archivos hayan sido eliminados o renombrados",
-        "generic_error": "¡Instalación de sigpatches fallida!"
+        "later": "Más tarde",
+        "generic_error": "¡Error al instalar Ultrahand Overlay y sys-patch!"
     },
     "options": {
         "menu_items": {
@@ -148,7 +138,9 @@
             "ask_delete": "Preguntar si borrar los archivos originales, luego de una instalación satisfactoria",
             "auto_update": "Buscar actualizaciones de Awoo Installer automaticamente",
             "gay_option": "Eliminar ánime",
-            "sig_url": "URL para la instalación de sigpatches: ",
+            "awoo_url": "URL de Awoo Installer: ",
+            "ultrahand_url": "URL de Ultrahand Overlay: ",
+            "sys_patch_url": "URL de sys-patch: ",
             "language": "Idioma: ",
             "check_update": "Buscar actualizaciones de Awoo Installer",
             "credits": "Créditos"
@@ -158,7 +150,6 @@
             "desc": "¡Algunos archivos instalables, pueden tener contenido malicioso!\n¡Habilita esta opción sólo, si estás completamente seguro de que\nel software que estás instalando es de confianza!\n\n¿Seguro que desea deshabilitar la verificación de firmas NCA?",
             "opt1": "Si, quiero un brick"
         },
-        "sig_hint": "Escribe la URL desde donde se descargarán los sigpatches",
         "update": {
             "title": "Actualización disponible",
             "desc0": "¡Awoo Installer ",
@@ -183,7 +174,10 @@
             "system_language": "Sistema"
         },
         "title": "¡Cambiar los ajustes de Awoo Installer!",
-        "buttons": "\ue0e0 Seleccionar/Cambiar    \ue0e1 Cancelar"
+        "buttons": " Seleccionar/Cambiar     Cancelar",
+        "ultrahand_hint": "Ingresa la URL de releases de GitHub para Ultrahand Overlay",
+        "sys_patch_hint": "Ingresa la URL de releases de GitHub para sys-patch",
+        "awoo_hint": "Ingresa la URL de releases de GitHub para Awoo Installer"
     },
     "common": {
         "ok": "Aceptar",

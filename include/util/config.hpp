@@ -8,7 +8,9 @@ namespace inst::config {
     static const std::string appVersion = std::string(APP_VERSION);
 
     extern std::string gAuthKey;
-    extern std::string sigPatchesUrl;
+    extern std::string awooUrl;
+    extern std::string ultrahandUrl;
+    extern std::string sysPatchUrl;
     extern std::string lastNetUrl;
     extern std::vector<std::string> updateInfo;
     extern int languageSetting;
