@@ -3,13 +3,12 @@ name: Awoo-Installer
 on:
   push:
     branches:
-      - "*"       # 继续对所有分支构建
+      - "*"
     tags:
-      - "v*"      # 对 v 开头的 tag 也触发（用于发版）
+      - "v*"
 
 permissions:
-  contents: read  # 默认只读
-  # release job 会单独请求 write 权限
+  contents: read
 
 jobs:
   build:
@@ -38,11 +37,10 @@ jobs:
   release:
     needs: build
     runs-on: ubuntu-latest
-    # 只有 push tag 时才跑 release（避免普通分支 push 误发版）
     if: github.ref_type == 'tag'
 
     permissions:
-      contents: write  # 创建 / 更新 Release 需要写权限
+      contents: write
 
     steps:
       - name: Download build artifact
@@ -60,7 +58,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: dist/Awoo-Installer.zip
-          # 根据 tag 名自动判断是否是预发布（例如 v1.0.0-rc1 / v1.0.0-beta）
           prerelease: ${{ contains(github.ref, '-rc') || contains(github.ref, '-beta') }}
           draft: false
         env:
