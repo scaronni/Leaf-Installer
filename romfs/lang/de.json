@@ -79,7 +79,7 @@
             "top_info2": "Wähle Dateien zur Installation aus und drücke dann  !",
             "error": "USB Übertragung ist zeitlich abgelaufen oder fehlgeschlagen",
             "source_string": " über USB",
-            "buttons": " (Halten) Hilfe     (Halte) Abbrechen",
+            "buttons": " Hilfe     Abbrechen",
             "buttons2": " Datei auswählen     Alle auswählen     Datei(en) installieren     Abbrechen"
         },
         "target": {

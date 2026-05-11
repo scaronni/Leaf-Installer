@@ -79,7 +79,7 @@
             "top_info2": "Sélectionnez les fichiers que vous voulez installer par USB, puis appuyez sur le bouton Plus !",
             "error": "Le transfert USB a été interrompu ou a échoué",
             "source_string": " à partir d'un périphèrique USB",
-            "buttons": " (Maintenir) Aide     (Maintenir) Annuler",
+            "buttons": " Aide     Annuler",
             "buttons2": " Sélectionnez un fichier     Tout sélectionner     Installer un/des fichier(s)     Annuler"
         },
         "target": {

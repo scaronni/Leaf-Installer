@@ -82,7 +82,7 @@
             "top_info2": "Select what files you want to install over USB, then press the Plus button!",
             "error": "USB transfer timed out or failed",
             "source_string": " over USB",
-            "buttons": " (Hold) Help     (Hold) Cancel",
+            "buttons": " Help     Cancel",
             "buttons2": " Select File     Select All     Install File(s)     Cancel"
         },
         "target": {

@@ -82,7 +82,7 @@
             "top_info2": "選定要從USB安裝的檔案後，請按+鈕",
             "error": "USB傳輸逾時或失敗",
             "source_string": " 透過USB",
-            "buttons": " (長按) 說明     (長按) 取消",
+            "buttons": " 說明     取消",
             "buttons2": " 選擇檔案     全選     安裝所選的檔案     取消"
         },
         "target": {

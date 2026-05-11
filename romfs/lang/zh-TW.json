@@ -82,7 +82,7 @@
             "top_info2": "選擇您想通過USB安裝的文件, 然後按  安裝",
             "error": "USB傳輸超時...",
             "source_string": " 通過USB",
-            "buttons": " (按住) 幫助  (按住) 取消",
+            "buttons": " 幫助  取消",
             "buttons2": " 選擇文件  全選  安裝文件  取消"
         },
         "target": {

@@ -79,7 +79,7 @@
             "top_info2": "Seleziona quali file vuoi installare via USB, poi premi il tasto Più!",
             "error": "Trasferimento USB scaduto o fallito",
             "source_string": " via USB",
-            "buttons": " (Tieni premuto) Aiuto     (Tieni premuto) Annulla",
+            "buttons": " Aiuto     Annulla",
             "buttons2": " Seleziona File     Seleziona tutto     Installa i File     Annulla"
         },
         "target": {

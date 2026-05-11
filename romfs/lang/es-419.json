@@ -79,7 +79,7 @@
             "top_info2": "¡Selecciona los archivos que quieres instalar por USB y pulsa el botón +!",
             "error": "Tiempo de espera agotado o error de transferencia USB",
             "source_string": " por USB",
-            "buttons": " (Mantener) Ayuda     (Mantener) Cancelar",
+            "buttons": " Ayuda     Cancelar",
             "buttons2": " Selecionar Archivo     Seleccionar Todo     Instalar Archivo(s)     Cancelar"
         },
         "target": {

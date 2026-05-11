@@ -79,7 +79,7 @@
             "top_info2": "Selecione os ficheiros que deseja instalar através do USB, depois pressione o botão Mais!",
             "error": "A transferência USB expirou ou falhou",
             "source_string": " através do USB",
-            "buttons": " (Manter primido) Ajuda     (Manter primido) Cancelar",
+            "buttons": " Ajuda     Cancelar",
             "buttons2": " Selecionar Ficheiro     Selecionar Todos     Instalar Ficheiro(s)     Cancelar"
         },
         "target": {
