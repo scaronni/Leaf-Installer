@@ -12,9 +12,15 @@ A No-Bullshit NSP, NSZ, XCI, and XCZ Installer for Nintendo Switch
 - Verifies NCAs by header signature before they're installed
 - Auto updates from the Github releases page.
 - Installs and manages the latest Ultrahand and some overlays:
-  - [Ultrahand overlay](ihttps://github.com/ppkantorski/Ultrahand-Overlay)
+  - [Ultrahand overlay](https://github.com/ppkantorski/Ultrahand-Overlay)
   - [sys-patch](https://github.com/impeeza/sys-patch)
   - [emuiibo](https://github.com/xortroll/emuiibo)
+- Generates Amiibo data for [emuiibo](https://github.com/xortroll/emuiibo) directly on the console:
+  - Downloads the Amiibo database from a configurable JSON endpoint (defaults to [amiiboapi.org](https://amiiboapi.org/api/amiibo/))
+  - Generates `amiibo.json` + `amiibo.flag` and a 150px-tall PNG icon for every entry under `sdmc:/emuiibo/amiibo/`
+  - Skips Amiibos that already exist on disk, so it's safe to re-run after the database is refreshed
+  - Inspired by [Slluxx/AmiiboGenerator](https://github.com/Slluxx/AmiiboGenerator)
+- All update endpotins are configurable under `Settings`.
 
 ## Building with Podman
 The GitHub Actions workflow builds Awoo Installer inside the official devkitPro container image (`devkitpro/devkita64:latest`). You can reproduce the exact same build locally with Podman — no need to install devkitPro, devkitA64, or any Switch toolchain on your host.
@@ -69,3 +75,4 @@ The same commands work with Docker — just replace `podman` with `docker` and o
 - The also kind folks at the RetroNX Discuck (of no direct involvement)
 - [namako8982](https://www.pixiv.net/member.php?id=14235616) for the Momiji art
 - TheXzoron for being a baka
+- [Claude](https://claude.ai/) for the incredible speed on iterating over features
