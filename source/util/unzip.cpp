@@ -1,11 +1,13 @@
 #include <minizip/unzip.h>
 #include <algorithm>
 #include <dirent.h>
+#include <filesystem>
 #include <string>
 #include <cstring>
 #include <switch.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include "util/error.hpp"
 
 // https://github.com/AtlasNX/Kosmos-Updater/blob/master/source/FileManager.cpp
 
@@ -16,62 +18,48 @@ unz_file_info_s * _getFileInfo(unzFile unz) {
 }
 
 std::string _getFullFileName(unzFile unz, unz_file_info_s * fileInfo) {
+    // Buffer must be size_filename+1 so minizip can write size_filename bytes
+    // and we can safely append the terminating null. Passing only size_filename
+    // as the buffer-size arg means minizip writes no trailing null — we add it.
     char filePath[fileInfo->size_filename + 1];
-    
+
     unzGetCurrentFileInfo(unz, fileInfo, filePath, fileInfo->size_filename, NULL, 0, NULL, 0);
     filePath[fileInfo->size_filename] = '\0';
-    
-    std::string path(filePath);
-    path.resize(fileInfo->size_filename);
 
-    return path;
+    return std::string(filePath);
 }
 
-bool _makeDirectoryParents(std::string path)
+bool _makeDirectoryParents(const std::string& path)
 {
-    bool bSuccess = false;
-    int nRC = ::mkdir(path.c_str(), 0775);
-    if(nRC == -1)
-    {
-        switch(errno)
-        {
-            case ENOENT:
-                //parent didn't exist, try to create it
-                if( _makeDirectoryParents(path.substr(0, path.find_last_of('/'))))
-                    //Now, try to create again.
-                    bSuccess = 0 == ::mkdir(path.c_str(), 0775);
-                else
-                    bSuccess = false;
-                break;
-            case EEXIST:
-                //Done!
-                bSuccess = true;
-                break;
-            default:
-                bSuccess = false;
-                break;
-        }
+    // std::filesystem::create_directories handles every edge case the old
+    // hand-rolled recursion got wrong: missing intermediate dirs, EEXIST,
+    // trailing slashes, paths that include the sdmc: device prefix.
+    std::error_code ec;
+    std::filesystem::create_directories(path, ec);
+    if (ec) {
+        LOG_DEBUG("create_directories(%s) failed: %s\n", path.c_str(), ec.message().c_str());
+        return false;
     }
-    else
-        bSuccess = true;
-    
-    return bSuccess;
+    return true;
 }
 
 int _extractFile(const char * path, unzFile unz, unz_file_info_s * fileInfo) {
     //check to make sure filepath or fileInfo isnt null
     if (path == NULL || fileInfo == NULL)
         return -1;
-        
+
     if (unzOpenCurrentFile(unz) != UNZ_OK)
         return -2;
-    
-    char folderPath[strlen(path) + 1];
-    strcpy(folderPath, path);
-    char * pos = strrchr(folderPath, '/');
-    if (pos != NULL) {
-        *pos = '\0';
-        _makeDirectoryParents(std::string(folderPath));
+
+    std::string fullPath(path);
+    auto slashPos = fullPath.find_last_of('/');
+    if (slashPos != std::string::npos) {
+        const std::string parent = fullPath.substr(0, slashPos);
+        if (!_makeDirectoryParents(parent)) {
+            LOG_DEBUG("could not create parent dir for %s\n", path);
+            unzCloseCurrentFile(unz);
+            return -5;
+        }
     }
     
     u32 blocksize = 0x8000;
