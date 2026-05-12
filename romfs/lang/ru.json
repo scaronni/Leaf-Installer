@@ -4,7 +4,7 @@
             "sd": "Установка из SD-карты",
             "net": "Установка по сети",
             "usb": "Установка через USB/USB HDD",
-            "sig": "Установить Ultrahand Overlay и sys-patch",
+            "sig": "Установить Ultrahand и оверлеи",
             "set": "Настройки",
             "exit": "Выход"
         },
@@ -118,7 +118,7 @@
         ]
     },
     "sig": {
-        "confirm_title": "Установить Ultrahand Overlay и sys-patch?",
+        "confirm_title": "Установить Ultrahand и оверлеи?",
         "confirm_desc": "Следующие версии будут загружены и установлены, после чего консоль перезагрузится.",
         "install": "Установить",
         "fetch_failed": "Не удалось получить информацию о последнем релизе",
@@ -128,8 +128,8 @@
         "complete_desc": "Перезагрузите консоль для применения",
         "restart": "Перезагрузить",
         "later": "Позже",
-        "generic_error": "Не удалось установить Ultrahand Overlay и sys-patch!",
-        "top_info": "Установка Ultrahand Overlay и sys-patch",
+        "generic_error": "Не удалось установить Ultrahand и оверлеи!",
+        "top_info": "Установка Ultrahand и оверлеев",
         "downloading": "Загрузка ",
         "extracting": "Распаковка "
     },
@@ -144,6 +144,7 @@
             "awoo_url": "URL Awoo Installer: ",
             "ultrahand_url": "URL Ultrahand Overlay: ",
             "sys_patch_url": "URL sys-patch: ",
+            "emuiibo_url": "URL emuiibo: ",
             "language": "Язык: ",
             "check_update": "Проверить наличие обновлений Awoo Installer",
             "credits": "Благодарности"
@@ -180,7 +181,8 @@
         "buttons": " Выбрать/Изменить     Отмена",
         "ultrahand_hint": "Введите URL релизов GitHub для Ultrahand Overlay",
         "sys_patch_hint": "Введите URL релизов GitHub для sys-patch",
-        "awoo_hint": "Введите URL релизов GitHub для Awoo Installer"
+        "awoo_hint": "Введите URL релизов GitHub для Awoo Installer",
+        "emuiibo_hint": "Введите URL релизов GitHub для emuiibo"
     },
     "common": {
         "ok": "OK",

@@ -4,7 +4,7 @@
             "sd": "SDカードからインストール",
             "net": "ネットワーク経由でインストール",
             "usb": "USB/USB HDD経由でインストール",
-            "sig": "Ultrahand Overlay と sys-patch をインストール",
+            "sig": "Ultrahand とオーバーレイをインストール",
             "set": "設定",
             "exit": "終了"
         },
@@ -118,7 +118,7 @@
         ]
     },
     "sig": {
-        "confirm_title": "Ultrahand Overlay と sys-patch をインストールしますか?",
+        "confirm_title": "Ultrahand とオーバーレイをインストールしますか?",
         "confirm_desc": "以下のバージョンがダウンロードおよびインストールされ、その後コンソールが再起動します。",
         "install": "インストール",
         "fetch_failed": "最新リリース情報を取得できませんでした",
@@ -128,8 +128,8 @@
         "complete_desc": "適用するにはコンソールを再起動してください",
         "restart": "再起動",
         "later": "後で",
-        "generic_error": "Ultrahand Overlay と sys-patch のインストールに失敗しました!",
-        "top_info": "Ultrahand Overlay と sys-patch をインストール中",
+        "generic_error": "Ultrahand とオーバーレイのインストールに失敗しました!",
+        "top_info": "Ultrahand とオーバーレイをインストール中",
         "downloading": "ダウンロード中: ",
         "extracting": "展開中: "
     },
@@ -144,6 +144,7 @@
             "awoo_url": "Awoo Installer URL: ",
             "ultrahand_url": "Ultrahand Overlay URL: ",
             "sys_patch_url": "sys-patch URL: ",
+            "emuiibo_url": "emuiibo URL: ",
             "language": "言語: ",
             "check_update": "Awoo Installerのアップデートを確認",
             "credits": "クレジット"
@@ -180,7 +181,8 @@
         "buttons": " 選択/変更     キャンセル",
         "ultrahand_hint": "Ultrahand Overlay の GitHub リリース URL を入力",
         "sys_patch_hint": "sys-patch の GitHub リリース URL を入力",
-        "awoo_hint": "Awoo Installer の GitHub リリース URL を入力"
+        "awoo_hint": "Awoo Installer の GitHub リリース URL を入力",
+        "emuiibo_hint": "emuiibo の GitHub リリース URL を入力"
     },
     "common": {
         "ok": "OK",

@@ -4,7 +4,7 @@
             "sd": "使用SD卡進行安裝",
             "net": "使用網路進行安裝",
             "usb": "使用USB進行安裝",
-            "sig": "安裝 Ultrahand Overlay 與 sys-patch",
+            "sig": "安裝 Ultrahand 與擴充功能",
             "set": "設定",
             "exit": "退出"
         },
@@ -121,7 +121,7 @@
         ]
     },
     "sig": {
-        "confirm_title": "安裝 Ultrahand Overlay 與 sys-patch?",
+        "confirm_title": "安裝 Ultrahand 與擴充功能?",
         "confirm_desc": "將下載並安裝以下版本,然後重新啟動主機。",
         "install": "安裝",
         "fetch_failed": "無法取得最新版本資訊",
@@ -131,8 +131,8 @@
         "complete_desc": "請重新啟動主機以套用變更",
         "restart": "重新啟動",
         "later": "稍後",
-        "generic_error": "安裝 Ultrahand Overlay 與 sys-patch 失敗!",
-        "top_info": "正在安裝 Ultrahand Overlay 與 sys-patch",
+        "generic_error": "安裝 Ultrahand 與擴充功能失敗!",
+        "top_info": "正在安裝 Ultrahand 與擴充功能",
         "downloading": "正在下載 ",
         "extracting": "正在解壓縮 "
     },
@@ -147,6 +147,7 @@
             "awoo_url": "Awoo Installer 網址：",
             "ultrahand_url": "Ultrahand Overlay 網址：",
             "sys_patch_url": "sys-patch 網址：",
+            "emuiibo_url": "emuiibo 網址：",
             "language": "介面語系： ",
             "check_update": "檢查Awoo Installer的更新版本",
             "credits": "感謝名單"
@@ -183,7 +184,8 @@
         "buttons": " 選擇/變更     取消",
         "ultrahand_hint": "輸入 Ultrahand Overlay 的 GitHub releases 網址",
         "sys_patch_hint": "輸入 sys-patch 的 GitHub releases 網址",
-        "awoo_hint": "輸入 Awoo Installer 的 GitHub releases 網址"
+        "awoo_hint": "輸入 Awoo Installer 的 GitHub releases 網址",
+        "emuiibo_hint": "輸入 emuiibo 的 GitHub releases 網址"
     },
     "common": {
         "ok": "確定",

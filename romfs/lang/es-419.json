@@ -4,7 +4,7 @@
             "sd": "Instalar desde tarjeta SD",
             "net": "Instalar a través de red local o Internet",
             "usb": "Instalar por USB/USB HDD",
-            "sig": "Instalar Ultrahand Overlay y sys-patch",
+            "sig": "Instalar Ultrahand y overlays",
             "set": "Ajustes",
             "exit": "Salir"
         },
@@ -118,7 +118,7 @@
         ]
     },
     "sig": {
-        "confirm_title": "¿Instalar Ultrahand Overlay y sys-patch?",
+        "confirm_title": "¿Instalar Ultrahand y overlays?",
         "confirm_desc": "Se descargarán e instalarán las siguientes versiones y luego se reiniciará la consola.",
         "install": "Instalar",
         "fetch_failed": "No se pudo obtener la información de la última versión",
@@ -128,8 +128,8 @@
         "complete_desc": "Reinicia la consola para aplicar los cambios",
         "restart": "Reiniciar",
         "later": "Más tarde",
-        "generic_error": "¡Error al instalar Ultrahand Overlay y sys-patch!",
-        "top_info": "Instalando Ultrahand Overlay y sys-patch",
+        "generic_error": "¡Error al instalar Ultrahand y overlays!",
+        "top_info": "Instalando Ultrahand y overlays",
         "downloading": "Descargando ",
         "extracting": "Extrayendo "
     },
@@ -144,6 +144,7 @@
             "awoo_url": "URL de Awoo Installer: ",
             "ultrahand_url": "URL de Ultrahand Overlay: ",
             "sys_patch_url": "URL de sys-patch: ",
+            "emuiibo_url": "URL de emuiibo: ",
             "language": "Idioma: ",
             "check_update": "Buscar actualizaciones de Awoo Installer",
             "credits": "Créditos"
@@ -180,7 +181,8 @@
         "buttons": " Seleccionar/Cambiar     Cancelar",
         "ultrahand_hint": "Ingresa la URL de releases de GitHub para Ultrahand Overlay",
         "sys_patch_hint": "Ingresa la URL de releases de GitHub para sys-patch",
-        "awoo_hint": "Ingresa la URL de releases de GitHub para Awoo Installer"
+        "awoo_hint": "Ingresa la URL de releases de GitHub para Awoo Installer",
+        "emuiibo_hint": "Ingresa la URL de releases de GitHub para emuiibo"
     },
     "common": {
         "ok": "Aceptar",

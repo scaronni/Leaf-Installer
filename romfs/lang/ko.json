@@ -4,7 +4,7 @@
             "sd": "SD 카드에서 설치",
             "net": "LAN 또는 인터넷을 통해 설치",
             "usb": "USB를 통해 설치",
-            "sig": "Ultrahand Overlay 및 sys-patch 설치",
+            "sig": "Ultrahand 및 오버레이 설치",
             "set": "설정",
             "exit": "종료"
         },
@@ -118,7 +118,7 @@
         ]
     },
     "sig": {
-        "confirm_title": "Ultrahand Overlay 및 sys-patch를 설치하시겠습니까?",
+        "confirm_title": "Ultrahand 및 오버레이를 설치하시겠습니까?",
         "confirm_desc": "다음 버전이 다운로드 및 설치되고 콘솔이 재부팅됩니다.",
         "install": "설치",
         "fetch_failed": "최신 릴리스 정보를 가져올 수 없습니다",
@@ -128,8 +128,8 @@
         "complete_desc": "변경 사항을 적용하려면 콘솔을 재부팅하세요",
         "restart": "재시작",
         "later": "나중에",
-        "generic_error": "Ultrahand Overlay 및 sys-patch 설치 실패!",
-        "top_info": "Ultrahand Overlay 및 sys-patch 설치 중",
+        "generic_error": "Ultrahand 및 오버레이 설치 실패!",
+        "top_info": "Ultrahand 및 오버레이 설치 중",
         "downloading": "다운로드 중: ",
         "extracting": "압축 해제 중: "
     },
@@ -144,6 +144,7 @@
             "awoo_url": "Awoo Installer URL: ",
             "ultrahand_url": "Ultrahand Overlay URL: ",
             "sys_patch_url": "sys-patch URL: ",
+            "emuiibo_url": "emuiibo URL: ",
             "language": "언어: ",
             "check_update": "Awoo 설치 프로그램에 대한 업데이트 확인",
             "credits": "크레딧"
@@ -180,7 +181,8 @@
         "buttons": " 선택/변경     취소",
         "ultrahand_hint": "Ultrahand Overlay GitHub 릴리스 URL을 입력하세요",
         "sys_patch_hint": "sys-patch GitHub 릴리스 URL을 입력하세요",
-        "awoo_hint": "Awoo Installer GitHub 릴리스 URL을 입력하세요"
+        "awoo_hint": "Awoo Installer GitHub 릴리스 URL을 입력하세요",
+        "emuiibo_hint": "emuiibo GitHub 릴리스 URL을 입력하세요"
     },
     "common": {
         "ok": "확인",

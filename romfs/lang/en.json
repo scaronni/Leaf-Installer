@@ -4,7 +4,7 @@
             "sd": "Install from SD card",
             "net": "Install over LAN or internet",
             "usb": "Install over USB/USB HDD",
-            "sig": "Install Ultrahand Overlay and sys-patch",
+            "sig": "Install Ultrahand and overlays",
             "set": "Settings",
             "exit": "Exit"
         },
@@ -121,7 +121,7 @@
         ]
     },
     "sig": {
-        "confirm_title": "Install Ultrahand Overlay and sys-patch?",
+        "confirm_title": "Install Ultrahand and overlays?",
         "confirm_desc": "The following versions will be downloaded and installed, then your console will reboot.",
         "install": "Install",
         "fetch_failed": "Could not fetch the latest release information",
@@ -131,8 +131,8 @@
         "complete_desc": "Restart your console to apply",
         "restart": "Restart",
         "later": "I'll do it later",
-        "generic_error": "Failed to install Ultrahand Overlay and sys-patch!",
-        "top_info": "Installing Ultrahand Overlay and sys-patch",
+        "generic_error": "Failed to install Ultrahand and overlays!",
+        "top_info": "Installing Ultrahand and overlays",
         "downloading": "Downloading ",
         "extracting": "Extracting "
     },
@@ -147,6 +147,7 @@
             "awoo_url": "Awoo Installer URL: ",
             "ultrahand_url": "Ultrahand Overlay URL: ",
             "sys_patch_url": "sys-patch URL: ",
+            "emuiibo_url": "emuiibo URL: ",
             "language": "Language: ",
             "check_update": "Check for updates to Awoo Installer",
             "credits": "Credits"
@@ -183,7 +184,8 @@
         "buttons": " Select/Change     Cancel",
         "ultrahand_hint": "Enter the GitHub releases URL for Ultrahand Overlay",
         "sys_patch_hint": "Enter the GitHub releases URL for sys-patch",
-        "awoo_hint": "Enter the GitHub releases URL for Awoo Installer"
+        "awoo_hint": "Enter the GitHub releases URL for Awoo Installer",
+        "emuiibo_hint": "Enter the GitHub releases URL for emuiibo"
     },
     "common": {
         "ok": "OK",

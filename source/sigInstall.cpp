@@ -37,8 +37,9 @@ namespace sig {
 
             auto ultrahandInfo = inst::util::fetchLatestRelease(inst::config::ultrahandUrl);
             auto sysPatchInfo = inst::util::fetchLatestRelease(inst::config::sysPatchUrl);
+            auto emuiiboInfo = inst::util::fetchLatestRelease(inst::config::emuiiboUrl);
 
-            if (ultrahandInfo.empty() || sysPatchInfo.empty()) {
+            if (ultrahandInfo.empty() || sysPatchInfo.empty() || emuiiboInfo.empty()) {
                 inst::ui::mainApp->CreateShowDialog("sig.fetch_failed"_lang, "sig.fetch_failed_desc"_lang, {"common.ok"_lang}, true);
                 bpcExit();
                 return;
@@ -46,7 +47,8 @@ namespace sig {
 
             const std::string desc = "sig.confirm_desc"_lang + std::string("\n\n") +
                                      "Ultrahand Overlay: " + ultrahandInfo[0] + "\n" +
-                                     "sys-patch: " + sysPatchInfo[0];
+                                     "sys-patch: " + sysPatchInfo[0] + "\n" +
+                                     "emuiibo: " + emuiiboInfo[0];
             const int rc = inst::ui::mainApp->CreateShowDialog("sig.confirm_title"_lang, desc, {"sig.install"_lang, "common.cancel"_lang}, false);
             if (rc != 0) {
                 bpcExit();
@@ -64,6 +66,12 @@ namespace sig {
             }
             if (!installComponent("sys-patch", sysPatchInfo[0], sysPatchInfo[1], inst::config::appDir + "/sys-patch.zip")) {
                 inst::ui::mainApp->CreateShowDialog("sig.download_failed"_lang, "sys-patch", {"common.ok"_lang}, true);
+                inst::ui::instPage::loadMainMenu();
+                bpcExit();
+                return;
+            }
+            if (!installComponent("emuiibo", emuiiboInfo[0], emuiiboInfo[1], inst::config::appDir + "/emuiibo.zip")) {
+                inst::ui::mainApp->CreateShowDialog("sig.download_failed"_lang, "emuiibo", {"common.ok"_lang}, true);
                 inst::ui::instPage::loadMainMenu();
                 bpcExit();
                 return;
