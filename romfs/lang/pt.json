@@ -28,7 +28,11 @@
             "title": "Modo applet não suportado",
             "desc": "Poderá ter problemas se usar o Awoo Installer em modo Applet. Se\ntiver problemas, execute o Awoo Installer através de um título\ninstalado (mantenha R primido enquanto inicia um jogo)!"
         },
-        "buttons": " Selecionar     Sair"
+        "buttons": " Selecionar     Sair",
+        "storage": {
+            "system_memory": "Memória do sistema: ",
+            "sd_card": "Cartão microSD: "
+        }
     },
     "inst": {
         "net": {

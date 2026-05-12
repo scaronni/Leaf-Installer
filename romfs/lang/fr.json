@@ -28,7 +28,11 @@
             "title": "Le mode Applet n'est pas compatible",
             "desc": "Vous pouvez rencontrer des problèmes en utilisant Awoo Installer en mode Applet.\n\n Si vous avez des problèmes, veuillez lancer Awoo en mode 'non-Applet' (Maintenez R pendant le démarrage d'un jeu)!"
         },
-        "buttons": " Select     Quitter"
+        "buttons": " Select     Quitter",
+        "storage": {
+            "system_memory": "Mémoire système : ",
+            "sd_card": "Carte microSD : "
+        }
     },
     "inst": {
         "net": {

@@ -129,6 +129,9 @@ namespace usbInstStuff {
                 installTask->Prepare();
 
                 installTask->Begin();
+                // Storage refresh between iterations would re-layout TextBlocks
+                // on the main thread and desync NS-USBloader the same way the
+                // extra CallForRender did before. Refresh once after the loop.
             }
         }
         catch (std::exception& e) {
@@ -154,6 +157,7 @@ namespace usbInstStuff {
 
         if(nspInstalled) {
             tin::util::USBCmdManager::SendExitCmd();
+            inst::util::refreshAllStorageDisplays();
             inst::ui::instPage::setInstInfoText("inst.info_page.complete"_lang);
             inst::ui::instPage::setInstBarPerc(100);
             std::string audioPath = "romfs:/audio/awoo.wav";

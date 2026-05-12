@@ -16,6 +16,7 @@
 #include "ui/MainApplication.hpp"
 #include "util/usb_comms_awoo.h"
 #include "util/json.hpp"
+#include "util/lang.hpp"
 #include "nx/usbhdd.h"
 
 namespace inst::util {
@@ -37,12 +38,74 @@ namespace inst::util {
         return img;
     }
 
+    static std::string formatStorageBytes(s64 bytes) {
+        constexpr double GB = 1024.0 * 1024.0 * 1024.0;
+        char buf[32];
+        if (bytes >= (s64)1024 * 1024 * 1024) {
+            std::snprintf(buf, sizeof(buf), "%.1f GB", (double)bytes / GB);
+        } else {
+            std::snprintf(buf, sizeof(buf), "%lld MB", (long long)(bytes / (1024 * 1024)));
+        }
+        return buf;
+    }
+
+    std::string getStorageInfoText(NcmStorageId storageId) {
+        s64 total = 0, free_ = 0;
+        if (R_FAILED(nsGetTotalSpaceSize(storageId, &total))) total = 0;
+        if (R_FAILED(nsGetFreeSpaceSize(storageId, &free_))) free_ = 0;
+        return formatStorageBytes(free_) + " / " + formatStorageBytes(total);
+    }
+
+    struct StorageDisplay {
+        pu::ui::elm::TextBlock::Ref sysText;
+        pu::ui::elm::TextBlock::Ref sdText;
+        s32 rightX;
+    };
+    static std::vector<StorageDisplay> s_storageDisplays;
+
+    static const std::string kStorageFont = pu::ui::MakeDefaultFontName(33);
+
+    static void positionRightAligned(pu::ui::elm::TextBlock::Ref& tb, s32 rightX) {
+        const s32 w = pu::ui::render::GetTextWidth(kStorageFont, tb->GetText());
+        tb->SetX(rightX - w);
+    }
+
+    void addStorageInfoBlocks(pu::ui::Layout* layout, s32 right_x, s32 y) {
+        auto sysText = pu::ui::elm::TextBlock::New(0, y,
+            "main.storage.system_memory"_lang + getStorageInfoText(NcmStorageId_BuiltInUser));
+        sysText->SetFont(kStorageFont);
+        sysText->SetColor(pu::ui::Color::FromHex("#FFFFFFFF"));
+        positionRightAligned(sysText, right_x);
+        layout->Add(sysText);
+
+        auto sdText = pu::ui::elm::TextBlock::New(0, y + 50,
+            "main.storage.sd_card"_lang + getStorageInfoText(NcmStorageId_SdCard));
+        sdText->SetFont(kStorageFont);
+        sdText->SetColor(pu::ui::Color::FromHex("#FFFFFFFF"));
+        positionRightAligned(sdText, right_x);
+        layout->Add(sdText);
+
+        s_storageDisplays.push_back({sysText, sdText, right_x});
+    }
+
+    void refreshAllStorageDisplays() {
+        const std::string sysStr = "main.storage.system_memory"_lang + getStorageInfoText(NcmStorageId_BuiltInUser);
+        const std::string sdStr  = "main.storage.sd_card"_lang + getStorageInfoText(NcmStorageId_SdCard);
+        for (auto& d : s_storageDisplays) {
+            d.sysText->SetText(sysStr);
+            d.sdText->SetText(sdStr);
+            positionRightAligned(d.sysText, d.rightX);
+            positionRightAligned(d.sdText, d.rightX);
+        }
+    }
+
     void initApp () {
         if (!std::filesystem::exists("sdmc:/switch")) std::filesystem::create_directory("sdmc:/switch");
         if (!std::filesystem::exists(inst::config::appDir)) std::filesystem::create_directory(inst::config::appDir);
         inst::config::parseConfig();
 
         socketInitializeDefault();
+        nsInitialize();
         #ifdef __DEBUG__
             nxlinkStdio();
         #endif
@@ -52,6 +115,7 @@ namespace inst::util {
 
     void deinitApp () {
         nx::hdd::exit();
+        nsExit();
         socketExit();
         awoo_usbCommsExit();
     }

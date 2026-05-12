@@ -83,6 +83,7 @@ namespace nspInstStuff {
                 inst::ui::instPage::setInstBarPerc(0);
                 installTask->Prepare();
                 installTask->Begin();
+                inst::util::refreshAllStorageDisplays();
             }
         }
         catch (std::exception& e)

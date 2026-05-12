@@ -28,7 +28,11 @@
             "title": "不支援Applet模式",
             "desc": "在Applet模式下執行Awoo Installer可能會產生安裝錯誤。\n請在hbmenu模式(啟動任何一個遊戲時按住R)，再執行Awoo Installer！"
         },
-        "buttons": " 選擇     退出"
+        "buttons": " 選擇     退出",
+        "storage": {
+            "system_memory": "主機儲存空間：",
+            "sd_card": "microSD 卡："
+        }
     },
     "inst": {
         "net": {

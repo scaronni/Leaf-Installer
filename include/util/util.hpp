@@ -26,4 +26,15 @@ namespace inst::util {
     void playAudio(std::string audioPath);
     std::vector<std::string> checkForAppUpdate();
     std::vector<std::string> fetchLatestRelease(const std::string& releasesPageUrl);
+    // Returns a "<free> / <total>" string (e.g. "32.5 GB / 64.0 GB") for the
+    // given NcmStorageId — used to surface available space on each page's top bar.
+    std::string getStorageInfoText(NcmStorageId storageId);
+    // Builds two right-aligned TextBlocks ("System memory: …" and "microSD card: …")
+    // and adds them to the given layout. `right_x` is the right edge to align
+    // against (e.g. 1900 leaves ~20 px margin from the 1920-wide screen). The
+    // blocks are tracked in a private registry so refreshAllStorageDisplays()
+    // can update them after each install without per-page member plumbing.
+    void addStorageInfoBlocks(pu::ui::Layout* layout, s32 right_x, s32 y);
+    // Re-queries storage sizes and updates every tracked storage display.
+    void refreshAllStorageDisplays();
 }

@@ -28,7 +28,11 @@
             "title": "Applet-Modus wird nicht unterstützt",
             "desc": "Es kann zu Problemen bei der Verwendung des Awoo Installer im Applet-Modus kommen.\nWenn du Probleme hast, starte den Awoo Installer über einen installierten Titel (halte R gedrückt, während du ein Spiel startest)!"
         },
-        "buttons": " Auswählen     Beenden"
+        "buttons": " Auswählen     Beenden",
+        "storage": {
+            "system_memory": "Systemspeicher: ",
+            "sd_card": "microSD-Karte: "
+        }
     },
     "inst": {
         "net": {

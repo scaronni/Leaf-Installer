@@ -28,7 +28,11 @@
             "title": "不支持 Applet 模式",
             "desc": "在 Applet 模式下使用 Awoo Installer 可能会遇到问题，\n如果遇到问题，请切换 Awoo Installer 的运行模式！\n(退回主界面，按住  并打开任意游戏，进入 hbmenu 后再打开 Awoo Installer 即可)"
         },
-        "buttons": " 选择     退出"
+        "buttons": " 选择     退出",
+        "storage": {
+            "system_memory": "主机存储空间：",
+            "sd_card": "microSD 卡："
+        }
     },
     "inst": {
         "net": {

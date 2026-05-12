@@ -53,6 +53,7 @@ namespace inst::ui {
         this->Add(this->botRect);
         this->Add(this->titleImage);
         this->Add(this->appVersionText);
+        inst::util::addStorageInfoBlocks(this, 1900, 25);
         this->Add(this->butText);
         this->Add(this->pageInfoText);
         this->Add(this->menu);
