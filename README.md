@@ -21,6 +21,9 @@ A No-Bullshit NSP, NSZ, XCI, and XCZ Installer for Nintendo Switch
   - Skips Amiibos that already exist on disk, so it's safe to re-run after the database is refreshed
   - Inspired by [Slluxx/AmiiboGenerator](https://github.com/Slluxx/AmiiboGenerator)
 - All update endpotins are configurable under `Settings`.
+- Show storage information while installing.
+  - Storage space is updated after every NSP install for network and SD installs.
+  - Storage space is updated at the end of the NSP install batch for USB installs (NS-USBLoader protocol limitation).
 
 ## Building with Podman
 The GitHub Actions workflow builds Awoo Installer inside the official devkitPro container image (`devkitpro/devkita64:latest`). You can reproduce the exact same build locally with Podman — no need to install devkitPro, devkitA64, or any Switch toolchain on your host.
