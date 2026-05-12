@@ -5,6 +5,7 @@
             "net": "Instalar através da LAN ou da Internet",
             "usb": "Instalar atráves do USB/USB HDD",
             "sig": "Instalar Ultrahand e overlays",
+            "amiibo": "Gerar dados Amiibo",
             "set": "Definições",
             "exit": "Sair"
         },
@@ -145,6 +146,7 @@
             "ultrahand_url": "URL do Ultrahand Overlay: ",
             "sys_patch_url": "URL do sys-patch: ",
             "emuiibo_url": "URL do emuiibo: ",
+            "amiibo_api_url": "URL da API Amiibo: ",
             "language": "Idioma: ",
             "check_update": "Procurar atualizações do Awoo Installer",
             "credits": "Créditos"
@@ -182,7 +184,8 @@
         "ultrahand_hint": "Insira a URL de releases do GitHub para o Ultrahand Overlay",
         "sys_patch_hint": "Insira a URL de releases do GitHub para o sys-patch",
         "awoo_hint": "Insira a URL de releases do GitHub para o Awoo Installer",
-        "emuiibo_hint": "Insira a URL de releases do GitHub para o emuiibo"
+        "emuiibo_hint": "Insira a URL de releases do GitHub para o emuiibo",
+        "amiibo_api_hint": "Insira a URL do endpoint JSON da API Amiibo"
     },
     "common": {
         "ok": "OK",
@@ -191,5 +194,19 @@
         "yes": "Sim",
         "no": "Não",
         "cancel_desc": "Pressione B para cancelar"
+    },
+    "amiibo": {
+        "confirm_title": "Gerar dados Amiibo?",
+        "confirm_desc": "A base Amiibo será baixada e todos os dados Amiibo (incluindo imagens)\nserão gerados em sdmc:/emuiibo/.\nPastas existentes são ignoradas.",
+        "generate": "Gerar",
+        "top_info": "Gerando dados Amiibo",
+        "downloading_db": "Baixando o banco Amiibo...",
+        "generating": "Gerando ",
+        "done_title": "Geração Amiibo concluída",
+        "done_generated": "Gerados: ",
+        "done_skipped": "Ignorados (já existem): ",
+        "db_failed": "Não foi possível baixar o banco Amiibo",
+        "db_failed_desc": "Verifique sua conexão e a URL.",
+        "generic_error": "Falha na geração Amiibo"
     }
 }

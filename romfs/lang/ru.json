@@ -5,6 +5,7 @@
             "net": "Установка по сети",
             "usb": "Установка через USB/USB HDD",
             "sig": "Установить Ultrahand и оверлеи",
+            "amiibo": "Сгенерировать данные Amiibo",
             "set": "Настройки",
             "exit": "Выход"
         },
@@ -145,6 +146,7 @@
             "ultrahand_url": "URL Ultrahand Overlay: ",
             "sys_patch_url": "URL sys-patch: ",
             "emuiibo_url": "URL emuiibo: ",
+            "amiibo_api_url": "URL API Amiibo: ",
             "language": "Язык: ",
             "check_update": "Проверить наличие обновлений Awoo Installer",
             "credits": "Благодарности"
@@ -182,7 +184,8 @@
         "ultrahand_hint": "Введите URL релизов GitHub для Ultrahand Overlay",
         "sys_patch_hint": "Введите URL релизов GitHub для sys-patch",
         "awoo_hint": "Введите URL релизов GitHub для Awoo Installer",
-        "emuiibo_hint": "Введите URL релизов GitHub для emuiibo"
+        "emuiibo_hint": "Введите URL релизов GitHub для emuiibo",
+        "amiibo_api_hint": "Введите URL JSON-эндпоинта API Amiibo"
     },
     "common": {
         "ok": "OK",
@@ -191,5 +194,19 @@
         "yes": "Да",
         "no": "Нет",
         "cancel_desc": "Нажмите \"B\" для отмены"
+    },
+    "amiibo": {
+        "confirm_title": "Сгенерировать данные Amiibo?",
+        "confirm_desc": "База Amiibo будет загружена и все данные Amiibo\n(включая изображения) будут сгенерированы в sdmc:/emuiibo/.\nСуществующие папки пропускаются.",
+        "generate": "Сгенерировать",
+        "top_info": "Генерация данных Amiibo",
+        "downloading_db": "Загрузка базы Amiibo...",
+        "generating": "Генерация ",
+        "done_title": "Генерация Amiibo завершена",
+        "done_generated": "Сгенерировано: ",
+        "done_skipped": "Пропущено (уже есть): ",
+        "db_failed": "Не удалось загрузить базу Amiibo",
+        "db_failed_desc": "Проверьте соединение и URL.",
+        "generic_error": "Сбой генерации Amiibo"
     }
 }

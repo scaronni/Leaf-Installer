@@ -6,6 +6,7 @@
 #include "util/config.hpp"
 #include "util/lang.hpp"
 #include "sigInstall.hpp"
+#include "amiiboGen.hpp"
 #include "data/buffered_placeholder_writer.hpp"
 #include "nx/usbhdd.h"
 
@@ -73,6 +74,9 @@ namespace inst::ui {
         this->sigPatchesMenuItem = pu::ui::elm::MenuItem::New("main.menu.sig"_lang);
         this->sigPatchesMenuItem->SetColor(COLOR("#FFFFFFFF"));
         this->sigPatchesMenuItem->SetIcon(inst::util::loadTex("romfs:/images/icons/wrench.png"));
+        this->amiiboMenuItem = pu::ui::elm::MenuItem::New("main.menu.amiibo"_lang);
+        this->amiiboMenuItem->SetColor(COLOR("#FFFFFFFF"));
+        this->amiiboMenuItem->SetIcon(inst::util::loadTex("romfs:/images/icons/amiibo.png"));
         this->settingsMenuItem = pu::ui::elm::MenuItem::New("main.menu.set"_lang);
         this->settingsMenuItem->SetColor(COLOR("#FFFFFFFF"));
         this->settingsMenuItem->SetIcon(inst::util::loadTex("romfs:/images/icons/settings.png"));
@@ -92,6 +96,7 @@ namespace inst::ui {
         this->optionMenu->AddItem(this->netInstallMenuItem);
         this->optionMenu->AddItem(this->usbInstallMenuItem);
         this->optionMenu->AddItem(this->sigPatchesMenuItem);
+        this->optionMenu->AddItem(this->amiiboMenuItem);
         this->optionMenu->AddItem(this->settingsMenuItem);
         this->optionMenu->AddItem(this->exitMenuItem);
         this->Add(this->optionMenu);
@@ -135,6 +140,10 @@ namespace inst::ui {
         sig::installSigPatches();
     }
 
+    void MainPage::amiiboMenuItem_Click() {
+        amiibo::generateAmiiboData();
+    }
+
     void MainPage::exitMenuItem_Click() {
         mainApp->FadeOut();
         mainApp->Close();
@@ -164,9 +173,12 @@ namespace inst::ui {
                     MainPage::sigPatchesMenuItem_Click();
                     break;
                 case 4:
-                    MainPage::settingsMenuItem_Click();
+                    MainPage::amiiboMenuItem_Click();
                     break;
                 case 5:
+                    MainPage::settingsMenuItem_Click();
+                    break;
+                case 6:
                     MainPage::exitMenuItem_Click();
                     break;
                 default:

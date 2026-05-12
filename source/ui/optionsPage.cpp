@@ -157,6 +157,9 @@ namespace inst::ui {
         auto emuiiboUrlOption = pu::ui::elm::MenuItem::New("options.menu_items.emuiibo_url"_lang + inst::util::shortenString(inst::config::emuiiboUrl, 80, false));
         emuiiboUrlOption->SetColor(COLOR("#FFFFFFFF"));
         this->menu->AddItem(emuiiboUrlOption);
+        auto amiiboApiUrlOption = pu::ui::elm::MenuItem::New("options.menu_items.amiibo_api_url"_lang + inst::util::shortenString(inst::config::amiiboApiUrl, 80, false));
+        amiiboApiUrlOption->SetColor(COLOR("#FFFFFFFF"));
+        this->menu->AddItem(amiiboApiUrlOption);
         auto languageOption = pu::ui::elm::MenuItem::New("options.menu_items.language"_lang + this->getMenuLanguage(inst::config::languageSetting));
         languageOption->SetColor(COLOR("#FFFFFFFF"));
         this->menu->AddItem(languageOption);
@@ -276,6 +279,14 @@ namespace inst::ui {
                     }
                     break;
                 case 10:
+                    keyboardResult = inst::util::softwareKeyboard("options.amiibo_api_hint"_lang, inst::config::amiiboApiUrl.c_str(), 500);
+                    if (keyboardResult.size() > 0) {
+                        inst::config::amiiboApiUrl = keyboardResult;
+                        inst::config::setConfig();
+                        this->setMenuText();
+                    }
+                    break;
+                case 11:
                     languageList = languageStrings;
                     languageList.push_back("options.language.system_language"_lang);
                     rc = inst::ui::mainApp->CreateShowDialog("options.language.title"_lang, "options.language.desc"_lang, languageList, false);
@@ -321,7 +332,7 @@ namespace inst::ui {
                     mainApp->FadeOut();
                     mainApp->Close();
                     break;
-                case 11:
+                case 12:
                     if (inst::util::getIPAddress() == "1.0.0.127") {
                         inst::ui::mainApp->CreateShowDialog("main.net.title"_lang, "main.net.desc"_lang, {"common.ok"_lang}, true);
                         break;
@@ -333,7 +344,7 @@ namespace inst::ui {
                     }
                     this->askToUpdate(downloadUrl);
                     break;
-                case 12:
+                case 13:
                     inst::ui::mainApp->CreateShowDialog("options.credits.title"_lang, "options.credits.desc"_lang, {"common.close"_lang}, true);
                     break;
                 default:

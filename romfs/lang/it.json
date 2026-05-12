@@ -5,6 +5,7 @@
             "net": "Installa via LAN o da internet",
             "usb": "Installa via USB/USB HDD",
             "sig": "Installa Ultrahand e overlays",
+            "amiibo": "Genera dati Amiibo",
             "set": "Impostazioni",
             "exit": "Esci"
         },
@@ -145,6 +146,7 @@
             "ultrahand_url": "URL Ultrahand Overlay: ",
             "sys_patch_url": "URL sys-patch: ",
             "emuiibo_url": "URL emuiibo: ",
+            "amiibo_api_url": "URL API Amiibo: ",
             "language": "Lingua: ",
             "check_update": "Controlla aggiornamenti di Awoo Installer ora",
             "credits": "Crediti"
@@ -182,7 +184,8 @@
         "ultrahand_hint": "Inserisci l'URL delle release GitHub di Ultrahand Overlay",
         "sys_patch_hint": "Inserisci l'URL delle release GitHub di sys-patch",
         "awoo_hint": "Inserisci l'URL delle release GitHub di Awoo Installer",
-        "emuiibo_hint": "Inserisci l'URL delle release GitHub di emuiibo"
+        "emuiibo_hint": "Inserisci l'URL delle release GitHub di emuiibo",
+        "amiibo_api_hint": "Inserisci l'URL dell'endpoint JSON dell'API Amiibo"
     },
     "common": {
         "ok": "OK",
@@ -191,5 +194,19 @@
         "yes": "Sì",
         "no": "No",
         "cancel_desc": "Premi B per annullare"
+    },
+    "amiibo": {
+        "confirm_title": "Generare i dati Amiibo?",
+        "confirm_desc": "Il database Amiibo verrà scaricato e tutti i dati Amiibo\n(incluse le immagini) verranno generati in sdmc:/emuiibo/.\nLe cartelle esistenti vengono saltate.",
+        "generate": "Genera",
+        "top_info": "Generazione dati Amiibo",
+        "downloading_db": "Download del database Amiibo...",
+        "generating": "Generazione ",
+        "done_title": "Generazione Amiibo completata",
+        "done_generated": "Generati: ",
+        "done_skipped": "Saltati (già presenti): ",
+        "db_failed": "Impossibile scaricare il database Amiibo",
+        "db_failed_desc": "Controlla la connessione e l'URL.",
+        "generic_error": "Generazione Amiibo fallita"
     }
 }

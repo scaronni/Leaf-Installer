@@ -5,6 +5,7 @@
             "net": "通过局域网或网络安装",
             "usb": "通过 USB/USB HDD 安装",
             "sig": "安装 Ultrahand 和扩展",
+            "amiibo": "生成 Amiibo 数据",
             "set": "设置",
             "exit": "退出"
         },
@@ -148,6 +149,7 @@
             "ultrahand_url": "Ultrahand Overlay 网址：",
             "sys_patch_url": "sys-patch 网址：",
             "emuiibo_url": "emuiibo 网址：",
+            "amiibo_api_url": "Amiibo API 网址：",
             "language": "语言：",
             "check_update": "检查 Awoo Installer 更新",
             "credits": "致谢"
@@ -185,7 +187,8 @@
         "ultrahand_hint": "输入 Ultrahand Overlay 的 GitHub releases 网址",
         "sys_patch_hint": "输入 sys-patch 的 GitHub releases 网址",
         "awoo_hint": "输入 Awoo Installer 的 GitHub releases 网址",
-        "emuiibo_hint": "输入 emuiibo 的 GitHub releases 网址"
+        "emuiibo_hint": "输入 emuiibo 的 GitHub releases 网址",
+        "amiibo_api_hint": "输入 Amiibo API JSON 端点网址"
     },
     "common": {
         "ok": "确定",
@@ -194,5 +197,19 @@
         "yes": "是",
         "no": "否",
         "cancel_desc": "按  取消"
+    },
+    "amiibo": {
+        "confirm_title": "生成 Amiibo 数据?",
+        "confirm_desc": "Amiibo 数据库将被下载,所有 Amiibo 数据(包括图像)\n将在 sdmc:/emuiibo/ 下生成。\n已存在的文件夹将被跳过。",
+        "generate": "生成",
+        "top_info": "正在生成 Amiibo 数据",
+        "downloading_db": "正在下载 Amiibo 数据库...",
+        "generating": "正在生成 ",
+        "done_title": "Amiibo 生成完成",
+        "done_generated": "已生成: ",
+        "done_skipped": "已跳过 (已存在): ",
+        "db_failed": "无法下载 Amiibo 数据库",
+        "db_failed_desc": "请检查您的互联网连接和网址。",
+        "generic_error": "Amiibo 生成失败"
     }
 }

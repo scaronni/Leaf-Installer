@@ -5,6 +5,7 @@
             "net": "ネットワーク経由でインストール",
             "usb": "USB/USB HDD経由でインストール",
             "sig": "Ultrahand とオーバーレイをインストール",
+            "amiibo": "Amiibo データを生成",
             "set": "設定",
             "exit": "終了"
         },
@@ -145,6 +146,7 @@
             "ultrahand_url": "Ultrahand Overlay URL: ",
             "sys_patch_url": "sys-patch URL: ",
             "emuiibo_url": "emuiibo URL: ",
+            "amiibo_api_url": "Amiibo API URL: ",
             "language": "言語: ",
             "check_update": "Awoo Installerのアップデートを確認",
             "credits": "クレジット"
@@ -182,7 +184,8 @@
         "ultrahand_hint": "Ultrahand Overlay の GitHub リリース URL を入力",
         "sys_patch_hint": "sys-patch の GitHub リリース URL を入力",
         "awoo_hint": "Awoo Installer の GitHub リリース URL を入力",
-        "emuiibo_hint": "emuiibo の GitHub リリース URL を入力"
+        "emuiibo_hint": "emuiibo の GitHub リリース URL を入力",
+        "amiibo_api_hint": "Amiibo API の JSON エンドポイント URL を入力"
     },
     "common": {
         "ok": "OK",
@@ -191,5 +194,19 @@
         "yes": "はい",
         "no": "いいえ",
         "cancel_desc": "Bを押してキャンセル"
+    },
+    "amiibo": {
+        "confirm_title": "Amiibo データを生成しますか?",
+        "confirm_desc": "Amiibo データベースがダウンロードされ、すべての Amiibo データ\n(画像を含む)が sdmc:/emuiibo/ に生成されます。\n既存のフォルダはスキップされます。",
+        "generate": "生成",
+        "top_info": "Amiibo データを生成中",
+        "downloading_db": "Amiibo データベースをダウンロード中...",
+        "generating": "生成中: ",
+        "done_title": "Amiibo の生成が完了しました",
+        "done_generated": "生成済み: ",
+        "done_skipped": "スキップ済み (既存): ",
+        "db_failed": "Amiibo データベースのダウンロードに失敗しました",
+        "db_failed_desc": "インターネット接続と URL を確認してください。",
+        "generic_error": "Amiibo の生成に失敗しました"
     }
 }

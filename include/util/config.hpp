@@ -12,6 +12,7 @@ namespace inst::config {
     extern std::string ultrahandUrl;
     extern std::string sysPatchUrl;
     extern std::string emuiiboUrl;
+    extern std::string amiiboApiUrl;
     extern std::string lastNetUrl;
     extern std::vector<std::string> updateInfo;
     extern int languageSetting;

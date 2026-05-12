@@ -5,6 +5,7 @@
             "net": "通過網路安裝",
             "usb": "通過USB/USB HDD安裝",
             "sig": "安裝 Ultrahand 與擴充功能",
+            "amiibo": "生成 Amiibo 資料",
             "set": "設置",
             "exit": "退出"
         },
@@ -148,6 +149,7 @@
             "ultrahand_url": "Ultrahand Overlay 網址：",
             "sys_patch_url": "sys-patch 網址：",
             "emuiibo_url": "emuiibo 網址：",
+            "amiibo_api_url": "Amiibo API 網址：",
             "language": "語言： ",
             "check_update": "檢測更新",
             "credits": "致谢"
@@ -185,7 +187,8 @@
         "ultrahand_hint": "輸入 Ultrahand Overlay 的 GitHub releases 網址",
         "sys_patch_hint": "輸入 sys-patch 的 GitHub releases 網址",
         "awoo_hint": "輸入 Awoo Installer 的 GitHub releases 網址",
-        "emuiibo_hint": "輸入 emuiibo 的 GitHub releases 網址"
+        "emuiibo_hint": "輸入 emuiibo 的 GitHub releases 網址",
+        "amiibo_api_hint": "輸入 Amiibo API JSON 端點網址"
     },
     "common": {
         "ok": "確定",
@@ -194,5 +197,19 @@
         "yes": "是",
         "no": "否",
         "cancel_desc": "按  取消"
+    },
+    "amiibo": {
+        "confirm_title": "生成 Amiibo 資料?",
+        "confirm_desc": "Amiibo 資料庫將被下載,所有 Amiibo 資料(包括圖片)\n將在 sdmc:/emuiibo/ 下生成。\n已存在的資料夾將被跳過。",
+        "generate": "生成",
+        "top_info": "正在生成 Amiibo 資料",
+        "downloading_db": "正在下載 Amiibo 資料庫...",
+        "generating": "正在生成 ",
+        "done_title": "Amiibo 生成完成",
+        "done_generated": "已生成: ",
+        "done_skipped": "已跳過 (已存在): ",
+        "db_failed": "無法下載 Amiibo 資料庫",
+        "db_failed_desc": "請檢查您的網路連線與網址。",
+        "generic_error": "Amiibo 生成失敗"
     }
 }

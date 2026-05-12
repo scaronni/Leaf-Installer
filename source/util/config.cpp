@@ -9,6 +9,7 @@ namespace inst::config {
     std::string ultrahandUrl;
     std::string sysPatchUrl;
     std::string emuiiboUrl;
+    std::string amiiboApiUrl;
     std::string lastNetUrl;
     std::vector<std::string> updateInfo;
     int languageSetting;
@@ -33,6 +34,7 @@ namespace inst::config {
             {"ultrahandUrl", ultrahandUrl},
             {"sysPatchUrl", sysPatchUrl},
             {"emuiiboUrl", emuiiboUrl},
+            {"amiiboApiUrl", amiiboApiUrl},
             {"usbAck", usbAck},
             {"validateNCAs", validateNCAs},
             {"lastNetUrl", lastNetUrl}
@@ -57,6 +59,7 @@ namespace inst::config {
             ultrahandUrl = j["ultrahandUrl"].get<std::string>();
             sysPatchUrl = j["sysPatchUrl"].get<std::string>();
             emuiiboUrl = j["emuiiboUrl"].get<std::string>();
+            amiiboApiUrl = j["amiiboApiUrl"].get<std::string>();
             usbAck = j["usbAck"].get<bool>();
             validateNCAs = j["validateNCAs"].get<bool>();
             lastNetUrl = j["lastNetUrl"].get<std::string>();
@@ -68,6 +71,7 @@ namespace inst::config {
             ultrahandUrl = "https://github.com/ppkantorski/Ultrahand-Overlay/releases";
             sysPatchUrl = "https://github.com/impeeza/sys-patch/releases";
             emuiiboUrl = "https://github.com/XorTroll/emuiibo/releases";
+            amiiboApiUrl = "https://amiiboapi.org/api/amiibo/";
             languageSetting = 99;
             autoUpdate = true;
             deletePrompt = true;

@@ -5,6 +5,7 @@
             "net": "Install over LAN or internet",
             "usb": "Install over USB/USB HDD",
             "sig": "Install Ultrahand and overlays",
+            "amiibo": "Generate Amiibo data",
             "set": "Settings",
             "exit": "Exit"
         },
@@ -148,6 +149,7 @@
             "ultrahand_url": "Ultrahand Overlay URL: ",
             "sys_patch_url": "sys-patch URL: ",
             "emuiibo_url": "emuiibo URL: ",
+            "amiibo_api_url": "Amiibo API URL: ",
             "language": "Language: ",
             "check_update": "Check for updates to Awoo Installer",
             "credits": "Credits"
@@ -185,7 +187,8 @@
         "ultrahand_hint": "Enter the GitHub releases URL for Ultrahand Overlay",
         "sys_patch_hint": "Enter the GitHub releases URL for sys-patch",
         "awoo_hint": "Enter the GitHub releases URL for Awoo Installer",
-        "emuiibo_hint": "Enter the GitHub releases URL for emuiibo"
+        "emuiibo_hint": "Enter the GitHub releases URL for emuiibo",
+        "amiibo_api_hint": "Enter the Amiibo API JSON endpoint URL"
     },
     "common": {
         "ok": "OK",
@@ -194,5 +197,19 @@
         "yes": "Yes",
         "no": "No",
         "cancel_desc": "Press B to cancel"
+    },
+    "amiibo": {
+        "confirm_title": "Generate Amiibo data?",
+        "confirm_desc": "The Amiibo database will be downloaded and all Amiibo data\n(including images) will be generated under sdmc:/emuiibo/.\nExisting Amiibo folders are skipped.",
+        "generate": "Generate data",
+        "top_info": "Generating Amiibo data",
+        "downloading_db": "Downloading Amiibo database...",
+        "generating": "Generating ",
+        "done_title": "Amiibo generation complete",
+        "done_generated": "Generated: ",
+        "done_skipped": "Skipped (already present): ",
+        "db_failed": "Could not download the Amiibo database",
+        "db_failed_desc": "Check your internet connection and the URL.",
+        "generic_error": "Amiibo generation failed"
     }
 }

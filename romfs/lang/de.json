@@ -5,6 +5,7 @@
             "net": "Über LAN oder Internet installieren",
             "usb": "Über USB/USB HDD installieren",
             "sig": "Ultrahand und Overlays installieren",
+            "amiibo": "Amiibo-Daten generieren",
             "set": "Einstellungen",
             "exit": "Beenden"
         },
@@ -145,6 +146,7 @@
             "ultrahand_url": "Ultrahand Overlay URL: ",
             "sys_patch_url": "sys-patch URL: ",
             "emuiibo_url": "emuiibo URL: ",
+            "amiibo_api_url": "Amiibo-API URL: ",
             "language": "Sprache: ",
             "check_update": "Suche nach Updates für Awoo Installer",
             "credits": "Anerkennung"
@@ -182,7 +184,8 @@
         "ultrahand_hint": "GitHub-Releases-URL für Ultrahand Overlay eingeben",
         "sys_patch_hint": "GitHub-Releases-URL für sys-patch eingeben",
         "awoo_hint": "GitHub-Releases-URL für Awoo Installer eingeben",
-        "emuiibo_hint": "GitHub-Releases-URL für emuiibo eingeben"
+        "emuiibo_hint": "GitHub-Releases-URL für emuiibo eingeben",
+        "amiibo_api_hint": "Amiibo-API JSON-Endpunkt-URL eingeben"
     },
     "common": {
         "ok": "OK",
@@ -191,5 +194,19 @@
         "yes": "Ja",
         "no": "Nein",
         "cancel_desc": "Drücke  zum Abbrechen "
+    },
+    "amiibo": {
+        "confirm_title": "Amiibo-Daten generieren?",
+        "confirm_desc": "Die Amiibo-Datenbank wird heruntergeladen und alle Amiibo-Daten\n(inkl. Bilder) werden unter sdmc:/emuiibo/ erzeugt.\nVorhandene Ordner werden übersprungen.",
+        "generate": "Daten generieren",
+        "top_info": "Amiibo-Daten werden generiert",
+        "downloading_db": "Amiibo-Datenbank wird heruntergeladen...",
+        "generating": "Generiere ",
+        "done_title": "Amiibo-Generierung abgeschlossen",
+        "done_generated": "Generiert: ",
+        "done_skipped": "Übersprungen (bereits vorhanden): ",
+        "db_failed": "Amiibo-Datenbank konnte nicht heruntergeladen werden",
+        "db_failed_desc": "Überprüfe deine Internetverbindung und die URL.",
+        "generic_error": "Amiibo-Generierung fehlgeschlagen"
     }
 }
