@@ -209,6 +209,11 @@ else
 $(OUTPUT).nro	:	$(OUTPUT).elf
 endif
 
+ifneq ($(strip $(ROMFS)),)
+ROMFS_FILES	:=	$(shell find $(TOPDIR)/$(ROMFS) -type f 2>/dev/null)
+$(OUTPUT).nro	:	$(ROMFS_FILES)
+endif
+
 else
 
 all	:	$(OUTPUT).nsp
