@@ -6,6 +6,7 @@
 #include "ui/usbInstPage.hpp"
 #include "ui/instPage.hpp"
 #include "ui/optionsPage.hpp"
+#include "ui/cfwInstPage.hpp"
 
 namespace inst::ui {
     class MainApplication : public pu::ui::Application {
@@ -19,5 +20,6 @@ namespace inst::ui {
             usbInstPage::Ref usbinstPage;
             instPage::Ref instpage;
             optionsPage::Ref optionspage;
+            cfwInstPage::Ref cfwinstpage;
     };
 }

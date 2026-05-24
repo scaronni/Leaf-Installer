@@ -1,10 +1,10 @@
 {
     "main": {
         "menu": {
-            "sd": "SD 카드에서 설치",
-            "net": "LAN 또는 인터넷을 통해 설치",
-            "usb": "USB를 통해 설치",
-            "sig": "Ultrahand 및 오버레이 설치",
+            "sd": "SD 카드 또는 USB 저장 장치에서 설치",
+            "net": "LAN 또는 인터넷을 통해 타이틀 설치",
+            "usb": "USB를 통해 타이틀 설치",
+            "cfw": "커스텀 펌웨어 구성 요소 설치",
             "amiibo": "Amiibo 데이터 생성",
             "set": "설정",
             "exit": "종료"
@@ -113,21 +113,30 @@
             "error": "요청한 NCA가 제대로 서명되지 않았음: "
         }
     },
-    "sig": {
-        "confirm_title": "Ultrahand 및 오버레이를 설치하시겠습니까?",
-        "confirm_desc": "다음 버전이 다운로드 및 설치되고 콘솔이 재부팅됩니다.",
-        "install": "설치",
+    "cfw": {
+        "confirm_title": "커스텀 펌웨어 구성 요소를 확인하시겠습니까?",
+        "confirm_desc": "구성된 GitHub 저장소에서 각 구성 요소의 최신 릴리스를 확인합니다.\n확인이 완료되면 설치할 구성 요소를 선택할 수 있습니다 —\n선택한 구성 요소는 sdmc:/leaf-offline-update/ 에 준비되고,\n다음 부팅 시 hekate 의 Leaf Updater 페이로드를 통해 적용됩니다.",
+        "install": "계속",
         "fetch_failed": "최신 릴리스 정보를 가져올 수 없습니다",
         "fetch_failed_desc": "설정의 URL 또는 인터넷 연결을 확인하세요.",
         "download_failed": "다운로드 실패",
-        "install_complete": "설치 완료!",
-        "complete_desc": "변경 사항을 적용하려면 콘솔을 재부팅하세요",
+        "extract_failed": "압축 해제 실패",
+        "skipped_prefix": "건너뜀: ",
+        "install_complete": "구성 요소 준비 완료",
+        "complete_desc": "선택한 구성 요소가 sdmc:/leaf-offline-update/ 에 저장되었습니다.\nhekate 로 재부팅 후 Leaf Updater 페이로드를 실행하여 적용하세요.",
         "restart": "재시작",
         "later": "나중에",
-        "generic_error": "Ultrahand 및 오버레이 설치 실패!",
-        "top_info": "Ultrahand 및 오버레이 설치 중",
+        "generic_error": "커스텀 펌웨어 구성 요소 준비 실패!",
+        "top_info": "커스텀 펌웨어 구성 요소 준비 중",
         "downloading": "다운로드 중: ",
-        "extracting": "압축 해제 중: "
+        "extracting": "압축 해제 중: ",
+        "select_top_info": "설치할 구성 요소를 선택한 후 플러스 버튼을 누르세요!",
+        "select_buttons": " 구성 요소 선택     모두 선택     선택 항목 설치     취소",
+        "no_selection_title": "선택된 구성 요소 없음",
+        "no_selection_desc": "계속하려면 최소 한 개의 구성 요소를 선택하세요.",
+        "missing_payload_title": "Leaf Updater 페이로드를 찾을 수 없음",
+        "missing_payload_desc": "sdmc:/bootloader/payloads/leaf-updater.bin 을 찾을 수 없습니다.\n공식 릴리스 zip 에서 Leaf 를 재설치하세요 — 다음 부팅 시\n커스텀 펌웨어 구성 요소를 적용하는 Leaf Updater 페이로드가\n포함되어 있습니다.",
+        "arm_failed": "hekate 의 [Leaf Update] 항목을 자동으로 설정하지 못했습니다.\nhekate 로 재부팅 후 Payloads 메뉴에서 Leaf Updater 페이로드를\n실행하여 구성 요소를 적용하세요."
     },
     "options": {
         "menu_items": {
@@ -138,9 +147,6 @@
             "auto_update": "자동으로 Leaf 설치 프로그램에 대한 업데이트 확인",
             "no_graphics_option": "나뭇잎 제거",
             "leaf_url": "Leaf Installer URL: ",
-            "ultrahand_url": "Ultrahand Overlay URL: ",
-            "sys_patch_url": "sys-patch URL: ",
-            "emuiibo_url": "emuiibo URL: ",
             "amiibo_api_url": "Amiibo API URL: ",
             "language": "언어: ",
             "check_update": "Leaf 설치 프로그램에 대한 업데이트 확인",
@@ -167,7 +173,7 @@
         },
         "credits": {
             "title": "다음 분들께 감사드립니다!",
-            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
+            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
         },
         "language": {
             "title": "Leaf 설치 프로그램의 언어 선택",
@@ -176,10 +182,7 @@
         },
         "title": "Leaf 설치 프로그램의 설정을 변경하십시오!",
         "buttons": " 선택/변경     취소",
-        "ultrahand_hint": "Ultrahand Overlay GitHub 릴리스 URL을 입력하세요",
-        "sys_patch_hint": "sys-patch GitHub 릴리스 URL을 입력하세요",
         "leaf_hint": "Leaf Installer GitHub 릴리스 URL을 입력하세요",
-        "emuiibo_hint": "emuiibo GitHub 릴리스 URL을 입력하세요",
         "amiibo_api_hint": "Amiibo API JSON 엔드포인트 URL을 입력하세요"
     },
     "common": {

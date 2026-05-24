@@ -1,13 +1,15 @@
 #include <minizip/unzip.h>
 #include <algorithm>
+#include <cerrno>
+#include <cstring>
 #include <dirent.h>
 #include <filesystem>
 #include <string>
-#include <cstring>
 #include <switch.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include "util/error.hpp"
+#include "util/unzip.hpp"
 
 // https://github.com/AtlasNX/Kosmos-Updater/blob/master/source/FileManager.cpp
 
@@ -43,13 +45,25 @@ bool _makeDirectoryParents(const std::string& path)
     return true;
 }
 
-int _extractFile(const char * path, unzFile unz, unz_file_info_s * fileInfo) {
-    //check to make sure filepath or fileInfo isnt null
-    if (path == NULL || fileInfo == NULL)
-        return -1;
+// Reasons returned by _extractFile so the caller can build a useful diagnostic.
+enum class ExtractStage {
+    Ok = 0,
+    BadArgs,
+    OpenInZip,
+    MakeParents,
+    AllocBuffer,
+    Fopen,
+    ReadFromZip,
+    WriteToDisk,
+    ShortWrite,
+};
 
-    if (unzOpenCurrentFile(unz) != UNZ_OK)
-        return -2;
+static int _extractFile(const char * path, unzFile unz, unz_file_info_s * fileInfo, ExtractStage * stageOut) {
+    auto setStage = [&](ExtractStage s){ if (stageOut) *stageOut = s; };
+
+    if (path == NULL || fileInfo == NULL) { setStage(ExtractStage::BadArgs); return -1; }
+
+    if (unzOpenCurrentFile(unz) != UNZ_OK) { setStage(ExtractStage::OpenInZip); return -2; }
 
     std::string fullPath(path);
     auto slashPos = fullPath.find_last_of('/');
@@ -58,49 +72,92 @@ int _extractFile(const char * path, unzFile unz, unz_file_info_s * fileInfo) {
         if (!_makeDirectoryParents(parent)) {
             LOG_DEBUG("could not create parent dir for %s\n", path);
             unzCloseCurrentFile(unz);
+            setStage(ExtractStage::MakeParents);
             return -5;
         }
     }
-    
+
     u32 blocksize = 0x8000;
     u8 * buffer = (u8*) malloc(blocksize);
-    if (buffer == NULL)
-        return -3;
-    u32 done = 0;
-    int writeBytes = 0;
-    FILE * fp = fopen(path, "w");
+    if (buffer == NULL) { unzCloseCurrentFile(unz); setStage(ExtractStage::AllocBuffer); return -3; }
+
+    // Best-effort: drop any pre-existing target so fopen("wb") creates a fresh
+    // file instead of trying to truncate an existing one.
+    {
+        std::error_code rmEc;
+        std::filesystem::remove(path, rmEc);
+    }
+
+    FILE * fp = fopen(path, "wb");
     if (fp == NULL) {
+        const int saved = errno;
         free(buffer);
-        return -4;		
+        unzCloseCurrentFile(unz);
+        setStage(ExtractStage::Fopen);
+        LOG_DEBUG("fopen(%s) failed: errno=%d (%s)\n", path, saved, std::strerror(saved));
+        (void)saved;
+        return -4;
     }
-        
+
+    u64 done = 0;
+    bool readErr = false;
+    bool writeErr = false;
     while (done < fileInfo->uncompressed_size) {
-        if (done + blocksize > fileInfo->uncompressed_size) {
-            blocksize = fileInfo->uncompressed_size - done;
+        u32 want = blocksize;
+        if (done + want > fileInfo->uncompressed_size) {
+            want = fileInfo->uncompressed_size - done;
         }
-        unzReadCurrentFile(unz, buffer, blocksize);
-        writeBytes = write(fileno(fp), buffer, blocksize);
-        if (writeBytes <= 0) {
-            break;
-        }
+        const int readBytes = unzReadCurrentFile(unz, buffer, want);
+        if (readBytes <= 0) { readErr = true; break; }
+        const int writeBytes = write(fileno(fp), buffer, readBytes);
+        if (writeBytes <= 0) { writeErr = true; break; }
         done += writeBytes;
+        if (writeBytes < readBytes) { writeErr = true; break; }
     }
-    
+
     fflush(fp);
     fsync(fileno(fp));
     fclose(fp);
-    
+
     free(buffer);
-    if (done != fileInfo->uncompressed_size)
-        return -4;		
-    
     unzCloseCurrentFile(unz);
+
+    if (readErr || writeErr || done != fileInfo->uncompressed_size) {
+        // Roll back the partial write so we don't leave garbage on disk.
+        std::error_code ec;
+        std::filesystem::remove(path, ec);
+        if (readErr) { setStage(ExtractStage::ReadFromZip); return -6; }
+        if (writeErr) { setStage(ExtractStage::WriteToDisk); return -7; }
+        setStage(ExtractStage::ShortWrite);
+        return -4;
+    }
+
+    setStage(ExtractStage::Ok);
     return 0;
 }
 
+static const char * _stageName(ExtractStage s) {
+    switch (s) {
+        case ExtractStage::Ok: return "ok";
+        case ExtractStage::BadArgs: return "bad_args";
+        case ExtractStage::OpenInZip: return "open_in_zip";
+        case ExtractStage::MakeParents: return "make_parents";
+        case ExtractStage::AllocBuffer: return "alloc_buffer";
+        case ExtractStage::Fopen: return "fopen";
+        case ExtractStage::ReadFromZip: return "read_from_zip";
+        case ExtractStage::WriteToDisk: return "write_to_disk";
+        case ExtractStage::ShortWrite: return "short_write";
+    }
+    return "?";
+}
+
 namespace inst::zip {
-    bool extractFile(const std::string filename, const std::string destination) {
+    bool extractFile(const std::string filename, const std::string destination, std::string* errorOut) {
         unzFile unz = unzOpen(filename.c_str());
+        if (unz == NULL) {
+            if (errorOut) *errorOut = "unzOpen failed (corrupt download?)";
+            return false;
+        }
 
         int i = 0;
         for (;;) {
@@ -114,9 +171,6 @@ namespace inst::zip {
 
             if (code == UNZ_END_OF_LIST_OF_FILE) {
                 break;
-            } else {
-                unz_file_pos pos;
-                unzGetFilePos(unz, &pos);
             }
 
             unz_file_info_s * fileInfo = _getFileInfo(unz);
@@ -125,8 +179,16 @@ namespace inst::zip {
             fileName += _getFullFileName(unz, fileInfo);
 
             if (fileName.back() != '/') {
-                int result = _extractFile(fileName.c_str(), unz, fileInfo);
+                ExtractStage stage = ExtractStage::Ok;
+                int result = _extractFile(fileName.c_str(), unz, fileInfo, &stage);
                 if (result < 0) {
+                    if (errorOut) {
+                        const int saved = errno;
+                        *errorOut = std::string("stage=") + _stageName(stage)
+                                  + " rc=" + std::to_string(result)
+                                  + " errno=" + std::to_string(saved)
+                                  + " path=" + fileName;
+                    }
                     free(fileInfo);
                     unzClose(unz);
                     return false;
@@ -138,6 +200,7 @@ namespace inst::zip {
 
         if (i <= 0) {
             unzClose(unz);
+            if (errorOut) *errorOut = "empty zip";
             return false;
         }
 

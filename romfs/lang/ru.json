@@ -1,10 +1,10 @@
 {
     "main": {
         "menu": {
-            "sd": "Установка из SD-карты",
-            "net": "Установка по сети",
-            "usb": "Установка через USB/USB HDD",
-            "sig": "Установить Ultrahand и оверлеи",
+            "sd": "Установка с SD-карты или USB-накопителя",
+            "net": "Установка тайтлов по LAN или интернету",
+            "usb": "Установка тайтлов через USB",
+            "cfw": "Установить компоненты пользовательской прошивки",
             "amiibo": "Сгенерировать данные Amiibo",
             "set": "Настройки",
             "exit": "Выход"
@@ -113,21 +113,30 @@
             "error": "Запрашиваемый NCA неверно подписан: "
         }
     },
-    "sig": {
-        "confirm_title": "Установить Ultrahand и оверлеи?",
-        "confirm_desc": "Следующие версии будут загружены и установлены, после чего консоль перезагрузится.",
-        "install": "Установить",
+    "cfw": {
+        "confirm_title": "Проверить компоненты пользовательской прошивки?",
+        "confirm_desc": "Будет проверена последняя версия каждого компонента в настроенных\nрепозиториях GitHub. После проверки вы сможете выбрать, какие из\nних установить — выбранные компоненты будут подготовлены в\nsdmc:/leaf-offline-update/ и применены при следующей загрузке\nпейлоадом Leaf Updater через hekate.",
+        "install": "Продолжить",
         "fetch_failed": "Не удалось получить информацию о последнем релизе",
         "fetch_failed_desc": "Проверьте URL в настройках или ваше интернет-соединение.",
         "download_failed": "Не удалось загрузить",
-        "install_complete": "Установка завершена!",
-        "complete_desc": "Перезагрузите консоль для применения",
+        "extract_failed": "Не удалось распаковать",
+        "skipped_prefix": "Пропущено: ",
+        "install_complete": "Компоненты подготовлены",
+        "complete_desc": "Выбранные компоненты записаны в sdmc:/leaf-offline-update/.\nПерезагрузитесь в hekate и запустите пейлоад Leaf Updater для\nих применения.",
         "restart": "Перезагрузить",
         "later": "Позже",
-        "generic_error": "Не удалось установить Ultrahand и оверлеи!",
-        "top_info": "Установка Ultrahand и оверлеев",
+        "generic_error": "Не удалось подготовить компоненты пользовательской прошивки!",
+        "top_info": "Подготовка компонентов пользовательской прошивки",
         "downloading": "Загрузка ",
-        "extracting": "Распаковка "
+        "extracting": "Распаковка ",
+        "select_top_info": "Выберите, какие компоненты установить, затем нажмите кнопку Plus!",
+        "select_buttons": " Выбрать компонент     Выбрать все     Установить выбранные     Отмена",
+        "no_selection_title": "Компоненты не выбраны",
+        "no_selection_desc": "Выберите хотя бы один компонент, чтобы продолжить.",
+        "missing_payload_title": "Пейлоад Leaf Updater отсутствует",
+        "missing_payload_desc": "Файл sdmc:/bootloader/payloads/leaf-updater.bin не найден.\nПереустановите Leaf из официального релизного zip — он содержит\nпейлоад Leaf Updater, который применяет компоненты пользовательской\nпрошивки при следующей загрузке.",
+        "arm_failed": "Не удалось автоматически выбрать запись [Leaf Update] в hekate.\nПерезагрузитесь в hekate и запустите пейлоад Leaf Updater из\nменю Payloads для применения компонентов."
     },
     "options": {
         "menu_items": {
@@ -138,9 +147,6 @@
             "auto_update": "Автоматически проверять наличие обновлений",
             "no_graphics_option": "Убрать листья",
             "leaf_url": "URL Leaf Installer: ",
-            "ultrahand_url": "URL Ultrahand Overlay: ",
-            "sys_patch_url": "URL sys-patch: ",
-            "emuiibo_url": "URL emuiibo: ",
             "amiibo_api_url": "URL API Amiibo: ",
             "language": "Язык: ",
             "check_update": "Проверить наличие обновлений Leaf Installer",
@@ -167,7 +173,7 @@
         },
         "credits": {
             "title": "Выражаем благодарность следующим людям:",
-            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
+            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
         },
         "language": {
             "title": "Выбор языка",
@@ -176,10 +182,7 @@
         },
         "title": "Изменение настроек Leaf Installer!",
         "buttons": " Выбрать/Изменить     Отмена",
-        "ultrahand_hint": "Введите URL релизов GitHub для Ultrahand Overlay",
-        "sys_patch_hint": "Введите URL релизов GitHub для sys-patch",
         "leaf_hint": "Введите URL релизов GitHub для Leaf Installer",
-        "emuiibo_hint": "Введите URL релизов GitHub для emuiibo",
         "amiibo_api_hint": "Введите URL JSON-эндпоинта API Amiibo"
     },
     "common": {

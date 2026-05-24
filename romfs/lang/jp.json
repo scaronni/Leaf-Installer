@@ -1,10 +1,10 @@
 {
     "main": {
         "menu": {
-            "sd": "SDカードからインストール",
-            "net": "ネットワーク経由でインストール",
-            "usb": "USB/USB HDD経由でインストール",
-            "sig": "Ultrahand とオーバーレイをインストール",
+            "sd": "SDカードまたはUSBストレージからインストール",
+            "net": "LAN またはインターネット経由でタイトルをインストール",
+            "usb": "USB 経由でタイトルをインストール",
+            "cfw": "カスタムファームウェアのコンポーネントをインストール",
             "amiibo": "Amiibo データを生成",
             "set": "設定",
             "exit": "終了"
@@ -113,21 +113,30 @@
             "error": "要求されたNCAは適切に署名されていません: "
         }
     },
-    "sig": {
-        "confirm_title": "Ultrahand とオーバーレイをインストールしますか?",
-        "confirm_desc": "以下のバージョンがダウンロードおよびインストールされ、その後コンソールが再起動します。",
-        "install": "インストール",
+    "cfw": {
+        "confirm_title": "カスタムファームウェアのコンポーネントを確認?",
+        "confirm_desc": "設定済みの GitHub リポジトリから各コンポーネントの最新リリースを\n確認します。確認が完了したら、インストールするコンポーネントを\n選択できます — 選択したコンポーネントは\nsdmc:/leaf-offline-update/ に準備され、次回起動時に hekate 経由で\nLeaf Updater ペイロードが適用します。",
+        "install": "続行",
         "fetch_failed": "最新リリース情報を取得できませんでした",
         "fetch_failed_desc": "設定の URL またはインターネット接続を確認してください。",
         "download_failed": "ダウンロードに失敗しました",
-        "install_complete": "インストール完了!",
-        "complete_desc": "適用するにはコンソールを再起動してください",
+        "extract_failed": "展開に失敗しました",
+        "skipped_prefix": "スキップ: ",
+        "install_complete": "コンポーネントを準備しました",
+        "complete_desc": "選択したコンポーネントは sdmc:/leaf-offline-update/ に\n書き込まれました。hekate に再起動し、Leaf Updater ペイロードを\n実行して適用してください。",
         "restart": "再起動",
         "later": "後で",
-        "generic_error": "Ultrahand とオーバーレイのインストールに失敗しました!",
-        "top_info": "Ultrahand とオーバーレイをインストール中",
+        "generic_error": "カスタムファームウェアのコンポーネントの準備に失敗しました!",
+        "top_info": "カスタムファームウェアのコンポーネントを準備中",
         "downloading": "ダウンロード中: ",
-        "extracting": "展開中: "
+        "extracting": "展開中: ",
+        "select_top_info": "インストールするコンポーネントを選択し、プラスボタンを押してください!",
+        "select_buttons": " コンポーネントを選択     すべて選択     選択をインストール     キャンセル",
+        "no_selection_title": "コンポーネントが選択されていません",
+        "no_selection_desc": "続行する前に少なくとも 1 つのコンポーネントを選択してください。",
+        "missing_payload_title": "Leaf Updater ペイロードが見つかりません",
+        "missing_payload_desc": "sdmc:/bootloader/payloads/leaf-updater.bin が見つかりません。\n公式リリース zip から Leaf を再インストールしてください — zip には\n次回起動時にカスタムファームウェアのコンポーネントを適用する\nLeaf Updater ペイロードが含まれています。",
+        "arm_failed": "hekate の [Leaf Update] エントリを自動的に設定できませんでした。\nhekate に再起動し、Payloads メニューから Leaf Updater ペイロードを\n実行してコンポーネントを適用してください。"
     },
     "options": {
         "menu_items": {
@@ -138,9 +147,6 @@
             "auto_update": "Leaf Installerのアップデートを自動的に確認する",
             "no_graphics_option": "葉を削除",
             "leaf_url": "Leaf Installer URL: ",
-            "ultrahand_url": "Ultrahand Overlay URL: ",
-            "sys_patch_url": "sys-patch URL: ",
-            "emuiibo_url": "emuiibo URL: ",
             "amiibo_api_url": "Amiibo API URL: ",
             "language": "言語: ",
             "check_update": "Leaf Installerのアップデートを確認",
@@ -167,7 +173,7 @@
         },
         "credits": {
             "title": "以下の方々に感謝します!",
-            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
+            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
         },
         "language": {
             "title": "Leaf Installerの言語を選択",
@@ -176,10 +182,7 @@
         },
         "title": "Leaf Installerの設定を変更する",
         "buttons": " 選択/変更     キャンセル",
-        "ultrahand_hint": "Ultrahand Overlay の GitHub リリース URL を入力",
-        "sys_patch_hint": "sys-patch の GitHub リリース URL を入力",
         "leaf_hint": "Leaf Installer の GitHub リリース URL を入力",
-        "emuiibo_hint": "emuiibo の GitHub リリース URL を入力",
         "amiibo_api_hint": "Amiibo API の JSON エンドポイント URL を入力"
     },
     "common": {

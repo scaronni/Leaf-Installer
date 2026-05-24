@@ -149,15 +149,6 @@ namespace inst::ui {
         auto leafUrlOption = pu::ui::elm::MenuItem::New("options.menu_items.leaf_url"_lang + inst::util::shortenString(inst::config::leafUrl, 80, false));
         leafUrlOption->SetColor(COLOR("#FFFFFFFF"));
         this->menu->AddItem(leafUrlOption);
-        auto ultrahandUrlOption = pu::ui::elm::MenuItem::New("options.menu_items.ultrahand_url"_lang + inst::util::shortenString(inst::config::ultrahandUrl, 80, false));
-        ultrahandUrlOption->SetColor(COLOR("#FFFFFFFF"));
-        this->menu->AddItem(ultrahandUrlOption);
-        auto sysPatchUrlOption = pu::ui::elm::MenuItem::New("options.menu_items.sys_patch_url"_lang + inst::util::shortenString(inst::config::sysPatchUrl, 80, false));
-        sysPatchUrlOption->SetColor(COLOR("#FFFFFFFF"));
-        this->menu->AddItem(sysPatchUrlOption);
-        auto emuiiboUrlOption = pu::ui::elm::MenuItem::New("options.menu_items.emuiibo_url"_lang + inst::util::shortenString(inst::config::emuiiboUrl, 80, false));
-        emuiiboUrlOption->SetColor(COLOR("#FFFFFFFF"));
-        this->menu->AddItem(emuiiboUrlOption);
         auto amiiboApiUrlOption = pu::ui::elm::MenuItem::New("options.menu_items.amiibo_api_url"_lang + inst::util::shortenString(inst::config::amiiboApiUrl, 80, false));
         amiiboApiUrlOption->SetColor(COLOR("#FFFFFFFF"));
         this->menu->AddItem(amiiboApiUrlOption);
@@ -256,30 +247,6 @@ namespace inst::ui {
                     }
                     break;
                 case 7:
-                    keyboardResult = inst::util::softwareKeyboard("options.ultrahand_hint"_lang, inst::config::ultrahandUrl.c_str(), 500);
-                    if (keyboardResult.size() > 0) {
-                        inst::config::ultrahandUrl = keyboardResult;
-                        inst::config::setConfig();
-                        this->setMenuText();
-                    }
-                    break;
-                case 8:
-                    keyboardResult = inst::util::softwareKeyboard("options.sys_patch_hint"_lang, inst::config::sysPatchUrl.c_str(), 500);
-                    if (keyboardResult.size() > 0) {
-                        inst::config::sysPatchUrl = keyboardResult;
-                        inst::config::setConfig();
-                        this->setMenuText();
-                    }
-                    break;
-                case 9:
-                    keyboardResult = inst::util::softwareKeyboard("options.emuiibo_hint"_lang, inst::config::emuiiboUrl.c_str(), 500);
-                    if (keyboardResult.size() > 0) {
-                        inst::config::emuiiboUrl = keyboardResult;
-                        inst::config::setConfig();
-                        this->setMenuText();
-                    }
-                    break;
-                case 10:
                     keyboardResult = inst::util::softwareKeyboard("options.amiibo_api_hint"_lang, inst::config::amiiboApiUrl.c_str(), 500);
                     if (keyboardResult.size() > 0) {
                         inst::config::amiiboApiUrl = keyboardResult;
@@ -287,7 +254,7 @@ namespace inst::ui {
                         this->setMenuText();
                     }
                     break;
-                case 11:
+                case 8:
                     languageList = languageStrings;
                     languageList.push_back("options.language.system_language"_lang);
                     rc = inst::ui::mainApp->CreateShowDialog("options.language.title"_lang, "options.language.desc"_lang, languageList, false);
@@ -333,7 +300,7 @@ namespace inst::ui {
                     mainApp->FadeOut();
                     mainApp->Close();
                     break;
-                case 12:
+                case 9:
                     if (inst::util::getIPAddress() == "1.0.0.127") {
                         inst::ui::mainApp->CreateShowDialog("main.net.title"_lang, "main.net.desc"_lang, {"common.ok"_lang}, true);
                         break;
@@ -345,7 +312,7 @@ namespace inst::ui {
                     }
                     this->askToUpdate(downloadUrl);
                     break;
-                case 13:
+                case 10:
                     inst::ui::mainApp->CreateShowDialog("options.credits.title"_lang, "options.credits.desc"_lang, {"common.close"_lang}, true);
                     break;
                 default:

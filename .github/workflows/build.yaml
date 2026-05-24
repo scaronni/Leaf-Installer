@@ -24,14 +24,17 @@ jobs:
       - name: Mark repo as safe directory
         run: git config --system --add safe.directory '*'
 
-      - name: Build Leaf
-        run: make -j"$(nproc)" all
+      # `make release` runs `make all` (the NRO) + `make payload` (the
+      # hekate-BDK BPMP binary, ARMv4T via devkitARM which the devkita64
+      # image ships) and then stages everything into Leaf-Installer.zip.
+      - name: Build full release zip
+        run: make -j"$(nproc)" release
 
-      - name: Upload build artifact
+      - name: Upload release zip
         uses: actions/upload-artifact@v7
         with:
           name: Leaf-Installer
-          path: Leaf-Installer.nro
+          path: Leaf-Installer.zip
           if-no-files-found: error
 
   release:
@@ -43,18 +46,11 @@ jobs:
       contents: write
 
     steps:
-      - name: Download build artifact
+      - name: Download release zip
         uses: actions/download-artifact@v8
         with:
           name: Leaf-Installer
           path: dist
-
-      - name: Create zip package (max compression)
-        run: |
-          mkdir -p staging/switch/Leaf-Installer
-          cp dist/Leaf-Installer.nro staging/switch/Leaf-Installer/Leaf-Installer.nro
-          cd staging
-          zip -9 -r ../dist/Leaf-Installer.zip switch
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v3
@@ -64,4 +60,3 @@ jobs:
           draft: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-

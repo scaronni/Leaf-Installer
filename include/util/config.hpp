@@ -1,5 +1,7 @@
 #pragma once
 
+#include <map>
+#include <string>
 #include <vector>
 
 namespace inst::config {
@@ -12,9 +14,12 @@ namespace inst::config {
     extern std::string ultrahandUrl;
     extern std::string sysPatchUrl;
     extern std::string emuiiboUrl;
+    extern std::string atmosphereUrl;
+    extern std::string hekateUrl;
     extern std::string amiiboApiUrl;
     extern std::string lastNetUrl;
     extern std::vector<std::string> updateInfo;
+    extern std::map<std::string, std::string> cfwInstalled;
     extern int languageSetting;
     extern bool ignoreReqVers;
     extern bool validateNCAs;

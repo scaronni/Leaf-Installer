@@ -1,10 +1,10 @@
 {
     "main": {
         "menu": {
-            "sd": "Install from SD card",
-            "net": "Install over LAN or internet",
-            "usb": "Install over USB/USB HDD",
-            "sig": "Install Ultrahand and overlays",
+            "sd": "Install from SD card or USB storage",
+            "net": "Install titles over LAN or internet",
+            "usb": "Install titles over USB",
+            "cfw": "Install custom firmware components",
             "amiibo": "Generate Amiibo data",
             "set": "Settings",
             "exit": "Exit"
@@ -116,21 +116,30 @@
             "error": "The requested NCA is not properly signed: "
         }
     },
-    "sig": {
-        "confirm_title": "Install Ultrahand and overlays?",
-        "confirm_desc": "The following versions will be downloaded and installed, then your console will reboot.",
-        "install": "Install",
+    "cfw": {
+        "confirm_title": "Check for custom firmware components?",
+        "confirm_desc": "The configured GitHub repositories will be checked for the latest\nrelease of each component. After the check completes you can pick\nwhich ones to install — selected components are staged under\nsdmc:/leaf-offline-update/ and applied on the next reboot by the\nLeaf Updater payload via hekate.",
+        "install": "Continue",
         "fetch_failed": "Could not fetch the latest release information",
         "fetch_failed_desc": "Check the URLs in Settings or your internet connection.",
         "download_failed": "Could not download",
-        "install_complete": "Install complete!",
-        "complete_desc": "Restart your console to apply",
+        "extract_failed": "Could not extract",
+        "skipped_prefix": "Skipped: ",
+        "install_complete": "Components staged",
+        "complete_desc": "The selected components have been written to sdmc:/leaf-offline-update/.\nReboot to hekate and run the Leaf Updater payload to apply them.",
         "restart": "Restart",
         "later": "I'll do it later",
-        "generic_error": "Failed to install Ultrahand and overlays!",
-        "top_info": "Installing Ultrahand and overlays",
+        "generic_error": "Failed to stage custom firmware components!",
+        "top_info": "Staging custom firmware components",
         "downloading": "Downloading ",
-        "extracting": "Extracting "
+        "extracting": "Extracting ",
+        "select_top_info": "Select which components to install, then press the Plus button!",
+        "select_buttons": " Select Component     Select All     Install Selected     Cancel",
+        "no_selection_title": "No components selected",
+        "no_selection_desc": "Select at least one component before continuing.",
+        "missing_payload_title": "Leaf Updater payload missing",
+        "missing_payload_desc": "sdmc:/bootloader/payloads/leaf-updater.bin was not found.\nReinstall Leaf from the official release zip — it bundles the updater\npayload that applies custom firmware components on next boot.",
+        "arm_failed": "Hekate's [Leaf Update] entry could not be armed automatically.\nReboot to hekate and launch the Leaf Updater payload from the\nPayloads menu to finish applying the staged components."
     },
     "options": {
         "menu_items": {
@@ -141,9 +150,6 @@
             "auto_update": "Check for updates to Leaf Installer automatically",
             "no_graphics_option": "Remove leaves",
             "leaf_url": "Leaf Installer URL: ",
-            "ultrahand_url": "Ultrahand Overlay URL: ",
-            "sys_patch_url": "sys-patch URL: ",
-            "emuiibo_url": "emuiibo URL: ",
             "amiibo_api_url": "Amiibo API URL: ",
             "language": "Language: ",
             "check_update": "Check for updates to Leaf Installer",
@@ -170,7 +176,7 @@
         },
         "credits": {
             "title": "Thanks to the following people!",
-            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
+            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
         },
         "language": {
             "title": "Select Leaf Installer's language",
@@ -179,10 +185,7 @@
         },
         "title": "Change Leaf Installer's settings!",
         "buttons": " Select/Change     Cancel",
-        "ultrahand_hint": "Enter the GitHub releases URL for Ultrahand Overlay",
-        "sys_patch_hint": "Enter the GitHub releases URL for sys-patch",
         "leaf_hint": "Enter the GitHub releases URL for Leaf Installer",
-        "emuiibo_hint": "Enter the GitHub releases URL for emuiibo",
         "amiibo_api_hint": "Enter the Amiibo API JSON endpoint URL"
     },
     "common": {

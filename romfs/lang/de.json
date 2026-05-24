@@ -1,10 +1,10 @@
 {
     "main": {
         "menu": {
-            "sd": "Von SD-Karte installieren",
-            "net": "Über LAN oder Internet installieren",
-            "usb": "Über USB/USB HDD installieren",
-            "sig": "Ultrahand und Overlays installieren",
+            "sd": "Von SD-Karte oder USB-Speicher installieren",
+            "net": "Titel über LAN oder Internet installieren",
+            "usb": "Titel über USB installieren",
+            "cfw": "Custom-Firmware-Komponenten installieren",
             "amiibo": "Amiibo-Daten generieren",
             "set": "Einstellungen",
             "exit": "Beenden"
@@ -113,21 +113,30 @@
             "error": "Die gewünschte NCA ist nicht richtig signiert: "
         }
     },
-    "sig": {
-        "confirm_title": "Ultrahand und Overlays installieren?",
-        "confirm_desc": "Die folgenden Versionen werden heruntergeladen und installiert, anschließend wird die Konsole neu gestartet.",
-        "install": "Installieren",
+    "cfw": {
+        "confirm_title": "Nach Custom-Firmware-Komponenten suchen?",
+        "confirm_desc": "Die konfigurierten GitHub-Repositories werden auf die neueste\nVersion jeder Komponente überprüft. Nach der Prüfung kannst du\nauswählen, welche installiert werden sollen — die gewählten\nKomponenten werden unter sdmc:/leaf-offline-update/ abgelegt und\nbeim nächsten Start vom Leaf-Updater-Payload via hekate übernommen.",
+        "install": "Weiter",
         "fetch_failed": "Neueste Release-Informationen konnten nicht abgerufen werden",
         "fetch_failed_desc": "Überprüfe die URLs in den Einstellungen oder deine Internetverbindung.",
         "download_failed": "Download fehlgeschlagen",
-        "install_complete": "Installation abgeschlossen!",
-        "complete_desc": "Starte deine Konsole neu, um die Änderungen anzuwenden",
+        "extract_failed": "Entpacken fehlgeschlagen",
+        "skipped_prefix": "Übersprungen: ",
+        "install_complete": "Komponenten vorbereitet",
+        "complete_desc": "Die gewählten Komponenten wurden nach sdmc:/leaf-offline-update/\ngeschrieben. Starte in hekate neu und führe das Leaf-Updater-Payload\naus, um sie anzuwenden.",
         "restart": "Neustart",
         "later": "Später",
-        "generic_error": "Installation von Ultrahand und Overlays fehlgeschlagen!",
-        "top_info": "Ultrahand und Overlays werden installiert",
+        "generic_error": "Vorbereitung der Custom-Firmware-Komponenten fehlgeschlagen!",
+        "top_info": "Custom-Firmware-Komponenten werden vorbereitet",
         "downloading": "Lade herunter ",
-        "extracting": "Extrahiere "
+        "extracting": "Extrahiere ",
+        "select_top_info": "Wähle die zu installierenden Komponenten und drücke dann die Plus-Taste!",
+        "select_buttons": " Komponente auswählen     Alle auswählen     Auswahl installieren     Abbrechen",
+        "no_selection_title": "Keine Komponenten ausgewählt",
+        "no_selection_desc": "Wähle mindestens eine Komponente aus, um fortzufahren.",
+        "missing_payload_title": "Leaf-Updater-Payload fehlt",
+        "missing_payload_desc": "sdmc:/bootloader/payloads/leaf-updater.bin wurde nicht gefunden.\nInstalliere Leaf erneut aus dem offiziellen Release-Zip — es enthält\ndas Updater-Payload, das die Custom-Firmware-Komponenten beim\nnächsten Start anwendet.",
+        "arm_failed": "Der hekate-Eintrag [Leaf Update] konnte nicht automatisch\nausgewählt werden. Starte in hekate neu und führe das Leaf-Updater-\nPayload aus dem Payloads-Menü aus, um die Komponenten anzuwenden."
     },
     "options": {
         "menu_items": {
@@ -138,9 +147,6 @@
             "auto_update": "Suche automatisch nach Updates für Leaf Installer",
             "no_graphics_option": "Blätter entfernen",
             "leaf_url": "Leaf Installer URL: ",
-            "ultrahand_url": "Ultrahand Overlay URL: ",
-            "sys_patch_url": "sys-patch URL: ",
-            "emuiibo_url": "emuiibo URL: ",
             "amiibo_api_url": "Amiibo-API URL: ",
             "language": "Sprache: ",
             "check_update": "Suche nach Updates für Leaf Installer",
@@ -167,7 +173,7 @@
         },
         "credits": {
             "title": "Vielen Dank an die folgenden Leute!",
-            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
+            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
         },
         "language": {
             "title": "Wähle Leaf Installer Sprache",
@@ -176,10 +182,7 @@
         },
         "title": "Ändere Leaf Installer Einstellungen!",
         "buttons": " Auswählen/Ändern     Abbrechen ",
-        "ultrahand_hint": "GitHub-Releases-URL für Ultrahand Overlay eingeben",
-        "sys_patch_hint": "GitHub-Releases-URL für sys-patch eingeben",
         "leaf_hint": "GitHub-Releases-URL für Leaf Installer eingeben",
-        "emuiibo_hint": "GitHub-Releases-URL für emuiibo eingeben",
         "amiibo_api_hint": "Amiibo-API JSON-Endpunkt-URL eingeben"
     },
     "common": {

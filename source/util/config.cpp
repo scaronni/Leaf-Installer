@@ -9,9 +9,12 @@ namespace inst::config {
     std::string ultrahandUrl;
     std::string sysPatchUrl;
     std::string emuiiboUrl;
+    std::string atmosphereUrl;
+    std::string hekateUrl;
     std::string amiiboApiUrl;
     std::string lastNetUrl;
     std::vector<std::string> updateInfo;
+    std::map<std::string, std::string> cfwInstalled;
     int languageSetting;
     bool autoUpdate;
     bool deletePrompt;
@@ -34,10 +37,13 @@ namespace inst::config {
             {"ultrahandUrl", ultrahandUrl},
             {"sysPatchUrl", sysPatchUrl},
             {"emuiiboUrl", emuiiboUrl},
+            {"atmosphereUrl", atmosphereUrl},
+            {"hekateUrl", hekateUrl},
             {"amiiboApiUrl", amiiboApiUrl},
             {"usbAck", usbAck},
             {"validateNCAs", validateNCAs},
-            {"lastNetUrl", lastNetUrl}
+            {"lastNetUrl", lastNetUrl},
+            {"cfwInstalled", cfwInstalled}
         };
         std::ofstream file(inst::config::configPath);
         file << std::setw(4) << j << std::endl;
@@ -59,10 +65,13 @@ namespace inst::config {
             ultrahandUrl = j["ultrahandUrl"].get<std::string>();
             sysPatchUrl = j["sysPatchUrl"].get<std::string>();
             emuiiboUrl = j["emuiiboUrl"].get<std::string>();
+            atmosphereUrl = j["atmosphereUrl"].get<std::string>();
+            hekateUrl = j["hekateUrl"].get<std::string>();
             amiiboApiUrl = j["amiiboApiUrl"].get<std::string>();
             usbAck = j["usbAck"].get<bool>();
             validateNCAs = j["validateNCAs"].get<bool>();
             lastNetUrl = j["lastNetUrl"].get<std::string>();
+            cfwInstalled = j["cfwInstalled"].get<std::map<std::string, std::string>>();
         }
         catch (...) {
             // If loading values from the config fails, we just load the defaults and overwrite the old config
@@ -71,6 +80,8 @@ namespace inst::config {
             ultrahandUrl = "https://github.com/ppkantorski/Ultrahand-Overlay/releases";
             sysPatchUrl = "https://github.com/impeeza/sys-patch/releases";
             emuiiboUrl = "https://github.com/XorTroll/emuiibo/releases";
+            atmosphereUrl = "https://github.com/Atmosphere-NX/Atmosphere/releases";
+            hekateUrl = "https://github.com/CTCaer/hekate/releases";
             amiiboApiUrl = "https://amiiboapi.org/api/amiibo/";
             languageSetting = 99;
             autoUpdate = true;
@@ -81,6 +92,7 @@ namespace inst::config {
             usbAck = false;
             validateNCAs = true;
             lastNetUrl = "https://";
+            cfwInstalled = {};
             setConfig();
         }
     }

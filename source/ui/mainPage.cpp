@@ -5,7 +5,7 @@
 #include "util/util.hpp"
 #include "util/config.hpp"
 #include "util/lang.hpp"
-#include "sigInstall.hpp"
+#include "cfwInstall.hpp"
 #include "amiiboGen.hpp"
 #include "data/buffered_placeholder_writer.hpp"
 #include "nx/usbhdd.h"
@@ -71,9 +71,9 @@ namespace inst::ui {
         this->usbInstallMenuItem = pu::ui::elm::MenuItem::New("main.menu.usb"_lang);
         this->usbInstallMenuItem->SetColor(COLOR("#FFFFFFFF"));
         this->usbInstallMenuItem->SetIcon(inst::util::loadTex("romfs:/images/icons/usb-port.png"));
-        this->sigPatchesMenuItem = pu::ui::elm::MenuItem::New("main.menu.sig"_lang);
-        this->sigPatchesMenuItem->SetColor(COLOR("#FFFFFFFF"));
-        this->sigPatchesMenuItem->SetIcon(inst::util::loadTex("romfs:/images/icons/wrench.png"));
+        this->cfwMenuItem = pu::ui::elm::MenuItem::New("main.menu.cfw"_lang);
+        this->cfwMenuItem->SetColor(COLOR("#FFFFFFFF"));
+        this->cfwMenuItem->SetIcon(inst::util::loadTex("romfs:/images/icons/wrench.png"));
         this->amiiboMenuItem = pu::ui::elm::MenuItem::New("main.menu.amiibo"_lang);
         this->amiiboMenuItem->SetColor(COLOR("#FFFFFFFF"));
         this->amiiboMenuItem->SetIcon(inst::util::loadTex("romfs:/images/icons/amiibo.png"));
@@ -96,7 +96,7 @@ namespace inst::ui {
         this->optionMenu->AddItem(this->installMenuItem);
         this->optionMenu->AddItem(this->netInstallMenuItem);
         this->optionMenu->AddItem(this->usbInstallMenuItem);
-        this->optionMenu->AddItem(this->sigPatchesMenuItem);
+        this->optionMenu->AddItem(this->cfwMenuItem);
         this->optionMenu->AddItem(this->amiiboMenuItem);
         this->optionMenu->AddItem(this->settingsMenuItem);
         this->optionMenu->AddItem(this->exitMenuItem);
@@ -107,7 +107,9 @@ namespace inst::ui {
     }
 
     void MainPage::installMenuItem_Click() {
-        mainApp->sdinstPage->drawMenuItems(true, "sdmc:/");
+        const char* startPath = "sdmc:/";
+        if (nx::hdd::count() && nx::hdd::rootPath()) startPath = nx::hdd::rootPath();
+        mainApp->sdinstPage->drawMenuItems(true, startPath);
         mainApp->sdinstPage->menu->SetSelectedIndex(0);
         mainApp->LoadLayout(mainApp->sdinstPage);
     }
@@ -121,24 +123,18 @@ namespace inst::ui {
     }
 
     void MainPage::usbInstallMenuItem_Click() {
-        if(nx::hdd::count() && nx::hdd::rootPath()) {
-            mainApp->sdinstPage->drawMenuItems(true, nx::hdd::rootPath());
-            mainApp->sdinstPage->menu->SetSelectedIndex(0);
-            mainApp->LoadLayout(mainApp->sdinstPage);
-        } else {
-            if (!inst::config::usbAck) {
-                if (mainApp->CreateShowDialog("main.usb.warn.title"_lang, "main.usb.warn.desc"_lang, {"common.ok"_lang, "main.usb.warn.opt1"_lang}, false) == 1) {
-                    inst::config::usbAck = true;
-                    inst::config::setConfig();
-                }
+        if (!inst::config::usbAck) {
+            if (mainApp->CreateShowDialog("main.usb.warn.title"_lang, "main.usb.warn.desc"_lang, {"common.ok"_lang, "main.usb.warn.opt1"_lang}, false) == 1) {
+                inst::config::usbAck = true;
+                inst::config::setConfig();
             }
-            if (inst::util::usbIsConnected()) mainApp->usbinstPage->startUsb();
-            else mainApp->CreateShowDialog("main.usb.error.title"_lang, "main.usb.error.desc"_lang, {"common.ok"_lang}, false);
         }
+        if (inst::util::usbIsConnected()) mainApp->usbinstPage->startUsb();
+        else mainApp->CreateShowDialog("main.usb.error.title"_lang, "main.usb.error.desc"_lang, {"common.ok"_lang}, false);
     }
 
-    void MainPage::sigPatchesMenuItem_Click() {
-        sig::installSigPatches();
+    void MainPage::cfwMenuItem_Click() {
+        cfw::startCfwInstall();
     }
 
     void MainPage::amiiboMenuItem_Click() {
@@ -171,7 +167,7 @@ namespace inst::ui {
                     MainPage::usbInstallMenuItem_Click();
                     break;
                 case 3:
-                    MainPage::sigPatchesMenuItem_Click();
+                    MainPage::cfwMenuItem_Click();
                     break;
                 case 4:
                     MainPage::amiiboMenuItem_Click();

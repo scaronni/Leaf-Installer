@@ -1,10 +1,10 @@
 {
     "main": {
         "menu": {
-            "sd": "通过 SD 卡安装",
-            "net": "通过局域网或网络安装",
-            "usb": "通过 USB/USB HDD 安装",
-            "sig": "安装 Ultrahand 和扩展",
+            "sd": "通过 SD 卡或 USB 存储安装",
+            "net": "通过局域网或网络安装标题",
+            "usb": "通过 USB 安装标题",
+            "cfw": "安装自定义固件组件",
             "amiibo": "生成 Amiibo 数据",
             "set": "设置",
             "exit": "退出"
@@ -116,21 +116,30 @@
             "error": "请求的 NCA 没有正确签名："
         }
     },
-    "sig": {
-        "confirm_title": "安装 Ultrahand 和扩展?",
-        "confirm_desc": "将下载并安装以下版本,然后重启主机。",
-        "install": "安装",
+    "cfw": {
+        "confirm_title": "检查自定义固件组件?",
+        "confirm_desc": "将检查已配置的 GitHub 仓库中各组件的最新版本。\n检查完成后您可以选择要安装的组件 — 所选组件会暂存到\nsdmc:/leaf-offline-update/,并在下次启动时由 hekate 的\nLeaf Updater 载荷应用。",
+        "install": "继续",
         "fetch_failed": "无法获取最新版本信息",
         "fetch_failed_desc": "请检查设置中的网址或您的互联网连接。",
         "download_failed": "下载失败",
-        "install_complete": "安装完成!",
-        "complete_desc": "请重启主机以应用更改",
+        "extract_failed": "解压失败",
+        "skipped_prefix": "已跳过: ",
+        "install_complete": "组件已暂存",
+        "complete_desc": "所选组件已写入 sdmc:/leaf-offline-update/。\n请重启进入 hekate 并运行 Leaf Updater 载荷以应用。",
         "restart": "重启",
         "later": "稍后",
-        "generic_error": "安装 Ultrahand 和扩展失败!",
-        "top_info": "正在安装 Ultrahand 和扩展",
+        "generic_error": "暂存自定义固件组件失败!",
+        "top_info": "正在暂存自定义固件组件",
         "downloading": "正在下载 ",
-        "extracting": "正在解压 "
+        "extracting": "正在解压 ",
+        "select_top_info": "选择要安装的组件,然后按 Plus 按钮!",
+        "select_buttons": " 选择组件     全选     安装所选     取消",
+        "no_selection_title": "未选择任何组件",
+        "no_selection_desc": "请先选择至少一个组件再继续。",
+        "missing_payload_title": "Leaf Updater 载荷缺失",
+        "missing_payload_desc": "未找到 sdmc:/bootloader/payloads/leaf-updater.bin。\n请从官方发布的 zip 重新安装 Leaf — 该 zip 包含\nLeaf Updater 载荷,在下次启动时应用自定义固件组件。",
+        "arm_failed": "无法自动启用 hekate 的 [Leaf Update] 条目。\n请重启进入 hekate 并从 Payloads 菜单运行 Leaf Updater\n载荷以应用组件。"
     },
     "options": {
         "menu_items": {
@@ -141,9 +150,6 @@
             "auto_update": "自动检查 Leaf Installer 更新",
             "no_graphics_option": "移除叶子",
             "leaf_url": "Leaf Installer 网址：",
-            "ultrahand_url": "Ultrahand Overlay 网址：",
-            "sys_patch_url": "sys-patch 网址：",
-            "emuiibo_url": "emuiibo 网址：",
             "amiibo_api_url": "Amiibo API 网址：",
             "language": "语言：",
             "check_update": "检查 Leaf Installer 更新",
@@ -170,7 +176,7 @@
         },
         "credits": {
             "title": "致谢以下朋友！",
-            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
+            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
         },
         "language": {
             "title": "选择 Leaf Installer 语言",
@@ -179,10 +185,7 @@
         },
         "title": "更改 Leaf Installer 设置！",
         "buttons": " 选择/更改     取消",
-        "ultrahand_hint": "输入 Ultrahand Overlay 的 GitHub releases 网址",
-        "sys_patch_hint": "输入 sys-patch 的 GitHub releases 网址",
         "leaf_hint": "输入 Leaf Installer 的 GitHub releases 网址",
-        "emuiibo_hint": "输入 emuiibo 的 GitHub releases 网址",
         "amiibo_api_hint": "输入 Amiibo API JSON 端点网址"
     },
     "common": {

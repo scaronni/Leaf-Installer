@@ -1,5 +1,8 @@
 *.elf
 *.nacp
 *.nro
-build
+*.zip
 .vscode
+build
+payload/build
+payload/output

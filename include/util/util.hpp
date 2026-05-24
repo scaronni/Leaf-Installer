@@ -25,7 +25,11 @@ namespace inst::util {
     bool usbIsConnected();
     void playAudio(std::string audioPath);
     std::vector<std::string> checkForAppUpdate();
-    std::vector<std::string> fetchLatestRelease(const std::string& releasesPageUrl);
+    // Returns {tag, asset_download_url} for the latest GitHub release at the given
+    // /releases page URL. If assetNameSubstring is non-empty, picks the first .zip
+    // asset whose name contains the substring (case-sensitive). Otherwise picks
+    // the first .zip asset, or the first asset if none are zips.
+    std::vector<std::string> fetchLatestRelease(const std::string& releasesPageUrl, const std::string& assetNameSubstring = "");
     // Returns a "<free> / <total>" string (e.g. "32.5 GB / 64.0 GB") for the
     // given NcmStorageId — used to surface available space on each page's top bar.
     std::string getStorageInfoText(NcmStorageId storageId);

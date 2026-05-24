@@ -402,7 +402,7 @@ namespace inst::util {
         return ourUpdateInfo;
     }
 
-    std::vector<std::string> fetchLatestRelease(const std::string& releasesPageUrl) {
+    std::vector<std::string> fetchLatestRelease(const std::string& releasesPageUrl, const std::string& assetNameSubstring) {
         const std::string prefix = "https://github.com/";
         const std::string suffix = "/releases";
         if (releasesPageUrl.compare(0, prefix.size(), prefix) != 0) return {};
@@ -418,12 +418,13 @@ namespace inst::util {
             std::string assetUrl;
             for (const auto& asset : j["assets"]) {
                 const std::string name = asset["name"].get<std::string>();
-                if (name.size() >= 4 && name.compare(name.size() - 4, 4, ".zip") == 0) {
-                    assetUrl = asset["browser_download_url"].get<std::string>();
-                    break;
-                }
+                const bool isZip = name.size() >= 4 && name.compare(name.size() - 4, 4, ".zip") == 0;
+                if (!isZip) continue;
+                if (!assetNameSubstring.empty() && name.find(assetNameSubstring) == std::string::npos) continue;
+                assetUrl = asset["browser_download_url"].get<std::string>();
+                break;
             }
-            if (assetUrl.empty() && !j["assets"].empty()) {
+            if (assetUrl.empty() && assetNameSubstring.empty() && !j["assets"].empty()) {
                 assetUrl = j["assets"][0]["browser_download_url"].get<std::string>();
             }
             if (assetUrl.empty()) return {};

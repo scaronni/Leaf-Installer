@@ -1,10 +1,10 @@
 {
     "main": {
         "menu": {
-            "sd": "Installer à partir de la carte SD",
-            "net": "Installer à partir d'un LAN ou d'internet",
-            "usb": "Installer à partir d'un périphèrique USB/USB HDD",
-            "sig": "Installer Ultrahand et overlays",
+            "sd": "Installer depuis la carte SD ou un stockage USB",
+            "net": "Installer des titres à partir d'un LAN ou d'internet",
+            "usb": "Installer des titres via USB",
+            "cfw": "Installer les composants du firmware personnalisé",
             "amiibo": "Générer les données Amiibo",
             "set": " Paramètres",
             "exit": " Quitter"
@@ -113,21 +113,30 @@
             "error": "Le NCA demandé n'est pas correctement signé: "
         }
     },
-    "sig": {
-        "confirm_title": "Installer Ultrahand et overlays ?",
-        "confirm_desc": "Les versions suivantes seront téléchargées et installées, puis votre console redémarrera.",
-        "install": "Installer",
+    "cfw": {
+        "confirm_title": "Rechercher les composants du firmware personnalisé ?",
+        "confirm_desc": "Les dépôts GitHub configurés seront interrogés pour obtenir la\ndernière version de chaque composant. Une fois la vérification\nterminée, vous pourrez choisir lesquels installer — les composants\nsélectionnés sont préparés dans sdmc:/leaf-offline-update/ et\nappliqués au redémarrage par le payload Leaf Updater via hekate.",
+        "install": "Continuer",
         "fetch_failed": "Impossible de récupérer les informations de la dernière version",
         "fetch_failed_desc": "Vérifiez les URL dans les paramètres ou votre connexion Internet.",
         "download_failed": "Échec du téléchargement",
-        "install_complete": "Installation terminée !",
-        "complete_desc": "Redémarrez votre console pour appliquer",
+        "extract_failed": "Échec de l'extraction",
+        "skipped_prefix": "Ignorés : ",
+        "install_complete": "Composants préparés",
+        "complete_desc": "Les composants sélectionnés ont été écrits dans\nsdmc:/leaf-offline-update/. Redémarrez sur hekate et lancez le\npayload Leaf Updater pour les appliquer.",
         "restart": "Redémarrer",
         "later": "Plus tard",
-        "generic_error": "Échec de l'installation de Ultrahand et overlays !",
-        "top_info": "Installation de Ultrahand et overlays",
+        "generic_error": "Échec de la préparation des composants du firmware personnalisé !",
+        "top_info": "Préparation des composants du firmware personnalisé",
         "downloading": "Téléchargement de ",
-        "extracting": "Extraction de "
+        "extracting": "Extraction de ",
+        "select_top_info": "Sélectionnez les composants à installer, puis appuyez sur le bouton Plus !",
+        "select_buttons": " Sélectionner un composant     Tout sélectionner     Installer la sélection     Annuler",
+        "no_selection_title": "Aucun composant sélectionné",
+        "no_selection_desc": "Sélectionnez au moins un composant avant de continuer.",
+        "missing_payload_title": "Payload Leaf Updater introuvable",
+        "missing_payload_desc": "sdmc:/bootloader/payloads/leaf-updater.bin est introuvable.\nRéinstallez Leaf à partir du zip de version officiel — il contient\nle payload Leaf Updater qui applique les composants du firmware\npersonnalisé au prochain démarrage.",
+        "arm_failed": "L'entrée [Leaf Update] de hekate n'a pas pu être armée\nautomatiquement. Redémarrez sur hekate et lancez le payload Leaf\nUpdater depuis le menu Payloads pour appliquer les composants."
     },
     "options": {
         "menu_items": {
@@ -138,9 +147,6 @@
             "auto_update": "Vérifier les mises à jour de l'installateur Leaf automatiquement",
             "no_graphics_option": "Retirer les feuilles",
             "leaf_url": "URL Leaf Installer : ",
-            "ultrahand_url": "URL Ultrahand Overlay : ",
-            "sys_patch_url": "URL sys-patch : ",
-            "emuiibo_url": "URL emuiibo : ",
             "amiibo_api_url": "URL API Amiibo : ",
             "language": "Langage: ",
             "check_update": "Vérifiez les mises à jour de l'installateur Leaf",
@@ -167,7 +173,7 @@
         },
         "credits": {
             "title": "Merci aux personnes suivantes !",
-            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
+            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
         },
         "language": {
             "title": "Sélectionnez la langue de Leaf Installer",
@@ -176,10 +182,7 @@
         },
         "title": "Modifiez les paramètres de Leaf Installler !",
         "buttons": " Sélectionner/Modifier     Annuler",
-        "ultrahand_hint": "Entrez l'URL des releases GitHub pour Ultrahand Overlay",
-        "sys_patch_hint": "Entrez l'URL des releases GitHub pour sys-patch",
         "leaf_hint": "Entrez l'URL des releases GitHub pour Leaf Installer",
-        "emuiibo_hint": "Entrez l'URL des releases GitHub pour emuiibo",
         "amiibo_api_hint": "Entrez l'URL du point de terminaison JSON de l'API Amiibo"
     },
     "common": {

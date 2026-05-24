@@ -167,7 +167,11 @@ ifneq ($(ROMFS),)
 	export NROFLAGS += --romfsdir=$(CURDIR)/$(ROMFS)
 endif
 
-.PHONY: $(BUILD) clean all
+.PHONY: $(BUILD) clean all payload release
+
+PAYLOAD_BIN := $(CURDIR)/payload/output/leaf-updater.bin
+RELEASE_ZIP := $(CURDIR)/Leaf-Installer.zip
+RELEASE_STAGE := $(CURDIR)/build/release-stage
 
 #---------------------------------------------------------------------------------
 all: $(BUILD)
@@ -179,14 +183,38 @@ $(BUILD):
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
 #---------------------------------------------------------------------------------
+# Builds the Hekate-side payload (leaf-updater.bin) — requires devkitARM. The
+# payload is the SD-side finalizer for the offline-update flow.
+payload:
+	@$(MAKE) --no-print-directory -C $(CURDIR)/payload all
+
+#---------------------------------------------------------------------------------
+# Produces Leaf-Installer.zip ready to be extracted to the root of the SD
+# card: it lays out bootloader/hekate_ipl.ini, the leaf-updater.bin payload,
+# and the Leaf-Installer.nro at the canonical hbmenu path.
+release: all payload
+	@echo "Packaging $(RELEASE_ZIP)..."
+	@rm -rf $(RELEASE_STAGE)
+	@mkdir -p $(RELEASE_STAGE)/switch/Leaf-Installer
+	@mkdir -p $(RELEASE_STAGE)/bootloader/payloads
+	@cp $(TARGET).nro          $(RELEASE_STAGE)/switch/Leaf-Installer/Leaf-Installer.nro
+	@cp release/bootloader/hekate_ipl.ini $(RELEASE_STAGE)/bootloader/hekate_ipl.ini
+	@cp $(PAYLOAD_BIN)         $(RELEASE_STAGE)/bootloader/payloads/leaf-updater.bin
+	@rm -f $(RELEASE_ZIP)
+	@cd $(RELEASE_STAGE) && zip -r9 $(RELEASE_ZIP) . > /dev/null
+	@echo "Built $(RELEASE_ZIP) — $$(wc -c < $(RELEASE_ZIP)) bytes"
+
+#---------------------------------------------------------------------------------
 clean:
 	@echo clean ...
 ifeq ($(strip $(APP_JSON)),)
 	@$(MAKE) --no-print-directory -C include/Plutonium/Plutonium -f Makefile clean
-	@rm -fr $(BUILD) $(TARGET).nro $(TARGET).nacp $(TARGET).elf
+	@$(MAKE) --no-print-directory -C $(CURDIR)/payload clean 2>/dev/null || true
+	@rm -fr $(BUILD) $(TARGET).nro $(TARGET).nacp $(TARGET).elf $(RELEASE_ZIP)
 else
 	@$(MAKE) --no-print-directory -C include/Plutonium/Plutonium -f Makefile clean
-	@rm -fr $(BUILD) $(TARGET).nsp $(TARGET).nso $(TARGET).npdm $(TARGET).elf
+	@$(MAKE) --no-print-directory -C $(CURDIR)/payload clean 2>/dev/null || true
+	@rm -fr $(BUILD) $(TARGET).nsp $(TARGET).nso $(TARGET).npdm $(TARGET).elf $(RELEASE_ZIP)
 endif
 
 
