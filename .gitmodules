@@ -5,3 +5,7 @@
 	path = include/libusbhsfs
 	url = https://github.com/DarkMatterCore/libusbhsfs.git
 	branch = master
+[submodule "include/hekate"]
+    path = include/hekate
+    url = https://github.com/CTCaer/hekate.git
+    branch = v6.5.2
