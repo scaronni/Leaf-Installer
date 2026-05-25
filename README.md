@@ -1,7 +1,4 @@
 # Leaf Installer
-An NSP, NSZ, XCI, and XCZ Installer for Nintendo Switch.
-
-Derived from [Awoo Installer](https://github.com/Huntereb/Awoo-Installer).
 
 ![Leaf Installer Main Menu](/images/main.jpg)
 

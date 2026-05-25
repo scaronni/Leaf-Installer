@@ -29,25 +29,20 @@ If you grabbed only the bare `Leaf-Installer.nro` (e.g. you updated by replacing
 
 For Switch systems modified with a boot chip that boots Hekate directly:
 
-- Boot your system with Hekate and then Atmosphere.
 - Launch Leaf Installer.
-- Install all custom firmware components.
-- Let it reboot.
-- System reboots into Hekate and the Leaf payload updates Atmosphere and everything else.
-- System reboots into Hekate and then Atmosphere.
+- Install all custom firmware components and let it reboot.
+- System reboots into Hekate and the Leaf payload updates Atmosphère and everything else.
+- System reboots into Hekate which then boots Atmosphère.
 
 For Switch systems that use an RCM injector:
 
-- Boot your system with Hekate as a payload via RCM.
-- Boot Atmosphere.
 - Launch Leaf Installer.
-- Install all custom firmware components.
-- Select to restart later and power off system.
-- Boot your system with Hekate as a payload via RCM.
-- The Leaf payload updates Atmosphere and everything else.
+- Install all custom firmware components, select to reboot later.
+- Power off the system.
+- **[RCM]** Boot your system with Hekate.
+- The Leaf payload updates Atmosphère and everything else.
 - Select power off.
-- Boot your system with Hekate as a payload via RCM.
-- Boot Atmosphere.
+- **[RCM]** Boot your system with Hekate which then boots Atmosphère.
 
 ## Why it isn't a normal "download and replace" install
 
@@ -169,11 +164,11 @@ The whole second phase, from "press Restart" to "back in HOS," is typically unde
 
 ### 8. Allow system updates
 
-Once back in Atmosphère, enter the UltraHand overaly menu (ZL + ZR + Down on the pad) and disable the `blockfirmwareupdates_12.0.0+` patch under `sys-patch`. Reboot the system, and you can let the Switch update itself to the latest HOS version.
-
-Once the update has happened, re-enable the patch and reboot to disable again checking for updates automatically.
+Once back in Atmosphère, enter the UltraHand overaly menu (ZL + ZR + Down on the pad) and disable the `blockfirmwareupdates_12.0.0+` patch under `sys-patch`. Reboot the system, and you can let the Switch update itself to the latest HOS version. It will also update all titles missing updates.
 
 ![sys-patch block updates](/images/firmware-block.jpg)
+
+Once the update has happened, re-enable the patch again and reboot one more time to disable again automatic updates.
 
 ---
 
