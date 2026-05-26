@@ -56,7 +56,14 @@ namespace inst::ui {
         this->components = comps;
         this->selected.resize(comps.size());
         for (size_t i = 0; i < comps.size(); i++) {
-            this->selected[i] = comps[i].defaultSelected;
+            // A component is selected by default unless it's already installed
+            // at the exact available version. Never installed → checked.
+            // Installed at older/different version → checked. Same version
+            // (e.g. 2.4.2 → 2.4.2) → unchecked so the user doesn't waste time
+            // re-downloading and re-staging the same files.
+            const bool up_to_date = !comps[i].installedVersion.empty()
+                                 && comps[i].installedVersion == comps[i].version;
+            this->selected[i] = comps[i].defaultSelected && !up_to_date;
         }
         this->menu->SetSelectedIndex(0);
         this->redraw();
