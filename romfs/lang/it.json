@@ -56,7 +56,7 @@
                 "source_string": " da Google Drive"
             },
             "top_info": "Seleziona quali file vuoi installare dal server, poi premi il tasto Più!",
-            "top_info1": "Aspettando una connessione... L'indirizzo IP è: ",
+            "top_info1": "In attesa di connessione sull'IP ",
             "failed": "Impossibile eseguire l'installazione remota!",
             "transfer_interput": "Si è verificato un errore durante il trasferimento dei dati. Controlla la tua connessione.",
             "source_string": " via rete locale",

@@ -58,15 +58,30 @@ namespace netInstStuff{
 
     void InitializeServerSocket() try
     {
-        // Create a socket
+        // Create a socket.
         m_serverSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
 
-        if (m_serverSocket < -1)
+        // Pre-existing typo: socket() returns -1 on failure, not "less than
+        // -1". The original `< -1` check meant a failed socket() silently fell
+        // through to bind(-1, ...) and the actual error surfaced one step
+        // later — fix to `< 0` so we throw on the right call.
+        if (m_serverSocket < 0)
         {
             THROW_FORMAT("Failed to create a server socket. Error code: %u\n", errno);
         }
+        LOG_DEBUG("netInstall: socket() = %d\n", m_serverSocket);
+
+        // Allow re-binding the port without waiting for TIME_WAIT to expire.
+        // The bsd:* service on the Switch can keep the previous run's socket
+        // alive across hbmenu re-launches, and without SO_REUSEADDR the next
+        // bind() returns EADDRINUSE while listen() reports OK on a separate
+        // (unbound) fd — `nc <ip> 2000` then sees "Connection refused" even
+        // though the wait screen shows up normally.
+        int reuse = 1;
+        setsockopt(m_serverSocket, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
 
         struct sockaddr_in server;
+        memset(&server, 0, sizeof(server));
         server.sin_family = AF_INET;
         server.sin_port = htons(REMOTE_INSTALL_PORT);
         server.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -75,14 +90,16 @@ namespace netInstStuff{
         {
             THROW_FORMAT("Failed to bind server socket. Error code: %u\n", errno);
         }
+        LOG_DEBUG("netInstall: bind(:%d) ok\n", REMOTE_INSTALL_PORT);
 
         // Set as non-blocking
         fcntl(m_serverSocket, F_SETFL, fcntl(m_serverSocket, F_GETFL, 0) | O_NONBLOCK);
 
-        if (listen(m_serverSocket, 5) < 0) 
+        if (listen(m_serverSocket, 5) < 0)
         {
             THROW_FORMAT("Failed to listen on server socket. Error code: %u\n", errno);
         }
+        LOG_DEBUG("netInstall: listen() ok\n");
     }
     catch (std::exception& e)
     {
@@ -232,7 +249,8 @@ namespace netInstStuff{
             }
 
             std::string ourIPAddress = inst::util::getIPAddress();
-            inst::ui::mainApp->netinstPage->pageInfoText->SetText("inst.net.top_info1"_lang + ourIPAddress);
+            inst::ui::mainApp->netinstPage->pageInfoText->SetText(
+                "inst.net.top_info1"_lang + ourIPAddress + "...");
             inst::ui::mainApp->CallForRender();
             LOG_DEBUG("%s %s\n", "Switch IP is ", ourIPAddress.c_str());
             LOG_DEBUG("%s\n", "Waiting for network");

@@ -56,7 +56,7 @@
                 "source_string": " von Google Drive"
             },
             "top_info": "Wähle Dateien zur Installation vom Server aus und drücke dann  !",
-            "top_info1": "Warte auf eine Verbindung... Die IP Adresse deiner Switch ist: ",
+            "top_info1": "Warte auf Verbindung über IP ",
             "failed": "Ferninstallation fehlgeschlagen!",
             "transfer_interput": "Bei der Dateiübertragung ist ein Fehler aufgetreten.",
             "source_string": " über das lokale Netzwerk",

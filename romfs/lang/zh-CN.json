@@ -59,7 +59,7 @@
             "qr_new": "请用手机 App 扫码",
             "qr_scaned": "扫描成功, 请在手机上根据提示确认登录",
             "top_info": "在服务器中选择将要安装的文件，然后按  以安装！",
-            "top_info1": "正在等待连接… Switch 的 IP 地址是：",
+            "top_info1": "正在等待 IP 连接 ",
             "failed": "远程安装失败！",
             "transfer_interput": "数据传输发生错误，检查网络连接。",
             "source_string": " 通过本地网络",

@@ -59,7 +59,7 @@
             "qr_new": "請用手機 App 掃碼",
             "qr_scaned": "掃描成功, 請在手機上根據提示確認登錄",
             "top_info": "選擇您要安裝的文件，然後按下  號",
-            "top_info1": "等待連接中... 您的Switch主機IP是: ",
+            "top_info1": "正在等待 IP 連線 ",
             "failed": "遠程安裝失敗！",
             "transfer_interput": "傳輸過程中產生了一個錯誤，請您檢查網路連接是否正常！",
             "source_string": " 通過局域網安裝",

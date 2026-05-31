@@ -56,7 +56,7 @@
                 "source_string": " à partir de Google Drive"
             },
             "top_info": "Sélectionnez les fichiers que vous voulez installer à partir du serveur, puis appuyez sur le bouton Plus !",
-            "top_info1": "En attente d'une connexion... L'adresse IP de votre switch est : ",
+            "top_info1": "En attente d'une connexion à l'IP ",
             "failed": "Echec de l'installation à distance !",
             "transfer_interput": "Une erreur s'est produite pendant le transfert des données. Vérifiez votre connexion réseau.",
             "source_string": " à partir du réseau local",

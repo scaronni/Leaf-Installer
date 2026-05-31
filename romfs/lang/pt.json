@@ -56,7 +56,7 @@
                 "source_string": " através do Google Drive"
             },
             "top_info": "Selecione os ficheiros que deseja instalar através do servidor, depois pressione o botão Mais!",
-            "top_info1": "A aguardar ligação... O endereço de IP da Switch é: ",
+            "top_info1": "Aguardando ligação no IP ",
             "failed": "A instalação remota falhou!",
             "transfer_interput": "Ocorreu um erro ao tranferir os dados. Verifique a sua ligação à rede.",
             "source_string": " através de rede local",

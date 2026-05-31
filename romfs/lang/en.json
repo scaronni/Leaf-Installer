@@ -59,7 +59,7 @@
             "qr_new": "Please scan qrcode",
             "qr_scaned": "scaned successfully",
             "top_info": "Select what files you want to install from the server, then press the Plus button!",
-            "top_info1": "Waiting for a connection... Your Switch's IP Address is: ",
+            "top_info1": "Waiting for connection on IP ",
             "failed": "Failed to perform remote install!",
             "transfer_interput": "An error occured during data transfer. Check your network connection.",
             "source_string": " over local network",
