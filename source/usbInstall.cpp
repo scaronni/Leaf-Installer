@@ -62,7 +62,13 @@ namespace usbInstStuff {
     std::vector<std::string> OnSelected() {
         TUSHeader header;
         while(true) {
-            if (bufferData(&header, sizeof(TUSHeader), 500000000) != 0) break;
+            // Short read timeout (50 ms) so the loop polls buttons frequently
+            // enough to catch a B press. The old 500 ms blocked the loop for
+            // half a second per iteration; Plutonium's GetButtonsDown is
+            // edge-triggered, and B presses landing inside that gap got eaten
+            // before we ever got a chance to read them — making B-to-cancel
+            // feel broken on the "Waiting for USB connection" screen.
+            if (bufferData(&header, sizeof(TUSHeader), 50000000) != 0) break;
             inst::ui::mainApp->CallForRender();
             u64 kDown = inst::ui::mainApp->GetButtonsDown();
             if (kDown & HidNpadButton_B) return {};
