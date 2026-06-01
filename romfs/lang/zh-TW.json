@@ -140,7 +140,7 @@
         "menu_items": {
             "ignore_firm": "忽略固件版本要求",
             "nca_verify": "安裝前驗證NCA簽名",
-            "boost_mode": "安裝過程中開啟“超頻”模式",
+            "boost_mode": "透過提高 CPU 與記憶體頻率加快安裝速度",
             "ask_delete": "安裝後詢問是否刪除原文件",
             "auto_update": "自動更新",
             "no_graphics_option": "移除葉子",

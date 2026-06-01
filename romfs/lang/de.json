@@ -137,7 +137,7 @@
         "menu_items": {
             "ignore_firm": "Ignoriere minimale Firmware Version des Titels",
             "nca_verify": "Verifiziere NCA Signatur vor der Installation",
-            "boost_mode": "Aktiviere \"Boost-Modus\" während der Installation",
+            "boost_mode": "Schnellere Installationen durch Übertakten von CPU und Speicher",
             "ask_delete": "Frage ob installierte Titel gelöscht werden sollen",
             "auto_update": "Suche automatisch nach Updates für Leaf Installer",
             "no_graphics_option": "Blätter entfernen",

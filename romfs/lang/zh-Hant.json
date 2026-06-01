@@ -140,7 +140,7 @@
         "menu_items": {
             "ignore_firm": "略過檢查遊戲最低系統版本要求",
             "nca_verify": "進行安裝前驗證NCA簽名",
-            "boost_mode": "在進行安裝時啟用\"超頻\"模式",
+            "boost_mode": "透過提高 CPU 與記憶體頻率加快安裝速度",
             "ask_delete": "在安裝完成後，詢問是否刪除原始檔案",
             "auto_update": "自動檢查Leaf Installer的更新版本",
             "no_graphics_option": "移除葉子",

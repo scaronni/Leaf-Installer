@@ -137,7 +137,7 @@
         "menu_items": {
             "ignore_firm": "타이틀에 필요한 최소 펌웨어 버전 무시",
             "nca_verify": "설치 전에 NCA 서명 확인",
-            "boost_mode": "설치 중 \"부스트 모드\" 활성화",
+            "boost_mode": "CPU 와 메모리 클럭을 높여 설치 속도 향상",
             "ask_delete": "설치 후 원본 파일 삭제 요청",
             "auto_update": "자동으로 Leaf 설치 프로그램에 대한 업데이트 확인",
             "no_graphics_option": "나뭇잎 제거",

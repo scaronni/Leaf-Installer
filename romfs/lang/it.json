@@ -137,7 +137,7 @@
         "menu_items": {
             "ignore_firm": "Ignora la versione minima del firmware richiesta dai titoli",
             "nca_verify": "Verifica le firme NCA prima dell'installazione",
-            "boost_mode": "Abilita la \"boost mode\" durante le installazioni",
+            "boost_mode": "Installazioni più veloci aumentando i clock di CPU e memoria",
             "ask_delete": "Chiedi di cancellare i file originale dopo l'installazione",
             "auto_update": "Controlla aggiornamenti di Leaf Installer automaticamente",
             "no_graphics_option": "Rimuovi le foglie",

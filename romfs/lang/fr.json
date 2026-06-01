@@ -137,7 +137,7 @@
         "menu_items": {
             "ignore_firm": "Ignorez la version minimale de firmware requise par les jeux",
             "nca_verify": "Vérifier les signatures des NCA avant l'installation",
-            "boost_mode": "Activer le  \"boost mode\" pendant l'installation",
+            "boost_mode": "Installations plus rapides en boostant les fréquences CPU et mémoire",
             "ask_delete": "Demande de suppression des fichiers originaux après l'installation",
             "auto_update": "Vérifier les mises à jour de l'installateur Leaf automatiquement",
             "no_graphics_option": "Retirer les feuilles",
