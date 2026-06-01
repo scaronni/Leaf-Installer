@@ -27,7 +27,6 @@ namespace inst::config {
     extern bool deletePrompt;
     extern bool autoUpdate;
     extern bool noGraphics;
-    extern bool usbAck;
 
     void setConfig();
     void parseConfig();

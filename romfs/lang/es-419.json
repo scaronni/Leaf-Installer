@@ -14,11 +14,6 @@
             "desc": "Verifica que el modo avión esté deshabilitado y que estés conectado a una red."
         },
         "usb": {
-            "warn": {
-                "title": "¡Advertencia!",
-                "desc": "Las instalaciones por USB pueden no funcionar muy bien en algunos dispositivos y configuraciones.\nSi experimentas problemas con las instalaciones USB, ¡por favor no te tires de los pelos!\nSe recomienda el uso de NS-USBloader para las instalaciones por USB,\no instalaciones a través de LAN/Internet en su lugar para instalar de forma remota, ¡especialmente\ncuando se usa en conjunto con un adaptador de ethernet!\n\nTe lo hemos advertido...",
-                "opt1": "No me vuelvas a advertir"
-            },
             "error": {
                 "title": "No se ha detectado una conexión USB",
                 "desc": "Conecta a un dispositivo compatible para hacer instalaciones por USB"

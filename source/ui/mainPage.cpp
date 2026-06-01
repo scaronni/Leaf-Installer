@@ -136,12 +136,6 @@ namespace inst::ui {
     }
 
     void MainPage::usbInstallMenuItem_Click() {
-        if (!inst::config::usbAck) {
-            if (mainApp->CreateShowDialog("main.usb.warn.title"_lang, "main.usb.warn.desc"_lang, {"common.ok"_lang, "main.usb.warn.opt1"_lang}, false) == 1) {
-                inst::config::usbAck = true;
-                inst::config::setConfig();
-            }
-        }
         if (inst::util::usbIsConnected()) mainApp->usbinstPage->startUsb();
         else mainApp->CreateShowDialog("main.usb.error.title"_lang, "main.usb.error.desc"_lang, {"common.ok"_lang}, false);
     }

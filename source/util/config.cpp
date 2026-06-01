@@ -21,7 +21,6 @@ namespace inst::config {
     bool noGraphics;
     bool ignoreReqVers;
     bool overClock;
-    bool usbAck;
     bool validateNCAs;
 
     void setConfig() {
@@ -40,7 +39,6 @@ namespace inst::config {
             {"atmosphereUrl", atmosphereUrl},
             {"hekateUrl", hekateUrl},
             {"amiiboApiUrl", amiiboApiUrl},
-            {"usbAck", usbAck},
             {"validateNCAs", validateNCAs},
             {"lastNetUrl", lastNetUrl},
             {"cfwInstalled", cfwInstalled}
@@ -68,7 +66,6 @@ namespace inst::config {
             atmosphereUrl = j["atmosphereUrl"].get<std::string>();
             hekateUrl = j["hekateUrl"].get<std::string>();
             amiiboApiUrl = j["amiiboApiUrl"].get<std::string>();
-            usbAck = j["usbAck"].get<bool>();
             validateNCAs = j["validateNCAs"].get<bool>();
             lastNetUrl = j["lastNetUrl"].get<std::string>();
             cfwInstalled = j["cfwInstalled"].get<std::map<std::string, std::string>>();
@@ -89,7 +86,6 @@ namespace inst::config {
             noGraphics = false;
             ignoreReqVers = true;
             overClock = false;
-            usbAck = false;
             validateNCAs = true;
             lastNetUrl = "https://";
             cfwInstalled = {};

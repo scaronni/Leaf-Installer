@@ -14,11 +14,6 @@
             "desc": "Vérifiez que le mode avion est désactivé et que vous êtes connecté à un réseau local."
         },
         "usb": {
-            "warn": {
-                "title": "Avertissement!",
-                "desc": "L'installation USB peut ne \"pas fonctionner\" sur certains appareils et certaines configurations.\nSi vous rencontrez des problèmes avec l'installation USB, ne vous arrachez pas les cheveux !\n\n Il est conseillé d'utiliser NS-USBloader pour l'installation USB. Pour installer à distance, préfèrez les modes \nLAN/Internet, en particulier si vous utilisez un adaptateur ethernet!\n\nVous avez été prévenu...",
-                "opt1": "Ne plus m'avertir"
-            },
             "error": {
                 "title": "Aucune connection USB détectée",
                 "desc": "Branchez un appareil compatible pour installer via le port USB"

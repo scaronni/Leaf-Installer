@@ -14,11 +14,6 @@
             "desc": "Check that airplane mode is disabled and you're connected to a local network."
         },
         "usb": {
-            "warn": {
-                "title": "Warning!",
-                "desc": "USB installations may not \"just werk\" on some devices and setups.\nIf you experience issues with USB installations, please don't pull your\nhair out! It's advised to use NS-USBloader for USB installations, or\nLAN/Internet installations instead for remote installation, especially\nwhen paired with an ethernet adapter!\n\nYou have been warned...",
-                "opt1": "Don't tell me again"
-            },
             "error": {
                 "title": "No USB connection detected",
                 "desc": "Plug in to a compatible device to install over USB"

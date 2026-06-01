@@ -14,11 +14,6 @@
             "desc": "Controlla che la modalità aereo sia disattivata e che tu sia connesso ad una rete."
         },
         "usb": {
-            "warn": {
-                "title": "Attenzione!",
-                "desc": "L'installazione USB potrebbe non funzionare su alcuni dispositivi e in alcune configurazioni.\nSe stai incontrando dei problemi con l'installazione USB, non disperare!\nÈ consigliato usare NS-USBloader per le installazioni via USB, mentre\nLAN/Internet per le installazioni remote, specie\nquando si utilizza un adattatore ethernet!\n\nSei stato avvertito...",
-                "opt1": "Non dirmelo di nuovo!"
-            },
             "error": {
                 "title": "Nessuna connessione USB rilevata",
                 "desc": "Collega a un dispositivo compatibile per installare via USB"
