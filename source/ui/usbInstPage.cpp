@@ -60,6 +60,10 @@ namespace inst::ui {
     void usbInstPage::drawMenuItems(bool clearItems) {
         if (clearItems) this->selectedTitles = {};
         this->menu->ClearItems();
+        // Touch tap forwards to selectTitle on the currently-highlighted row.
+        const auto touchActivate = [this]() {
+            this->selectTitle(this->menu->GetSelectedIndex());
+        };
         for (auto& url: this->ourTitles) {
             std::string itm = inst::util::shortenString(inst::util::formatUrlString(url), 56, true);
             auto ourEntry = pu::ui::elm::MenuItem::New(itm);
@@ -70,6 +74,7 @@ namespace inst::ui {
                     ourEntry->SetIcon(inst::util::loadTex("romfs:/images/icons/check-box-outline.png"));
                 }
             }
+            ourEntry->AddOnKey(touchActivate, pu::ui::TouchPseudoKey);
             this->menu->AddItem(ourEntry);
         }
     }

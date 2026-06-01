@@ -100,6 +100,19 @@ namespace inst::ui {
         this->optionMenu->AddItem(this->amiiboMenuItem);
         this->optionMenu->AddItem(this->settingsMenuItem);
         this->optionMenu->AddItem(this->exitMenuItem);
+        // Plutonium's Menu eats touch events internally and fires per-item
+        // callbacks bound to TouchPseudoKey — it does NOT propagate that
+        // pseudo-key up to the Layout's onInput. The `Up & TouchPseudoKey`
+        // check in onInput is therefore dead code for touch, and tapping an
+        // item only moves the highlight. Register a TouchPseudoKey callback
+        // on each item so taps actually activate.
+        this->installMenuItem->AddOnKey([this]() { this->installMenuItem_Click(); }, pu::ui::TouchPseudoKey);
+        this->netInstallMenuItem->AddOnKey([this]() { this->netInstallMenuItem_Click(); }, pu::ui::TouchPseudoKey);
+        this->usbInstallMenuItem->AddOnKey([this]() { this->usbInstallMenuItem_Click(); }, pu::ui::TouchPseudoKey);
+        this->cfwMenuItem->AddOnKey([this]() { this->cfwMenuItem_Click(); }, pu::ui::TouchPseudoKey);
+        this->amiiboMenuItem->AddOnKey([this]() { this->amiiboMenuItem_Click(); }, pu::ui::TouchPseudoKey);
+        this->settingsMenuItem->AddOnKey([this]() { this->settingsMenuItem_Click(); }, pu::ui::TouchPseudoKey);
+        this->exitMenuItem->AddOnKey([this]() { this->exitMenuItem_Click(); }, pu::ui::TouchPseudoKey);
         this->Add(this->optionMenu);
         this->Add(this->leafImage);
         this->leafImage->SetVisible(!inst::config::noGraphics);

@@ -66,10 +66,18 @@ namespace inst::ui {
             this->drawMenuItems(false, this->currentDir.parent_path());
             return;
         }
+        // Touch tap forwards to selectNsp on the currently-highlighted row.
+        // Plutonium has already moved the highlight to the tapped row by the
+        // time the callback fires, so GetSelectedIndex() is correct.
+        const auto touchActivate = [this]() {
+            this->selectNsp(this->menu->GetSelectedIndex());
+        };
+
         std::string itm = "..";
         auto ourEntry = pu::ui::elm::MenuItem::New(itm);
         ourEntry->SetColor(COLOR("#FFFFFFFF"));
         ourEntry->SetIcon(inst::util::loadTex("romfs:/images/icons/folder-upload.png"));
+        ourEntry->AddOnKey(touchActivate, pu::ui::TouchPseudoKey);
         this->menu->AddItem(ourEntry);
         for (auto& file: this->ourDirectories) {
             if (file == "..") break;
@@ -77,6 +85,7 @@ namespace inst::ui {
             auto ourEntry = pu::ui::elm::MenuItem::New(itm);
             ourEntry->SetColor(COLOR("#FFFFFFFF"));
             ourEntry->SetIcon(inst::util::loadTex("romfs:/images/icons/folder.png"));
+            ourEntry->AddOnKey(touchActivate, pu::ui::TouchPseudoKey);
             this->menu->AddItem(ourEntry);
         }
         for (auto& file: this->ourFiles) {
@@ -89,6 +98,7 @@ namespace inst::ui {
                     ourEntry->SetIcon(inst::util::loadTex("romfs:/images/icons/check-box-outline.png"));
                 }
             }
+            ourEntry->AddOnKey(touchActivate, pu::ui::TouchPseudoKey);
             this->menu->AddItem(ourEntry);
         }
     }

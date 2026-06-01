@@ -84,6 +84,11 @@ namespace inst::ui {
             } else {
                 entry->SetIcon(inst::util::loadTex("romfs:/images/icons/checkbox-blank-outline.png"));
             }
+            // Touch tap toggles the row. Plutonium has already moved the
+            // highlight to the tapped row by the time this fires, so the
+            // index passed to `toggle` is correct.
+            const int captured = static_cast<int>(i);
+            entry->AddOnKey([this, captured]() { this->toggle(captured); }, pu::ui::TouchPseudoKey);
             this->menu->AddItem(entry);
         }
     }

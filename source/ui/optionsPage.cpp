@@ -122,45 +122,60 @@ namespace inst::ui {
 
     void optionsPage::setMenuText() {
         this->menu->ClearItems();
+
+        // Touch handler: Plutonium fires this on tap+release of any item
+        // (after it's already moved the highlight to the tapped row), so we
+        // just synthesize the same input the A-button path would take and let
+        // onInput's existing switch-on-GetSelectedIndex do the work.
+        const auto touchActivate = [this]() {
+            this->onInput(HidNpadButton_A, 0, 0, pu::ui::TouchPoint());
+        };
+        // Plutonium's Menu::AddItem takes a non-const ref to a shared_ptr, so
+        // the lambda parameter has to match.
+        auto attach = [&](pu::ui::elm::MenuItem::Ref &item) {
+            item->AddOnKey(touchActivate, pu::ui::TouchPseudoKey);
+            this->menu->AddItem(item);
+        };
+
         auto ignoreFirmOption = pu::ui::elm::MenuItem::New("options.menu_items.ignore_firm"_lang);
         ignoreFirmOption->SetColor(COLOR("#FFFFFFFF"));
         ignoreFirmOption->SetIcon(inst::util::loadTex(this->getMenuOptionIcon(inst::config::ignoreReqVers)));
-        this->menu->AddItem(ignoreFirmOption);
+        attach(ignoreFirmOption);
         auto validateOption = pu::ui::elm::MenuItem::New("options.menu_items.nca_verify"_lang);
         validateOption->SetColor(COLOR("#FFFFFFFF"));
         validateOption->SetIcon(inst::util::loadTex(this->getMenuOptionIcon(inst::config::validateNCAs)));
-        this->menu->AddItem(validateOption);
+        attach(validateOption);
         auto overclockOption = pu::ui::elm::MenuItem::New("options.menu_items.boost_mode"_lang);
         overclockOption->SetColor(COLOR("#FFFFFFFF"));
         overclockOption->SetIcon(inst::util::loadTex(this->getMenuOptionIcon(inst::config::overClock)));
-        this->menu->AddItem(overclockOption);
+        attach(overclockOption);
         auto deletePromptOption = pu::ui::elm::MenuItem::New("options.menu_items.ask_delete"_lang);
         deletePromptOption->SetColor(COLOR("#FFFFFFFF"));
         deletePromptOption->SetIcon(inst::util::loadTex(this->getMenuOptionIcon(inst::config::deletePrompt)));
-        this->menu->AddItem(deletePromptOption);
+        attach(deletePromptOption);
         auto autoUpdateOption = pu::ui::elm::MenuItem::New("options.menu_items.auto_update"_lang);
         autoUpdateOption->SetColor(COLOR("#FFFFFFFF"));
         autoUpdateOption->SetIcon(inst::util::loadTex(this->getMenuOptionIcon(inst::config::autoUpdate)));
-        this->menu->AddItem(autoUpdateOption);
+        attach(autoUpdateOption);
         auto noGraphicsOption = pu::ui::elm::MenuItem::New("options.menu_items.no_graphics_option"_lang);
         noGraphicsOption->SetColor(COLOR("#FFFFFFFF"));
         noGraphicsOption->SetIcon(inst::util::loadTex(this->getMenuOptionIcon(inst::config::noGraphics)));
-        this->menu->AddItem(noGraphicsOption);
+        attach(noGraphicsOption);
         auto leafUrlOption = pu::ui::elm::MenuItem::New("options.menu_items.leaf_url"_lang + inst::util::shortenString(inst::config::leafUrl, 80, false));
         leafUrlOption->SetColor(COLOR("#FFFFFFFF"));
-        this->menu->AddItem(leafUrlOption);
+        attach(leafUrlOption);
         auto amiiboApiUrlOption = pu::ui::elm::MenuItem::New("options.menu_items.amiibo_api_url"_lang + inst::util::shortenString(inst::config::amiiboApiUrl, 80, false));
         amiiboApiUrlOption->SetColor(COLOR("#FFFFFFFF"));
-        this->menu->AddItem(amiiboApiUrlOption);
+        attach(amiiboApiUrlOption);
         auto languageOption = pu::ui::elm::MenuItem::New("options.menu_items.language"_lang + this->getMenuLanguage(inst::config::languageSetting));
         languageOption->SetColor(COLOR("#FFFFFFFF"));
-        this->menu->AddItem(languageOption);
+        attach(languageOption);
         auto updateOption = pu::ui::elm::MenuItem::New("options.menu_items.check_update"_lang);
         updateOption->SetColor(COLOR("#FFFFFFFF"));
-        this->menu->AddItem(updateOption);
+        attach(updateOption);
         auto creditsOption = pu::ui::elm::MenuItem::New("options.menu_items.credits"_lang);
         creditsOption->SetColor(COLOR("#FFFFFFFF"));
-        this->menu->AddItem(creditsOption);
+        attach(creditsOption);
     }
 
     void optionsPage::onInput(u64 Down, u64 Up, u64 Held, pu::ui::TouchPoint Pos) {

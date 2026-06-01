@@ -66,11 +66,16 @@ namespace inst::ui {
             this->alternativeNames.clear();
         }
         this->menu->ClearItems();
+        // Touch tap forwards to selectTitle on the currently-highlighted row.
+        const auto touchActivate = [this]() {
+            this->selectTitle(this->menu->GetSelectedIndex());
+        };
         if (this->lastFileId.size() > 1) {
             std::string itm = "..";
             auto ourEntry = pu::ui::elm::MenuItem::New(itm);
             ourEntry->SetColor(COLOR("#FFFFFFFF"));
             ourEntry->SetIcon(inst::util::loadTex("romfs:/images/icons/folder-upload.png"));
+            ourEntry->AddOnKey(touchActivate, pu::ui::TouchPseudoKey);
             this->menu->AddItem(ourEntry);
         }
         for (auto& url : this->ourUrls) {
@@ -87,6 +92,7 @@ namespace inst::ui {
                     }
                 }
             }
+            ourEntry->AddOnKey(touchActivate, pu::ui::TouchPseudoKey);
             this->menu->AddItem(ourEntry);
         }
     }
