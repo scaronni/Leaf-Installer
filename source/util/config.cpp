@@ -85,7 +85,7 @@ namespace inst::config {
             deletePrompt = true;
             noGraphics = false;
             ignoreReqVers = true;
-            overClock = false;
+            overClock = true;
             validateNCAs = true;
             lastNetUrl = "https://";
             cfwInstalled = {};
