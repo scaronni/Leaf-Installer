@@ -16,6 +16,17 @@ namespace inst::ui {
     extern MainApplication *mainApp;
     bool appletFinished = false;
     bool updateFinished = false;
+    // Touch tap on the Exit row used to call FadeOut+Close directly from
+    // inside Plutonium's Menu::OnInput callback. FadeOut runs an animation
+    // loop that calls CallForRender → recursive Application::OnRender →
+    // Menu::OnInput → which still sees `item_touched == true` because the
+    // outer Menu::OnInput hasn't returned to clear it → fires our callback
+    // again → unbounded recursion → stack-overflow crash. The A-button path
+    // doesn't trip this because A is consumed in the Layout's onInput before
+    // element iteration ever begins. Fix: just flip a flag from the click
+    // handler and let mainMenuThread (a render callback that runs at the
+    // top of the frame, outside element iteration) do the actual exit.
+    bool exitRequested = false;
 
     void mainMenuThread() {
         bool menuLoaded = mainApp->IsShown();
@@ -24,7 +35,7 @@ namespace inst::ui {
             if (menuLoaded) {
                 inst::ui::appletFinished = true;
                 mainApp->CreateShowDialog("main.applet.title"_lang, "main.applet.desc"_lang, {"common.ok"_lang}, true);
-            } 
+            }
         } else if (!appletFinished) {
             inst::ui::appletFinished = true;
             tin::data::NUM_BUFFER_SEGMENTS = 128;
@@ -33,6 +44,11 @@ namespace inst::ui {
         if (!updateFinished && menuLoaded && inst::config::updateInfo.size()) {
             updateFinished = true;
             optionsPage::askToUpdate(inst::config::updateInfo);
+        }
+        if (exitRequested) {
+            exitRequested = false;
+            mainApp->FadeOut();
+            mainApp->Close();
         }
     }
 
@@ -149,8 +165,13 @@ namespace inst::ui {
     }
 
     void MainPage::exitMenuItem_Click() {
-        mainApp->FadeOut();
-        mainApp->Close();
+        // Direct FadeOut+Close from a callback that fires inside Plutonium's
+        // element-iteration loop (i.e. the touch path) recurses unboundedly
+        // — see the note next to `exitRequested` at the top of this file.
+        // The A-button path works fine without deferring because A is
+        // consumed in Layout::onInput before element iteration runs, but we
+        // route both through the same flag for consistency.
+        exitRequested = true;
     }
 
     void MainPage::settingsMenuItem_Click() {
@@ -159,8 +180,7 @@ namespace inst::ui {
 
     void MainPage::onInput(u64 Down, u64 Up, u64 Held, pu::ui::TouchPoint Pos) {
         if (((Down & HidNpadButton_Plus) || (Down & HidNpadButton_Minus) || (Down & HidNpadButton_B)) && mainApp->IsShown()) {
-            mainApp->FadeOut();
-            mainApp->Close();
+            exitRequested = true;
         }
         if ((Down & HidNpadButton_A) || (Up & pu::ui::TouchPseudoKey)) {
             switch (this->optionMenu->GetSelectedIndex()) {
