@@ -44,7 +44,7 @@ DATA		:=	data
 INCLUDES	:=	include include/ui include/data include/install include/nx include/nx/ipc include/util include/Plutonium/Plutonium/include include/libusbhsfs/include
 APP_TITLE	:=	Leaf Installer
 APP_AUTHOR	:=	slaanesh
-APP_VERSION	:=	2.0.3
+APP_VERSION	:=	2.0.4
 ROMFS		:=	romfs
 
 #---------------------------------------------------------------------------------
