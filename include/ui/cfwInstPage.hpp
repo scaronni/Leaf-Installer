@@ -13,6 +13,12 @@ namespace inst::ui {
         std::string postProcess;      // tag for per-component post-extract step ("", "emuiibo_sdout", "hekate_payload")
         std::string installedVersion; // populated from inst::config::cfwInstalled before showing the page; empty if never installed via Leaf
         bool defaultSelected = true;  // whether the row is checked when the selection page opens
+        // Extra non-zip assets to download from the same GitHub release and
+        // drop into the staging tree. Each pair is
+        // (resolved_download_url, staging_relative_dest_path). The payload's
+        // recursive move then takes them to their final SD-root location.
+        // Currently used for Atmosphère's standalone `fusee.bin`.
+        std::vector<std::pair<std::string, std::string>> extraAssets = {};
     };
 
     class cfwInstPage : public pu::ui::Layout

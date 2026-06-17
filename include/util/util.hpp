@@ -30,6 +30,11 @@ namespace inst::util {
     // asset whose name contains the substring (case-sensitive). Otherwise picks
     // the first .zip asset, or the first asset if none are zips.
     std::vector<std::string> fetchLatestRelease(const std::string& releasesPageUrl, const std::string& assetNameSubstring = "");
+    // Returns the download URL of a specific asset from the latest GitHub
+    // release at `releasesPageUrl`, matching by exact filename. Empty string
+    // on failure or no match. Used for shipped-alongside binaries (e.g.
+    // Atmosphère's `fusee.bin`) that sit next to the main release zip.
+    std::string fetchReleaseAssetUrl(const std::string& releasesPageUrl, const std::string& exactAssetName);
     // Returns a "<free> / <total>" string (e.g. "32.5 GB / 64.0 GB") for the
     // given NcmStorageId — used to surface available space on each page's top bar.
     std::string getStorageInfoText(NcmStorageId storageId);

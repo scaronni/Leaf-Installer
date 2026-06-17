@@ -200,6 +200,27 @@ namespace cfw {
         std::filesystem::remove(zipPath);
         if (!ok) return InstallResult::ExtractFailed;
         applyPostProcess(c.postProcess);
+
+        // After the main zip is staged, pull any sibling raw assets the
+        // component asked for (e.g. Atmosphère's `fusee.bin`) and drop them
+        // into the staging tree at the requested relative path so the
+        // payload's recursive move puts them in place.
+        for (const auto& extra : c.extraAssets) {
+            const std::string& assetUrl  = extra.first;
+            const std::string& destPath  = extra.second;
+            if (assetUrl.empty() || destPath.empty()) continue;
+            const std::string fullDest = kStagingDirSlash + destPath;
+            inst::ui::instPage::setInstInfoText("cfw.downloading"_lang + c.displayName + " (" + destPath + ")");
+            std::error_code ec;
+            std::filesystem::create_directories(std::filesystem::path(fullDest).parent_path(), ec);
+            if (!inst::curl::downloadFile(assetUrl, fullDest.c_str(), 0, true)) {
+                // Don't fail the whole component install for a missing extra
+                // — log via the diagnostic string but let the main contents
+                // still apply on next boot.
+                LOG_DEBUG("Extra asset download failed: %s\n", destPath.c_str());
+            }
+        }
+
         return InstallResult::Ok;
     }
 
@@ -235,8 +256,21 @@ namespace cfw {
                 return;
             }
 
+            // Atmosphère's release ships `fusee.bin` as a standalone asset
+            // next to the main .zip; we need it at
+            // sdmc:/bootloader/payloads/fusee.bin (where hekate_ipl.ini's
+            // [Atmosphere] entry chainloads it from) alongside the rest of
+            // the extracted tree. Resolve its URL up front; empty means the
+            // release didn't include it this round (rare) and we'll just
+            // skip it without failing the install.
+            const std::string fuseeUrl = inst::util::fetchReleaseAssetUrl(inst::config::atmosphereUrl, "fusee.bin");
+            std::vector<std::pair<std::string, std::string>> atmosphereExtras;
+            if (!fuseeUrl.empty()) {
+                atmosphereExtras.push_back({fuseeUrl, "bootloader/payloads/fusee.bin"});
+            }
+
             std::vector<inst::ui::CfwComponent> components = {
-                {"Atmosphère",        atmosphereInfo[0], atmosphereInfo[1], "atmosphere.zip", "",               ""},
+                {"Atmosphère",        atmosphereInfo[0], atmosphereInfo[1], "atmosphere.zip", "",               "", true, atmosphereExtras},
                 {"hekate - Nyx",      hekateInfo[0],     hekateInfo[1],     "hekate.zip",     "hekate_payload", ""},
                 {"Ultrahand Overlay", ultrahandInfo[0],  ultrahandInfo[1],  "ultrahand.zip",  "",               ""},
                 {"sys-patch",         sysPatchInfo[0],   sysPatchInfo[1],   "sys-patch.zip",  "",               ""},

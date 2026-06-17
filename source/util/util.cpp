@@ -402,6 +402,27 @@ namespace inst::util {
         return ourUpdateInfo;
     }
 
+    std::string fetchReleaseAssetUrl(const std::string& releasesPageUrl, const std::string& exactAssetName) {
+        const std::string prefix = "https://github.com/";
+        const std::string suffix = "/releases";
+        if (releasesPageUrl.compare(0, prefix.size(), prefix) != 0) return "";
+        if (releasesPageUrl.size() < prefix.size() + suffix.size()) return "";
+        if (releasesPageUrl.compare(releasesPageUrl.size() - suffix.size(), suffix.size(), suffix) != 0) return "";
+        const std::string repo = releasesPageUrl.substr(prefix.size(), releasesPageUrl.size() - prefix.size() - suffix.size());
+        const std::string apiUrl = "https://api.github.com/repos/" + repo + "/releases/latest";
+        try {
+            std::string jsonData = inst::curl::downloadToBuffer(apiUrl, 0, 0, 1000L);
+            if (jsonData.empty()) return "";
+            nlohmann::json j = nlohmann::json::parse(jsonData);
+            for (const auto& asset : j["assets"]) {
+                if (asset["name"].get<std::string>() == exactAssetName) {
+                    return asset["browser_download_url"].get<std::string>();
+                }
+            }
+        } catch (...) {}
+        return "";
+    }
+
     std::vector<std::string> fetchLatestRelease(const std::string& releasesPageUrl, const std::string& assetNameSubstring) {
         const std::string prefix = "https://github.com/";
         const std::string suffix = "/releases";
