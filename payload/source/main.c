@@ -140,8 +140,12 @@ finish:
 
 static void exit_menu_draw(u32 base_x, u32 base_y, int selected, int seconds_left)
 {
-    /* Wipe the rows we own (4 rows tall: header + 2 options + countdown). */
-    gfx_clear_partial_grey(0x1B, base_y, 4 * 16);
+    /* Repaint in place: reposition to the captured base and reprint. No
+       partial-clear is needed because the 16px renderer fills each glyph's
+       background (fillbg=1) and every line variant below is a fixed length,
+       so reprinting fully overwrites the previous frame. (A coordinate-based
+       partial clear wouldn't map to text rows under the landscape software
+       rotation anyway.) */
     gfx_con_setpos(base_x, base_y);
 
     const u32 hot = TXT_CLR_GREENISH;
@@ -152,6 +156,8 @@ static void exit_menu_draw(u32 base_x, u32 base_y, int selected, int seconds_lef
                selected == 0 ? ">" : " ", TXT_CLR_DEFAULT);
     gfx_printf("  %k%s  Power off%k\n",  selected == 1 ? hot : cold,
                selected == 1 ? ">" : " ", TXT_CLR_DEFAULT);
+    /* Both status strings are deliberately the same length (38 chars) so one
+       cleanly overwrites the other when the countdown is cancelled. */
     if (seconds_left >= 0)
         gfx_printf("\n  %kAuto-rebooting in %d... (VOL to cancel)%k",
                    TXT_CLR_GREY, seconds_left, TXT_CLR_DEFAULT);

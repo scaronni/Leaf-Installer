@@ -25,6 +25,15 @@ gfx_con_t gfx_con;
 
 static bool gfx_con_init_done = false;
 
+// Software-rotation state for landscape rendering. The panel framebuffer is
+// physically portrait (720x1280); we render text rotated 90° so it reads
+// correctly when the console is held / docked in landscape, exactly like
+// Lockpick_RCM_Pro / TegraExplorer. g_YLeftConfig tracks the left margin
+// (internal gfx_con.y) to return to on newline; g_XTopConfig tracks the
+// initial column (external x) of the current block.
+static u32 g_YLeftConfig = 1279;
+static u32 g_XTopConfig = 0;
+
 static const u8 _gfx_font[] = {
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // Char 032 ( )
 	0x00, 0x30, 0x30, 0x18, 0x18, 0x00, 0x0C, 0x00, // Char 033 (!)
@@ -160,6 +169,9 @@ void gfx_con_init()
 	gfx_con.bgcol = TXT_CLR_BG;
 	gfx_con.mute = 0;
 
+	g_YLeftConfig = 1279; // Default to left edge (landscape).
+	g_XTopConfig = 0;     // Default to top edge.
+
 	gfx_con_init_done = true;
 }
 
@@ -172,14 +184,26 @@ void gfx_con_setcol(u32 fgcol, int fillbg, u32 bgcol)
 
 void gfx_con_getpos(u32 *x, u32 *y)
 {
-	*x = gfx_con.x;
-	*y = gfx_con.y;
+	// Software rotation for landscape mode: external (x,y) map to the
+	// rotated internal coordinates.
+	*x = 1279 - gfx_con.y;
+	*y = gfx_con.x;
 }
 
 void gfx_con_setpos(u32 x, u32 y)
 {
-	gfx_con.x = x;
-	gfx_con.y = y;
+	// Software rotation for landscape mode (see gfx_putc).
+	gfx_con.x = y;
+	gfx_con.y = 1279 - x;
+
+	// Clamp y into the valid framebuffer range to avoid corruption.
+	if (gfx_con.y < 16)
+		gfx_con.y = 16;
+	if (gfx_con.y > 1279)
+		gfx_con.y = 1279;
+
+	g_YLeftConfig = gfx_con.y; // Left margin for newlines (after clamp).
+	g_XTopConfig = y;          // Top margin (internal x = external y).
 }
 
 void gfx_putc(char c)
@@ -188,7 +212,13 @@ void gfx_putc(char c)
 	switch (gfx_con.fntsz)
 	{
 	case 16:
-		if (c >= 32 && c <= 126)
+		// Landscape (software-rotated) 16px renderer, ported from
+		// Lockpick_RCM_Pro / TegraExplorer. Each glyph is drawn rotated 90°
+		// into the portrait framebuffer; the text cursor advances up the
+		// framebuffer (gfx_con.y decreasing) which is left-to-right on
+		// screen, and newlines advance gfx_con.x which is top-to-bottom on
+		// screen.
+		if (c >= 32 && c <= 129)
 		{
 			u8 *cbuf = (u8 *)&_gfx_font[8 * (c - 32)];
 			u32 *fb = gfx_ctxt.fb + gfx_con.x + gfx_con.y * gfx_ctxt.stride;
@@ -196,40 +226,52 @@ void gfx_putc(char c)
 			for (u32 i = 0; i < 16; i += 2)
 			{
 				u8 v = *cbuf;
-				for (u32 k = 0; k < 2; k++)
+				for (u32 t = 0; t < 8; t++)
 				{
-					for (u32 j = 0; j < 8; j++)
+					if (v & 1 || gfx_con.fillbg)
 					{
-						if (v & 1)
-						{
-							*fb = gfx_con.fgcol;
-							fb++;
-							*fb = gfx_con.fgcol;
-						}
-						else if (gfx_con.fillbg)
-						{
-							*fb = gfx_con.bgcol;
-							fb++;
-							*fb = gfx_con.bgcol;
-						}
-						else
-							fb++;
-						v >>= 1;
-						fb++;
+						u32 setColor = (v & 1) ? gfx_con.fgcol : gfx_con.bgcol;
+						*fb = setColor;
+						*(fb + 1) = setColor;
+						*(fb - gfx_ctxt.stride) = setColor;
+						*(fb - gfx_ctxt.stride + 1) = setColor;
 					}
-					fb += gfx_ctxt.stride - 16;
-					v = *cbuf;
+					v >>= 1;
+					fb -= gfx_ctxt.stride * 2;
 				}
+				fb += gfx_ctxt.stride * 16 + 2;
 				cbuf++;
 			}
-			gfx_con.x += 16;
+
+			gfx_con.y -= 16;
+			if (gfx_con.y < 16)
+			{
+				if (g_YLeftConfig < 16)
+					g_YLeftConfig = 1279;
+				if (g_XTopConfig > 1279)
+					g_XTopConfig = 0;
+				gfx_con.y = g_YLeftConfig;
+				gfx_con.x += 16;
+				if (gfx_con.x >= 720)
+					gfx_con.x = 0;
+			}
 		}
 		else if (c == '\n')
 		{
-			gfx_con.x = 0;
-			gfx_con.y += 16;
-			if (gfx_con.y > gfx_ctxt.height - 16)
-				gfx_con.y = 0;
+			if (g_YLeftConfig < 16)
+				g_YLeftConfig = 1279;
+			if (g_XTopConfig > 1279)
+				g_XTopConfig = 0;
+			gfx_con.y = g_YLeftConfig;
+			gfx_con.x += 16;
+			if (gfx_con.x >= 720)
+				gfx_con.x = 0;
+		}
+		else if (c == '\r')
+		{
+			if (g_YLeftConfig < 16)
+				g_YLeftConfig = 1279;
+			gfx_con.y = g_YLeftConfig;
 		}
 		break;
 	case 8:
