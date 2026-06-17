@@ -28,6 +28,13 @@ BL_MAGIC      := 0x4655414C # "LAUF" — Leaf Auto-Update Finalizer.
 SOURCEDIR     := source
 BUILDDIR      := build
 OUTPUTDIR     := output
+# NOTE: the include/hekate submodule is intentionally pinned to v6.5.2 (see
+# .gitmodules). hekate v6.5.3 rewrote bdk/storage/sdmmc.c's SD UHS/1.8V init
+# path; the payload's sd_mount() then hangs at runtime (the rewritten
+# low-voltage / SD_VOLTAGE_SWITCH sequence doesn't complete under this
+# payload's minimal hw_init). The payload needs none of 6.5.3's SD changes.
+# Do NOT bump past v6.5.2 without re-testing SD mount on real hardware.
+# See main.c::main() near sd_mount().
 BDKDIR        := ../include/hekate/bdk
 
 # Curated subset of BDK modules — just enough to bring up clocks, display, GFX,

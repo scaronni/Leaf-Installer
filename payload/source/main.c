@@ -78,7 +78,13 @@ int main(void)
     gfx_printf("%kLeaf Updater\n", 0xFF40A040);
     gfx_printf("%kApplying staged CFW components...\n\n", 0xFFC0C0C0);
 
-    /* ----- Mount the SD card. ----- */
+    /* ----- Mount the SD card. -----
+     * This is built against hekate's BDK pinned at v6.5.2 on purpose. v6.5.3
+     * rewrote the SD UHS / 1.8V-signaling init path (bdk/storage/sdmmc.c) and
+     * sd_mount() hangs here at runtime: the default SD_UHS_SDR104 mode drives
+     * the new SD_VOLTAGE_SWITCH / sdmmc_enable_low_voltage sequence, which
+     * doesn't complete under this payload's minimal hw_init. Bumping the
+     * submodule past v6.5.2 will silently reintroduce that hang. */
     if (sd_mount())
         halt_with_error("Failed to mount SD card.");
 
