@@ -200,6 +200,7 @@
         "generating": "正在生成 ",
         "done_title": "Amiibo 生成完成",
         "done_generated": "已生成: ",
+        "done_backfilled": "已新增圖片: ",
         "done_skipped": "已跳過 (已存在): ",
         "db_failed": "無法下載 Amiibo 資料庫",
         "db_failed_desc": "請檢查您的網路連線與網址。",

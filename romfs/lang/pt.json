@@ -197,6 +197,7 @@
         "generating": "Gerando ",
         "done_title": "Geração Amiibo concluída",
         "done_generated": "Gerados: ",
+        "done_backfilled": "Imagens adicionadas: ",
         "done_skipped": "Ignorados (já existem): ",
         "db_failed": "Não foi possível baixar o banco Amiibo",
         "db_failed_desc": "Verifique sua conexão e a URL.",

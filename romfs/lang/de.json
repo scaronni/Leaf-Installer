@@ -197,6 +197,7 @@
         "generating": "Generiere ",
         "done_title": "Amiibo-Generierung abgeschlossen",
         "done_generated": "Generiert: ",
+        "done_backfilled": "Bilder hinzugefügt: ",
         "done_skipped": "Übersprungen (bereits vorhanden): ",
         "db_failed": "Amiibo-Datenbank konnte nicht heruntergeladen werden",
         "db_failed_desc": "Überprüfe deine Internetverbindung und die URL.",

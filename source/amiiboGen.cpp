@@ -99,6 +99,30 @@ namespace amiibo {
         stbi_image_free(data);
     }
 
+    // Outcome of processing a single amiibo entry.
+    enum class GenResult { Created, ImageBackfilled, Skipped };
+
+    // True if the amiibo's icon is already on disk and non-empty.
+    static bool amiiboImagePresent(const std::string& dir) {
+        std::error_code ec;
+        const std::string imagePath = dir + "amiibo.png";
+        return std::filesystem::exists(imagePath, ec) &&
+               std::filesystem::file_size(imagePath, ec) > 0;
+    }
+
+    // Downloads the amiibo icon into `dir` (as amiibo.png) and resizes it.
+    // Returns true if a file was fetched. resizeAmiiboImage leaves the
+    // original download in place if it can't decode/resize, so a successful
+    // download always yields a valid PNG.
+    static bool downloadAmiiboImage(const nlohmann::json& entry, const std::string& dir) {
+        const std::string imageUrl = entry.value("image", "");
+        if (imageUrl.empty()) return false;
+        const std::string imagePath = dir + "amiibo.png";
+        if (!inst::curl::downloadFile(imageUrl, imagePath.c_str(), 0, false)) return false;
+        resizeAmiiboImage(imagePath);
+        return true;
+    }
+
     // Build the on-disk path for a given amiibo. emuiibo's layout requires
     // <series>/<name>_<full_id>/ — sanitize series/name the same way the
     // original AmiiboGenerator does (strip non-ASCII + a few punctuation chars,
@@ -113,16 +137,25 @@ namespace amiibo {
         return AMIIBO_DIR + series + "/" + name + "_" + fullId + "/";
     }
 
-    // Returns true if a new amiibo dir was created, false if the entry was
-    // skipped (already on disk or malformed).
-    static bool generateOne(const nlohmann::json& entry) {
+    // Generates a fresh amiibo dir, backfills a missing icon into an existing
+    // one, or skips an entry that's already complete (or malformed).
+    static GenResult generateOne(const nlohmann::json& entry) {
         const std::string head = entry.value("head", "");
         const std::string tail = entry.value("tail", "");
         const std::string fullId = head + tail;
-        if (fullId.length() < 16) return false;
+        if (fullId.length() < 16) return GenResult::Skipped;
 
         const std::string dir = amiiboDir(entry, fullId);
-        if (std::filesystem::exists(dir)) return false;
+        if (std::filesystem::exists(dir)) {
+            // Already generated. Backfill just the icon if it's missing — e.g.
+            // the folder was created by an older build that predated image
+            // support or whose image download failed. Leave amiibo.json /
+            // amiibo.flag untouched: they're correct and the UUID inside may
+            // have been used/customized already.
+            if (!amiiboImagePresent(dir) && downloadAmiiboImage(entry, dir))
+                return GenResult::ImageBackfilled;
+            return GenResult::Skipped;
+        }
 
         const std::string gameIdStr  = fullId.substr(0, 4);
         const std::string variantStr = fullId.substr(4, 2);
@@ -165,7 +198,7 @@ namespace amiibo {
 
         std::error_code ec;
         std::filesystem::create_directories(dir, ec);
-        if (ec) return false;
+        if (ec) return GenResult::Skipped;
 
         std::ofstream(dir + "amiibo.flag").close();
 
@@ -173,14 +206,8 @@ namespace amiibo {
         meta << out.dump(2);
         meta.close();
 
-        const std::string imageUrl = entry.value("image", "");
-        if (!imageUrl.empty()) {
-            const std::string imagePath = dir + "amiibo.png";
-            if (inst::curl::downloadFile(imageUrl, imagePath.c_str(), 0, false)) {
-                resizeAmiiboImage(imagePath);
-            }
-        }
-        return true;
+        downloadAmiiboImage(entry, dir);
+        return GenResult::Created;
     }
 
     void generateAmiiboData() {
@@ -235,6 +262,7 @@ namespace amiibo {
             const auto& list = db["amiibo"];
             const size_t total = list.size();
             size_t generated = 0;
+            size_t backfilled = 0;
             size_t skipped = 0;
 
             // Throttle progress redraws so we don't render once per amiibo —
@@ -251,10 +279,10 @@ namespace amiibo {
                         " (" + std::to_string(i + 1) + "/" + std::to_string(total) + ")");
                     lastPercent = percent;
                 }
-                if (generateOne(entry)) {
-                    generated++;
-                } else {
-                    skipped++;
+                switch (generateOne(entry)) {
+                    case GenResult::Created:         generated++;  break;
+                    case GenResult::ImageBackfilled: backfilled++; break;
+                    case GenResult::Skipped:         skipped++;    break;
                 }
             }
 
@@ -262,6 +290,7 @@ namespace amiibo {
 
             const std::string doneDesc =
                 "amiibo.done_generated"_lang + std::to_string(generated) + "\n" +
+                "amiibo.done_backfilled"_lang + std::to_string(backfilled) + "\n" +
                 "amiibo.done_skipped"_lang + std::to_string(skipped);
             inst::ui::mainApp->CreateShowDialog("amiibo.done_title"_lang, doneDesc, {"common.ok"_lang}, false);
             inst::ui::instPage::loadMainMenu();

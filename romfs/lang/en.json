@@ -200,6 +200,7 @@
         "generating": "Generating ",
         "done_title": "Amiibo generation complete",
         "done_generated": "Generated: ",
+        "done_backfilled": "Images added: ",
         "done_skipped": "Skipped (already present): ",
         "db_failed": "Could not download the Amiibo database",
         "db_failed_desc": "Check your internet connection and the URL.",

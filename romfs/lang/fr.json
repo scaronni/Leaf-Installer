@@ -197,6 +197,7 @@
         "generating": "Génération de ",
         "done_title": "Génération Amiibo terminée",
         "done_generated": "Générés : ",
+        "done_backfilled": "Images ajoutées : ",
         "done_skipped": "Ignorés (déjà présents) : ",
         "db_failed": "Impossible de télécharger la base Amiibo",
         "db_failed_desc": "Vérifiez votre connexion et l'URL.",

@@ -197,6 +197,7 @@
         "generating": "Генерация ",
         "done_title": "Генерация Amiibo завершена",
         "done_generated": "Сгенерировано: ",
+        "done_backfilled": "Добавлено изображений: ",
         "done_skipped": "Пропущено (уже есть): ",
         "db_failed": "Не удалось загрузить базу Amiibo",
         "db_failed_desc": "Проверьте соединение и URL.",

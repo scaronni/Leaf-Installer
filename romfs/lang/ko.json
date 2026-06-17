@@ -197,6 +197,7 @@
         "generating": "생성 중: ",
         "done_title": "Amiibo 생성 완료",
         "done_generated": "생성됨: ",
+        "done_backfilled": "이미지 추가됨: ",
         "done_skipped": "건너뜀 (이미 존재): ",
         "db_failed": "Amiibo 데이터베이스를 다운로드할 수 없습니다",
         "db_failed_desc": "인터넷 연결과 URL을 확인하세요.",
