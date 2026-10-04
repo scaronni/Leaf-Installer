@@ -10,6 +10,7 @@
 #include "util/unzip.hpp"
 #include "util/lang.hpp"
 #include "ui/instPage.hpp"
+#include "shortcutInstall.hpp"
 
 #define COLOR(hex) pu::ui::Color::FromHex(hex)
 
@@ -173,6 +174,9 @@ namespace inst::ui {
         auto updateOption = pu::ui::elm::MenuItem::New("options.menu_items.check_update"_lang);
         updateOption->SetColor(COLOR("#FFFFFFFF"));
         attach(updateOption);
+        auto shortcutOption = pu::ui::elm::MenuItem::New("options.menu_items.home_shortcut"_lang);
+        shortcutOption->SetColor(COLOR("#FFFFFFFF"));
+        attach(shortcutOption);
         auto creditsOption = pu::ui::elm::MenuItem::New("options.menu_items.credits"_lang);
         creditsOption->SetColor(COLOR("#FFFFFFFF"));
         attach(creditsOption);
@@ -328,6 +332,9 @@ namespace inst::ui {
                     this->askToUpdate(downloadUrl);
                     break;
                 case 10:
+                    shortcut::startShortcutInstall();
+                    break;
+                case 11:
                     inst::ui::mainApp->CreateShowDialog("options.credits.title"_lang, "options.credits.desc"_lang, {"common.close"_lang}, true);
                     break;
                 default:

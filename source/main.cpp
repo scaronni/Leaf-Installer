@@ -4,10 +4,12 @@
 #include "ui/MainApplication.hpp"
 #include "util/util.hpp"
 #include "util/config.hpp"
+#include "shortcutInstall.hpp"
 
 using namespace pu::ui::render;
 int main(int argc, char* argv[])
 {
+    shortcut::configureHomeExit();
     inst::util::initApp();
     try {
         RendererInitOptions init_opts(

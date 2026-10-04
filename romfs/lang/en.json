@@ -148,6 +148,7 @@
             "amiibo_api_url": "Amiibo API URL: ",
             "language": "Language: ",
             "check_update": "Check for updates to Leaf Installer",
+            "home_shortcut": "Add Leaf Installer to the HOME Menu",
             "credits": "Credits"
         },
         "nca_warn": {
@@ -171,7 +172,7 @@
         },
         "credits": {
             "title": "Thanks to the following people!",
-            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
+            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- NSteamLink (https://github.com/kxn/nsteamlink) and nx-hbloader (https://github.com/switchbrew/nx-hbloader) for the HOME Menu shortcut\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
         },
         "language": {
             "title": "Select Leaf Installer's language",
@@ -205,5 +206,19 @@
         "db_failed": "Could not download the Amiibo database",
         "db_failed_desc": "Check your internet connection and the URL.",
         "generic_error": "Amiibo generation failed"
+    },
+    "shortcut": {
+        "confirm_title": "Add to HOME Menu",
+        "confirm_desc": "This installs a shortcut on the HOME Menu that launches\nsdmc:/switch/Leaf-Installer/Leaf-Installer.nro.\nKeep the NRO at that path — updating it does not require reinstalling\nthe shortcut. Signature patches (sys-patch) are needed to launch it.",
+        "add": "Add",
+        "nro_missing_title": "Leaf Installer NRO not found",
+        "nro_missing_desc": "The shortcut launches sdmc:/switch/Leaf-Installer/Leaf-Installer.nro,\nbut no NRO was found there. Extract the official release zip to the\nroot of your SD card and try again.",
+        "success_title": "Shortcut added",
+        "success_desc": "Leaf Installer is now on the HOME Menu.",
+        "exists_title": "Shortcut already installed",
+        "exists_desc": "A Leaf Installer shortcut is already installed. To reinstall it,\ndelete it first from System Settings → Data Management.",
+        "failed_title": "Could not add the shortcut",
+        "failed_desc": "Installing the HOME Menu shortcut failed: ",
+        "cleanup_failed_desc": "Installing the shortcut failed and its leftovers could not be removed.\nDelete \"Leaf Installer\" from System Settings → Data Management.\nDetails: "
     }
 }

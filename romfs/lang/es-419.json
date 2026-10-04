@@ -145,6 +145,7 @@
             "amiibo_api_url": "URL de la API Amiibo: ",
             "language": "Idioma: ",
             "check_update": "Buscar actualizaciones de Leaf Installer",
+            "home_shortcut": "Agregar Leaf Installer al menú HOME",
             "credits": "Créditos"
         },
         "nca_warn": {
@@ -168,7 +169,7 @@
         },
         "credits": {
             "title": "Gracias a las siguientes personas:",
-            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
+            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- NSteamLink (https://github.com/kxn/nsteamlink) and nx-hbloader (https://github.com/switchbrew/nx-hbloader) for the HOME Menu shortcut\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
         },
         "language": {
             "title": "Selecciona el idioma de Leaf Installer",
@@ -202,5 +203,19 @@
         "db_failed": "No se pudo descargar la base Amiibo",
         "db_failed_desc": "Verifica tu conexión y la URL.",
         "generic_error": "Falló la generación Amiibo"
+    },
+    "shortcut": {
+        "confirm_title": "Agregar al menú HOME",
+        "confirm_desc": "Esto instala un acceso directo en el menú HOME que abre\nsdmc:/switch/Leaf-Installer/Leaf-Installer.nro.\nMantén el NRO en esa ruta — al actualizarlo no hace falta reinstalar\nel acceso directo. Se necesitan parches de firma (sys-patch) para abrirlo.",
+        "add": "Agregar",
+        "nro_missing_title": "No se encontró el NRO de Leaf Installer",
+        "nro_missing_desc": "El acceso directo abre sdmc:/switch/Leaf-Installer/Leaf-Installer.nro,\npero no se encontró ningún NRO allí. Extrae el zip oficial en la raíz\nde tu tarjeta SD e inténtalo de nuevo.",
+        "success_title": "Acceso directo agregado",
+        "success_desc": "Leaf Installer ya está en el menú HOME.",
+        "exists_title": "El acceso directo ya está instalado",
+        "exists_desc": "Ya hay un acceso directo de Leaf Installer instalado. Para reinstalarlo,\nelimínalo primero en Configuración de la consola → Gestión de datos.",
+        "failed_title": "No se pudo agregar el acceso directo",
+        "failed_desc": "Falló la instalación del acceso directo del menú HOME: ",
+        "cleanup_failed_desc": "La instalación falló y no se pudieron eliminar los restos.\nElimina \"Leaf Installer\" en Configuración de la consola → Gestión de datos.\nDetalles: "
     }
 }

@@ -167,7 +167,7 @@ ifneq ($(ROMFS),)
 	export NROFLAGS += --romfsdir=$(CURDIR)/$(ROMFS)
 endif
 
-.PHONY: $(BUILD) clean all payload release
+.PHONY: $(BUILD) clean all payload release shortcut
 
 PAYLOAD_BIN := $(CURDIR)/payload/output/leaf-updater.bin
 RELEASE_ZIP := $(CURDIR)/Leaf-Installer.zip
@@ -187,6 +187,17 @@ $(BUILD):
 # payload is the SD-side finalizer for the offline-update flow.
 payload:
 	@$(MAKE) --no-print-directory -C $(CURDIR)/payload all
+
+#---------------------------------------------------------------------------------
+# Regenerates romfs/shortcut/template.bin, the key-free HOME Menu forwarder
+# template (see shortcut/build-shortcut.py). The output is committed, so this
+# only needs re-running when the forwarder changes. Needs network access and
+# python3-cryptography + python3-pil (installed on the fly in the devkita64
+# image when missing).
+shortcut:
+	@python3 -c "import cryptography, PIL" 2>/dev/null || \
+		(apt-get update -qq && apt-get install -y -qq python3-cryptography python3-pil > /dev/null)
+	@python3 $(CURDIR)/shortcut/build-shortcut.py
 
 #---------------------------------------------------------------------------------
 # Produces Leaf-Installer.zip ready to be extracted to the root of the SD

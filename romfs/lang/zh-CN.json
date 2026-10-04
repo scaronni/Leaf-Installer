@@ -148,6 +148,7 @@
             "amiibo_api_url": "Amiibo API 网址：",
             "language": "语言：",
             "check_update": "检查 Leaf Installer 更新",
+            "home_shortcut": "将 Leaf Installer 添加到 HOME 菜单",
             "credits": "致谢"
         },
         "nca_warn": {
@@ -171,7 +172,7 @@
         },
         "credits": {
             "title": "致谢以下朋友！",
-            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
+            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- NSteamLink (https://github.com/kxn/nsteamlink) and nx-hbloader (https://github.com/switchbrew/nx-hbloader) for the HOME Menu shortcut\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
         },
         "language": {
             "title": "选择 Leaf Installer 语言",
@@ -205,5 +206,19 @@
         "db_failed": "无法下载 Amiibo 数据库",
         "db_failed_desc": "请检查您的互联网连接和网址。",
         "generic_error": "Amiibo 生成失败"
+    },
+    "shortcut": {
+        "confirm_title": "添加到 HOME 菜单",
+        "confirm_desc": "这将在 HOME 菜单安装一个快捷方式,用于启动\nsdmc:/switch/Leaf-Installer/Leaf-Installer.nro。\n请保持 NRO 位于该路径 — 更新 NRO 后无需重新安装快捷方式。\n启动它需要签名补丁(sys-patch)。",
+        "add": "添加",
+        "nro_missing_title": "未找到 Leaf Installer NRO",
+        "nro_missing_desc": "快捷方式会启动 sdmc:/switch/Leaf-Installer/Leaf-Installer.nro,\n但该位置没有找到 NRO。请将官方发布 zip 解压到 SD 卡根目录后重试。",
+        "success_title": "快捷方式已添加",
+        "success_desc": "Leaf Installer 已添加到 HOME 菜单。",
+        "exists_title": "快捷方式已安装",
+        "exists_desc": "Leaf Installer 快捷方式已安装。如需重新安装,\n请先在 设置 → 数据管理 中将其删除。",
+        "failed_title": "无法添加快捷方式",
+        "failed_desc": "安装 HOME 菜单快捷方式失败:",
+        "cleanup_failed_desc": "安装失败,且无法删除残留数据。\n请在 设置 → 数据管理 中删除 \"Leaf Installer\"。\n详细信息:"
     }
 }

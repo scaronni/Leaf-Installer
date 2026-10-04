@@ -148,6 +148,7 @@
             "amiibo_api_url": "Amiibo API 網址：",
             "language": "介面語系： ",
             "check_update": "檢查Leaf Installer的更新版本",
+            "home_shortcut": "將 Leaf Installer 加入 HOME 選單",
             "credits": "感謝名單"
         },
         "nca_warn": {
@@ -171,7 +172,7 @@
         },
         "credits": {
             "title": "感謝所有幫助過我們的人",
-            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
+            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- NSteamLink (https://github.com/kxn/nsteamlink) and nx-hbloader (https://github.com/switchbrew/nx-hbloader) for the HOME Menu shortcut\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
         },
         "language": {
             "title": "設定Leaf Installer的介面語系",
@@ -205,5 +206,19 @@
         "db_failed": "無法下載 Amiibo 資料庫",
         "db_failed_desc": "請檢查您的網路連線與網址。",
         "generic_error": "Amiibo 生成失敗"
+    },
+    "shortcut": {
+        "confirm_title": "加入 HOME 選單",
+        "confirm_desc": "這會在 HOME 選單安裝一個捷徑,用於啟動\nsdmc:/switch/Leaf-Installer/Leaf-Installer.nro。\n請將 NRO 保留在該路徑 — 更新 NRO 後不需要重新安裝捷徑。\n啟動它需要簽章修補(sys-patch)。",
+        "add": "加入",
+        "nro_missing_title": "找不到 Leaf Installer NRO",
+        "nro_missing_desc": "捷徑會啟動 sdmc:/switch/Leaf-Installer/Leaf-Installer.nro,\n但該位置找不到 NRO。請將官方發行 zip 解壓縮到 SD 卡根目錄後再試一次。",
+        "success_title": "已加入捷徑",
+        "success_desc": "Leaf Installer 已加入 HOME 選單。",
+        "exists_title": "捷徑已安裝",
+        "exists_desc": "Leaf Installer 捷徑已經安裝。如需重新安裝,\n請先在 設定 → 資料管理 中將其刪除。",
+        "failed_title": "無法加入捷徑",
+        "failed_desc": "安裝 HOME 選單捷徑失敗:",
+        "cleanup_failed_desc": "安裝失敗,且無法刪除殘留資料。\n請在 設定 → 資料管理 中刪除「Leaf Installer」。\n詳細資訊:"
     }
 }

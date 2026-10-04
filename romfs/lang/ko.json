@@ -145,6 +145,7 @@
             "amiibo_api_url": "Amiibo API URL: ",
             "language": "언어: ",
             "check_update": "Leaf 설치 프로그램에 대한 업데이트 확인",
+            "home_shortcut": "Leaf Installer를 HOME 메뉴에 추가",
             "credits": "크레딧"
         },
         "nca_warn": {
@@ -168,7 +169,7 @@
         },
         "credits": {
             "title": "다음 분들께 감사드립니다!",
-            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
+            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- NSteamLink (https://github.com/kxn/nsteamlink) and nx-hbloader (https://github.com/switchbrew/nx-hbloader) for the HOME Menu shortcut\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
         },
         "language": {
             "title": "Leaf 설치 프로그램의 언어 선택",
@@ -202,5 +203,19 @@
         "db_failed": "Amiibo 데이터베이스를 다운로드할 수 없습니다",
         "db_failed_desc": "인터넷 연결과 URL을 확인하세요.",
         "generic_error": "Amiibo 생성 실패"
+    },
+    "shortcut": {
+        "confirm_title": "HOME 메뉴에 추가",
+        "confirm_desc": "다음 파일을 실행하는 바로가기를 HOME 메뉴에 설치합니다:\nsdmc:/switch/Leaf-Installer/Leaf-Installer.nro\nNRO를 이 경로에 그대로 두세요 — NRO를 업데이트해도 바로가기를\n다시 설치할 필요는 없습니다. 실행하려면 서명 패치(sys-patch)가 필요합니다.",
+        "add": "추가",
+        "nro_missing_title": "Leaf Installer NRO를 찾을 수 없음",
+        "nro_missing_desc": "바로가기는 sdmc:/switch/Leaf-Installer/Leaf-Installer.nro를 실행하지만,\n해당 위치에 NRO가 없습니다. 공식 릴리스 zip을 SD 카드 루트에\n압축 해제한 후 다시 시도하세요.",
+        "success_title": "바로가기 추가됨",
+        "success_desc": "Leaf Installer가 HOME 메뉴에 추가되었습니다.",
+        "exists_title": "바로가기가 이미 설치됨",
+        "exists_desc": "Leaf Installer 바로가기가 이미 설치되어 있습니다. 다시 설치하려면\n먼저 설정 → 데이터 관리에서 삭제하세요.",
+        "failed_title": "바로가기를 추가할 수 없음",
+        "failed_desc": "HOME 메뉴 바로가기 설치에 실패했습니다: ",
+        "cleanup_failed_desc": "설치에 실패했으며 남은 데이터를 삭제하지 못했습니다.\n설정 → 데이터 관리에서 \"Leaf Installer\"를 삭제하세요.\n세부 정보: "
     }
 }

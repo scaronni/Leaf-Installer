@@ -145,6 +145,7 @@
             "amiibo_api_url": "URL API Amiibo: ",
             "language": "Язык: ",
             "check_update": "Проверить наличие обновлений Leaf Installer",
+            "home_shortcut": "Добавить Leaf Installer в меню HOME",
             "credits": "Благодарности"
         },
         "nca_warn": {
@@ -168,7 +169,7 @@
         },
         "credits": {
             "title": "Выражаем благодарность следующим людям:",
-            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
+            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- NSteamLink (https://github.com/kxn/nsteamlink) and nx-hbloader (https://github.com/switchbrew/nx-hbloader) for the HOME Menu shortcut\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
         },
         "language": {
             "title": "Выбор языка",
@@ -202,5 +203,19 @@
         "db_failed": "Не удалось загрузить базу Amiibo",
         "db_failed_desc": "Проверьте соединение и URL.",
         "generic_error": "Сбой генерации Amiibo"
+    },
+    "shortcut": {
+        "confirm_title": "Добавить в меню HOME",
+        "confirm_desc": "Будет установлен ярлык в меню HOME, запускающий\nsdmc:/switch/Leaf-Installer/Leaf-Installer.nro.\nНе перемещайте NRO — при его обновлении переустанавливать ярлык\nне нужно. Для запуска нужны патчи подписей (sys-patch).",
+        "add": "Добавить",
+        "nro_missing_title": "NRO Leaf Installer не найден",
+        "nro_missing_desc": "Ярлык запускает sdmc:/switch/Leaf-Installer/Leaf-Installer.nro,\nно NRO там не найден. Распакуйте официальный zip-архив в корень\nSD-карты и повторите попытку.",
+        "success_title": "Ярлык добавлен",
+        "success_desc": "Leaf Installer теперь в меню HOME.",
+        "exists_title": "Ярлык уже установлен",
+        "exists_desc": "Ярлык Leaf Installer уже установлен. Чтобы переустановить его,\nсначала удалите его в Настройках системы → Управление данными.",
+        "failed_title": "Не удалось добавить ярлык",
+        "failed_desc": "Не удалось установить ярлык в меню HOME: ",
+        "cleanup_failed_desc": "Установка не удалась, и остатки не удалось удалить.\nУдалите «Leaf Installer» в Настройках системы → Управление данными.\nПодробности: "
     }
 }

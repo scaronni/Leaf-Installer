@@ -145,6 +145,7 @@
             "amiibo_api_url": "URL API Amiibo: ",
             "language": "Lingua: ",
             "check_update": "Controlla aggiornamenti di Leaf Installer ora",
+            "home_shortcut": "Aggiungi Leaf Installer al menu HOME",
             "credits": "Crediti"
         },
         "nca_warn": {
@@ -168,7 +169,7 @@
         },
         "credits": {
             "title": "Un ringraziamento alle seguenti persone!",
-            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
+            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- NSteamLink (https://github.com/kxn/nsteamlink) and nx-hbloader (https://github.com/switchbrew/nx-hbloader) for the HOME Menu shortcut\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
         },
         "language": {
             "title": "Seleziona la lingua di Leaf Installer",
@@ -202,5 +203,19 @@
         "db_failed": "Impossibile scaricare il database Amiibo",
         "db_failed_desc": "Controlla la connessione e l'URL.",
         "generic_error": "Generazione Amiibo fallita"
+    },
+    "shortcut": {
+        "confirm_title": "Aggiungi al menu HOME",
+        "confirm_desc": "Verrà installato un collegamento nel menu HOME che avvia\nsdmc:/switch/Leaf-Installer/Leaf-Installer.nro.\nLascia l'NRO in quel percorso — aggiornarlo non richiede di reinstallare\nil collegamento. Per avviarlo servono le patch delle firme (sys-patch).",
+        "add": "Aggiungi",
+        "nro_missing_title": "NRO di Leaf Installer non trovato",
+        "nro_missing_desc": "Il collegamento avvia sdmc:/switch/Leaf-Installer/Leaf-Installer.nro,\nma lì non è stato trovato alcun NRO. Estrai lo zip ufficiale nella\nradice della scheda SD e riprova.",
+        "success_title": "Collegamento aggiunto",
+        "success_desc": "Leaf Installer ora è nel menu HOME.",
+        "exists_title": "Collegamento già installato",
+        "exists_desc": "Un collegamento a Leaf Installer è già installato. Per reinstallarlo,\neliminalo prima da Impostazioni di sistema → Gestione dati.",
+        "failed_title": "Impossibile aggiungere il collegamento",
+        "failed_desc": "Installazione del collegamento nel menu HOME non riuscita: ",
+        "cleanup_failed_desc": "L'installazione non è riuscita e i residui non sono stati rimossi.\nElimina \"Leaf Installer\" da Impostazioni di sistema → Gestione dati.\nDettagli: "
     }
 }

@@ -145,6 +145,7 @@
             "amiibo_api_url": "Amiibo API URL: ",
             "language": "言語: ",
             "check_update": "Leaf Installerのアップデートを確認",
+            "home_shortcut": "Leaf InstallerをHOMEメニューに追加",
             "credits": "クレジット"
         },
         "nca_warn": {
@@ -168,7 +169,7 @@
         },
         "credits": {
             "title": "以下の方々に感謝します!",
-            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
+            "desc": "- Plutonium (https://github.com/XorTroll/Plutonium) graphics library\n- Original Awoo Installer (https://github.com/Huntereb/Awoo-Installer)\n- Fork of Awoo Installer (https://github.com/harmonsir/Awoo-Installer) with HTTP and USB hard drive support\n- hekate (https://github.com/CTCaer/hekate) bootloader and BDK used by the Leaf Updater payload\n- NSteamLink (https://github.com/kxn/nsteamlink) and nx-hbloader (https://github.com/switchbrew/nx-hbloader) for the HOME Menu shortcut\n- Claude (https://claude.ai/) for the incredible speed on iterating over features"
         },
         "language": {
             "title": "Leaf Installerの言語を選択",
@@ -202,5 +203,19 @@
         "db_failed": "Amiibo データベースのダウンロードに失敗しました",
         "db_failed_desc": "インターネット接続と URL を確認してください。",
         "generic_error": "Amiibo の生成に失敗しました"
+    },
+    "shortcut": {
+        "confirm_title": "HOMEメニューに追加",
+        "confirm_desc": "HOMEメニューに次のファイルを起動するショートカットをインストールします:\nsdmc:/switch/Leaf-Installer/Leaf-Installer.nro\nNROはこの場所に置いたままにしてください — NROを更新しても\nショートカットの再インストールは不要です。起動には署名パッチ\n(sys-patch)が必要です。",
+        "add": "追加",
+        "nro_missing_title": "Leaf InstallerのNROが見つかりません",
+        "nro_missing_desc": "ショートカットは sdmc:/switch/Leaf-Installer/Leaf-Installer.nro を起動しますが、\nそこにNROが見つかりませんでした。公式リリース zip を\nSDカードのルートに展開してから、もう一度お試しください。",
+        "success_title": "ショートカットを追加しました",
+        "success_desc": "Leaf InstallerがHOMEメニューに追加されました。",
+        "exists_title": "ショートカットはインストール済みです",
+        "exists_desc": "Leaf Installerのショートカットは既にインストールされています。\n再インストールするには、先に 設定 → データ管理 から削除してください。",
+        "failed_title": "ショートカットを追加できませんでした",
+        "failed_desc": "HOMEメニューのショートカットのインストールに失敗しました: ",
+        "cleanup_failed_desc": "インストールに失敗し、残ったデータを削除できませんでした。\n設定 → データ管理 から「Leaf Installer」を削除してください。\n詳細: "
     }
 }
