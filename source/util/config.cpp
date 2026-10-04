@@ -4,6 +4,7 @@
 #include "util/json.hpp"
 
 namespace inst::config {
+    const std::string appVersion = APP_VERSION;
     std::string gAuthKey;
     std::string leafUrl;
     std::string ultrahandUrl;

@@ -256,6 +256,11 @@ $(OUTPUT).elf	:	$(OFILES)
 
 $(OFILES_SRC)	: $(HFILES_BIN)
 
+# APP_VERSION reaches the code via -D, which make doesn't track: rebuild the
+# one object that embeds it (and the NACP) whenever the Makefile changes, or a
+# version bump leaves the old string in the NRO and the update check loops.
+config.o $(OUTPUT).nacp	: $(TOPDIR)/Makefile
+
 #---------------------------------------------------------------------------------
 # you need a rule like this for each extension you use as binary data
 #---------------------------------------------------------------------------------

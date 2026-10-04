@@ -7,7 +7,9 @@
 namespace inst::config {
     static const std::string appDir = "sdmc:/switch/Leaf-Installer";
     static const std::string configPath = appDir + "/config.json";
-    static const std::string appVersion = std::string(APP_VERSION);
+    // Defined once in config.cpp (from -DAPP_VERSION) so a version bump only
+    // needs that one object rebuilt — see the config.o rule in the Makefile.
+    extern const std::string appVersion;
 
     extern std::string gAuthKey;
     extern std::string leafUrl;
