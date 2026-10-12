@@ -11,8 +11,8 @@
 - Verifies NCAs by header signature before they're installed
 - Auto updates from the Github releases page.
 - Installs and manages the latest custom firmware components via an [offline-update flow](OFFLINE_UPDATE.md) (HOS stages the files, a bundled hekate payload applies them on next boot):
-  - [Atmosphère](https://github.com/Atmosphere-NX/Atmosphere)
-  - [hekate & Nyx](https://github.com/CTCaer/hekate)
+  - [Atmosphère](https://github.com/Atmosphere-NX/Atmosphere) payload (`bootloader/payloads/fusee.bin`)
+  - [hekate & Nyx](https://github.com/CTCaer/hekate) payload (`payload.bin`)
   - [Ultrahand overlay](https://github.com/ppkantorski/Ultrahand-Overlay)
   - [sys-patch](https://github.com/impeeza/sys-patch)
   - [emuiibo](https://github.com/xortroll/emuiibo)
