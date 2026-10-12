@@ -4,6 +4,8 @@
 #include "util/json.hpp"
 
 namespace inst::config {
+    static const std::string kDefaultLockpickUrl = "https://github.com/Kofysh/Lockpick_RCM/releases";
+
     const std::string appVersion = APP_VERSION;
     std::string gAuthKey;
     std::string leafUrl;
@@ -12,6 +14,7 @@ namespace inst::config {
     std::string emuiiboUrl;
     std::string atmosphereUrl;
     std::string hekateUrl;
+    std::string lockpickUrl;
     std::string amiiboApiUrl;
     std::string lastNetUrl;
     std::vector<std::string> updateInfo;
@@ -39,6 +42,7 @@ namespace inst::config {
             {"emuiiboUrl", emuiiboUrl},
             {"atmosphereUrl", atmosphereUrl},
             {"hekateUrl", hekateUrl},
+            {"lockpickUrl", lockpickUrl},
             {"amiiboApiUrl", amiiboApiUrl},
             {"validateNCAs", validateNCAs},
             {"lastNetUrl", lastNetUrl},
@@ -66,6 +70,9 @@ namespace inst::config {
             emuiiboUrl = j["emuiiboUrl"].get<std::string>();
             atmosphereUrl = j["atmosphereUrl"].get<std::string>();
             hekateUrl = j["hekateUrl"].get<std::string>();
+            // Optional (added after the other URLs), so upgrading doesn't trip the
+            // reset-everything defaults below over one missing key.
+            lockpickUrl = j.value("lockpickUrl", kDefaultLockpickUrl);
             amiiboApiUrl = j["amiiboApiUrl"].get<std::string>();
             validateNCAs = j["validateNCAs"].get<bool>();
             lastNetUrl = j["lastNetUrl"].get<std::string>();
@@ -80,6 +87,7 @@ namespace inst::config {
             emuiiboUrl = "https://github.com/XorTroll/emuiibo/releases";
             atmosphereUrl = "https://github.com/Atmosphere-NX/Atmosphere/releases";
             hekateUrl = "https://github.com/CTCaer/hekate/releases";
+            lockpickUrl = kDefaultLockpickUrl;
             amiiboApiUrl = "https://amiiboapi.org/api/amiibo/";
             languageSetting = 99;
             autoUpdate = true;

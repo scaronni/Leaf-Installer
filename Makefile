@@ -167,10 +167,11 @@ ifneq ($(ROMFS),)
 	export NROFLAGS += --romfsdir=$(CURDIR)/$(ROMFS)
 endif
 
-.PHONY: $(BUILD) clean all payload release shortcut
+.PHONY: $(BUILD) clean all payload release shortcut initial-sd-card
 
 PAYLOAD_BIN := $(CURDIR)/payload/output/leaf-updater.bin
 RELEASE_ZIP := $(CURDIR)/Leaf-Installer.zip
+SD_CARD_ZIP := $(CURDIR)/initial-sd-card.zip
 RELEASE_STAGE := $(CURDIR)/build/release-stage
 
 #---------------------------------------------------------------------------------
@@ -216,16 +217,25 @@ release: all payload
 	@echo "Built $(RELEASE_ZIP) — $$(wc -c < $(RELEASE_ZIP)) bytes"
 
 #---------------------------------------------------------------------------------
+# Produces initial-sd-card.zip: a complete SD card for a fresh setup (hekate,
+# Atmosphère, Ultrahand, sys-patch, emuiibo, toolbox payloads) plus the
+# Leaf-Installer.zip just built. Third-party versions are pinned in
+# release/initial-sd-card.sh — bump them when tagging. Needs network access.
+initial-sd-card: release
+	@echo "Packaging $(SD_CARD_ZIP)..."
+	@bash $(CURDIR)/release/initial-sd-card.sh $(RELEASE_ZIP) $(SD_CARD_ZIP)
+
+#---------------------------------------------------------------------------------
 clean:
 	@echo clean ...
 ifeq ($(strip $(APP_JSON)),)
 	@$(MAKE) --no-print-directory -C include/Plutonium/Plutonium -f Makefile clean
 	@$(MAKE) --no-print-directory -C $(CURDIR)/payload clean 2>/dev/null || true
-	@rm -fr $(BUILD) $(TARGET).nro $(TARGET).nacp $(TARGET).elf $(RELEASE_ZIP)
+	@rm -fr $(BUILD) $(TARGET).nro $(TARGET).nacp $(TARGET).elf $(RELEASE_ZIP) $(SD_CARD_ZIP)
 else
 	@$(MAKE) --no-print-directory -C include/Plutonium/Plutonium -f Makefile clean
 	@$(MAKE) --no-print-directory -C $(CURDIR)/payload clean 2>/dev/null || true
-	@rm -fr $(BUILD) $(TARGET).nsp $(TARGET).nso $(TARGET).npdm $(TARGET).elf $(RELEASE_ZIP)
+	@rm -fr $(BUILD) $(TARGET).nsp $(TARGET).nso $(TARGET).npdm $(TARGET).elf $(RELEASE_ZIP) $(SD_CARD_ZIP)
 endif
 
 

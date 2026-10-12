@@ -18,6 +18,7 @@ namespace inst::config {
     extern std::string emuiiboUrl;
     extern std::string atmosphereUrl;
     extern std::string hekateUrl;
+    extern std::string lockpickUrl;
     extern std::string amiiboApiUrl;
     extern std::string lastNetUrl;
     extern std::vector<std::string> updateInfo;

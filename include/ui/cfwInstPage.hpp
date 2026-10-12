@@ -19,6 +19,10 @@ namespace inst::ui {
         // recursive move then takes them to their final SD-root location.
         // Currently used for Atmosphère's standalone `fusee.bin`.
         std::vector<std::pair<std::string, std::string>> extraAssets = {};
+        // When set, `url` is a bare file (not a zip): it's downloaded straight
+        // to this staging-relative path instead of being extracted. Used for
+        // Lockpick_RCM, whose releases don't always ship a zip.
+        std::string rawDest = "";
     };
 
     class cfwInstPage : public pu::ui::Layout

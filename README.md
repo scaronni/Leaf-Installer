@@ -16,12 +16,20 @@
   - [Ultrahand overlay](https://github.com/ppkantorski/Ultrahand-Overlay)
   - [sys-patch](https://github.com/impeeza/sys-patch)
   - [emuiibo](https://github.com/xortroll/emuiibo)
+  - [Lockpick_RCM](https://github.com/Kofysh/Lockpick_RCM) payload (`bootloader/payloads/Lockpick_RCM.bin`)
 - Generates [emuiibo](https://github.com/xortroll/emuiibo)-compatible Amiibo data directly on the console — no PC required. See [Amiibo data generation](#amiibo-data-generation) below.
 - Adds itself to the HOME Menu as a regular title — no NSP to download or keys to supply. See [HOME Menu shortcut](#home-menu-shortcut) below.
 - Auto-update endpoints for Leaf Installer itself and the Amiibo API are configurable under `Settings`. The CFW component release URLs are pinned to upstream and not user-editable.
 - Show storage information in the main window. It is also updated:
   - After every NSP install for network and SD installs.
   - At the end of the NSP install batch for USB installs (NS-USBLoader protocol limitation).
+
+## Installation
+
+Each [release](https://github.com/scaronni/Leaf-Installer/releases) ships two zips — extract either one to the root of the SD card:
+
+- **`Leaf-Installer.zip`** — Leaf Installer only (the NRO, the `leaf-updater.bin` payload and a sample `bootloader/hekate_ipl.ini`). Use it to add Leaf to an existing setup or to update it.
+- **`initial-sd-card.zip`** — a complete starting point for a blank SD card: [hekate & Nyx](https://github.com/CTCaer/hekate) (also copied to `/payload.bin` for modchips that boot it, such as PicoFly), [Atmosphère](https://github.com/Atmosphere-NX/Atmosphere) with `fusee.bin`, [Ultrahand overlay](https://github.com/ppkantorski/Ultrahand-Overlay), [sys-patch](https://github.com/impeeza/sys-patch), [emuiibo](https://github.com/xortroll/emuiibo), the [HWFLY](https://github.com/hwfly-nx/hwfly-toolbox) and [PicoFly](https://github.com/Ansem-SoD/Picofly) toolbox payloads, [Lockpick_RCM](https://github.com/Kofysh/Lockpick_RCM), and the same release of Leaf Installer. It overwrites `bootloader/hekate_ipl.ini` with Leaf's sample, so use it on a fresh card rather than on top of an existing configuration. Once booted, keep the components current from Leaf's CFW menu.
 
 ## Amiibo data generation
 
@@ -114,6 +122,21 @@ What this does:
 - `make -j"$(nproc)" release` runs the same build command as CI. The `release` target builds the NRO, then the `leaf-updater.bin` BPMP payload via devkitARM (already present in the `devkita64` image), and bundles them together with the sample `hekate_ipl.ini`.
 
 Output: `Leaf-Installer.zip` at the repo root — extract it to the SD card. The standalone `Leaf-Installer.nro` is also produced in the repo root if you only want to update the homebrew binary itself.
+
+### Initial SD card zip
+
+`make initial-sd-card` builds `Leaf-Installer.zip` as above, then assembles `initial-sd-card.zip` from it plus the third-party components (needs network access):
+```sh
+podman run --rm -it \
+    -v "$PWD":/Leaf-Installer:Z \
+    -w /Leaf-Installer \
+    docker.io/devkitpro/devkita64:latest \
+    bash -c "git config --system --add safe.directory '*' && make -j\"\$(nproc)\" initial-sd-card"
+```
+CI runs this on every push and attaches both zips to tagged releases. The third-party versions are pinned by release tag at the top of `release/initial-sd-card.sh` (the asset is looked up by name pattern, so e.g. Atmosphère's commit hash never needs editing) — bump them when tagging a new release. To see what to bump to, run the script with `--latest`, which ignores the pins:
+```sh
+release/initial-sd-card.sh Leaf-Installer.zip /tmp/sd.zip --latest
+```
 
 ### Regenerating the HOME Menu shortcut template
 

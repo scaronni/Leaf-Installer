@@ -191,6 +191,16 @@ namespace cfw {
         errorOut.clear();
         inst::ui::instPage::setInstBarPerc(0);
         inst::ui::instPage::setInstInfoText("cfw.downloading"_lang + c.displayName + " " + c.version);
+        if (!c.rawDest.empty()) {
+            const std::string fullDest = kStagingDirSlash + c.rawDest;
+            std::error_code ec;
+            std::filesystem::create_directories(std::filesystem::path(fullDest).parent_path(), ec);
+            if (!inst::curl::downloadFile(c.url, fullDest.c_str(), 0, true)) {
+                std::filesystem::remove(fullDest, ec);
+                return InstallResult::DownloadFailed;
+            }
+            return InstallResult::Ok;
+        }
         if (!inst::curl::downloadFile(c.url, zipPath.c_str(), 0, true)) {
             std::filesystem::remove(zipPath);
             return InstallResult::DownloadFailed;
@@ -276,6 +286,16 @@ namespace cfw {
                 {"sys-patch",         sysPatchInfo[0],   sysPatchInfo[1],   "sys-patch.zip",  "",               ""},
                 {"emuiibo",           emuiiboInfo[0],    emuiiboInfo[1],    "emuiibo.zip",    "emuiibo_sdout",  ""},
             };
+
+            // Lockpick_RCM is a standalone payload (bootloader/payloads/), not
+            // a zip. It's an optional extra: if its lookup fails, leave the row
+            // out rather than blocking the CFW components above.
+            auto lockpickInfo = inst::util::fetchLatestRelease(inst::config::lockpickUrl);
+            const std::string lockpickBin = inst::util::fetchReleaseAssetUrl(inst::config::lockpickUrl, "Lockpick_RCM.bin");
+            if (!lockpickInfo.empty() && !lockpickBin.empty()) {
+                components.push_back({"Lockpick_RCM", lockpickInfo[0], lockpickBin, "", "", "", true, {},
+                                      "bootloader/payloads/Lockpick_RCM.bin"});
+            }
 
             for (auto& c : components) {
                 auto it = inst::config::cfwInstalled.find(c.displayName);

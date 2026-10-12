@@ -1,6 +1,6 @@
 # CFW offline-update flow
 
-Leaf Installer can install and update the major custom firmware components (`Atmosphère`, `hekate + Nyx`, `Ultrahand overlay`, `sys-patch`, `emuiibo`) without you ever having to plug your SD card into a PC. But it does so in two phases instead of one — this document explains why, what happens on screen, and how to recover if anything goes wrong.
+Leaf Installer can install and update the major custom firmware components (`Atmosphère`, `hekate + Nyx`, `Ultrahand overlay`, `sys-patch`, `emuiibo`) plus the `Lockpick_RCM` payload without you ever having to plug your SD card into a PC. But it does so in two phases instead of one — this document explains why, what happens on screen, and how to recover if anything goes wrong.
 
 ## Prerequisites
 
@@ -22,6 +22,8 @@ sdmc:/
     └── Leaf-Installer/
         └── Leaf-Installer.nro
 ```
+
+Setting up a blank SD card? `initial-sd-card.zip` from the same release contains all of the above plus hekate, Atmosphère and the other components — see [Installation](README.md#installation).
 
 If you grabbed only the bare `Leaf-Installer.nro` (e.g. you updated by replacing the homebrew binary by hand) and tried to use the offline-update flow, Leaf will refuse to start with a "Leaf Updater payload missing" dialog — that's a signal to re-extract the full release zip.
 

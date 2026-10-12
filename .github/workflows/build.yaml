@@ -27,14 +27,22 @@ jobs:
       # `make release` runs `make all` (the NRO) + `make payload` (the
       # hekate-BDK BPMP binary, ARMv4T via devkitARM which the devkita64
       # image ships) and then stages everything into Leaf-Installer.zip.
-      - name: Build full release zip
-        run: make -j"$(nproc)" release
+      # `make initial-sd-card` builds that first, then adds the pinned
+      # third-party components (release/initial-sd-card.sh) for a blank SD.
+      - name: Build release zips
+        run: make -j"$(nproc)" initial-sd-card
+        env:
+          # Authenticated GitHub API lookups (the anonymous limit is shared
+          # across runners).
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload release zip
+      - name: Upload release zips
         uses: actions/upload-artifact@v7
         with:
           name: Leaf-Installer
-          path: Leaf-Installer.zip
+          path: |
+            Leaf-Installer.zip
+            initial-sd-card.zip
           if-no-files-found: error
 
   release:
@@ -46,7 +54,7 @@ jobs:
       contents: write
 
     steps:
-      - name: Download release zip
+      - name: Download release zips
         uses: actions/download-artifact@v8
         with:
           name: Leaf-Installer
@@ -55,7 +63,9 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v3
         with:
-          files: dist/Leaf-Installer.zip
+          files: |
+            dist/Leaf-Installer.zip
+            dist/initial-sd-card.zip
           prerelease: ${{ contains(github.ref, '-rc') || contains(github.ref, '-beta') }}
           draft: false
         env:

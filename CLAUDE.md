@@ -14,6 +14,8 @@ To build the full **release zip** (NRO + payload + ini), use `make release` — 
 
 Output: `Leaf-Installer.zip` at the repo root, containing `switch/Leaf-Installer/Leaf-Installer.nro`, `bootloader/payloads/leaf-updater.bin`, and `bootloader/hekate_ipl.ini`.
 
+`make initial-sd-card` (what CI runs, with `GITHUB_TOKEN` set) builds the release zip, then `release/initial-sd-card.sh` assembles `initial-sd-card.zip`: pinned hekate/Atmosphère/Ultrahand/sys-patch/emuiibo releases (by **tag** + asset glob, resolved via the GitHub API — no hashes to edit), merges emuiibo's `SdOut/`, extracts our `Leaf-Installer.zip` last (so Leaf's `hekate_ipl.ini` wins), adds fusee/hwfly/picofly/Lockpick_RCM payloads, and renames `hekate_ctcaer_*.bin` to `/payload.bin`. Bump the pins at the top of the script when tagging a release (`--latest` shows the current upstream versions). Downloads are cached in `build/initial-sd-card/downloads/`.
+
 ## Project layout
 
 This is a Switch homebrew app (forked from Awoo Installer). It uses devkitpro/devkitA64 + Plutonium for graphics.
@@ -23,7 +25,7 @@ This is a Switch homebrew app (forked from Awoo Installer). It uses devkitpro/de
 - `romfs/lang/` — translation JSON files, one per language (12 total).
 - `include/Plutonium/`, `include/libusbhsfs/`, `include/hekate/` — vendored submodules. `Plutonium` and `libusbhsfs` are built by the top-level Makefile. `hekate` is BPMP-side code; only the `bdk/` subtree is linked into the payload at `payload/`.
 - `payload/` — stand-alone hekate-BDK payload (ARMv4T) that runs after a reboot to apply the staged CFW components. Built by `make payload`. See the "CFW install flow + offline-update payload" section below.
-- `release/` — files bundled verbatim into the release zip (currently `bootloader/hekate_ipl.ini`).
+- `release/` — `bootloader/hekate_ipl.ini` (bundled verbatim into the release zip) and `initial-sd-card.sh` (assembles `initial-sd-card.zip`).
 - `shortcut/` — generator for the HOME Menu forwarder template (`romfs/shortcut/template.bin`). See the "HOME Menu shortcut" section below.
 - `Makefile` line 42 lists `SOURCES` (directories scanned for `*.cpp`/`*.c`) — new source dirs must be added there. New `.cpp` files in an existing source dir are picked up automatically.
 
@@ -64,13 +66,13 @@ After editing all JSON files, validate them: `for f in romfs/lang/*.json; do pyt
 - Serialize it in `setConfig()`.
 - Parse it in `parseConfig()`.
 - Provide a default in the `catch (...)` block at the bottom of `parseConfig()`.
-The defaults block also runs when any single key is missing, so always supply one.
+The defaults block also runs when any single key is missing, so always supply one. **That block resets *every* setting**, so a key added to an existing release must be read with `j.value("key", default)` instead of `j["key"].get<>()` — otherwise every user upgrading loses their language, URLs and `cfwInstalled` map (see `lockpickUrl`).
 
 ## GitHub release fetching
 
 `inst::util::fetchLatestRelease(releasesPageUrl, assetNameSubstring = "")` in `source/util/util.cpp:405` takes a `https://github.com/<owner>/<repo>/releases` URL, queries the GitHub API for the latest release, and returns `{tag, asset_download_url}`. By default it picks the first `.zip` asset (or the first asset if none are zips). When `assetNameSubstring` is non-empty, it only matches `.zip` assets whose name contains that substring — used for hekate, whose release ships both `hekate_ctcaer_X.Y.Z.zip` (no Nyx GUI) and `hekate_ctcaer_X.Y.Z_Nyx_A.B.C.zip` (with Nyx) and we want the latter. Empty vector means failure.
 
-Component release URLs (Atmosphère, hekate, Ultrahand, sys-patch, emuiibo) live in `inst::config::` with hardcoded defaults — they're persisted in `config.json` so a power user can hand-edit them, but the Settings UI does NOT expose them. Only Leaf Installer's own update URL and the Amiibo API URL are editable in-app.
+Component release URLs (Atmosphère, hekate, Ultrahand, sys-patch, emuiibo, Lockpick_RCM) live in `inst::config::` with hardcoded defaults — they're persisted in `config.json` so a power user can hand-edit them, but the Settings UI does NOT expose them. Only Leaf Installer's own update URL and the Amiibo API URL are editable in-app.
 
 ## CFW install flow + offline-update payload
 
@@ -82,7 +84,7 @@ The flow is split between HOS (the .nro) and BPMP (the payload) because Atmosph�
 - `cfw::installSelectedComponents(components)` — wipes `sdmc:/leaf-offline-update/`, then downloads + extracts each selected component **into the staging dir** (not the SD root). Per-component `postProcess` hooks run inside the staging dir (`emuiibo_sdout` flattens `SdOut/`, `hekate_payload` renames `hekate_ctcaer_*.bin` to `payload.bin`). After all components are staged, `armHekateAutoboot()` parses `bootloader/hekate_ipl.ini`, finds the index of `[Leaf Update]` and the current `autoboot=` value, snapshots the latter to `sdmc:/leaf-offline-update/.autoboot-prev`, rewrites `autoboot=` to the Leaf Update index. Prompts user to reboot.
 - `armHekateAutoboot()` returns negative values for distinct failure modes (ini missing, `[Leaf Update]` section missing, `autoboot=` line missing, write failed). On any failure, the user gets the `cfw.arm_failed` message telling them to launch the payload manually from hekate's Payloads menu — staging still completed successfully.
 
-`CfwComponent` struct (in `include/ui/cfwInstPage.hpp`) fields: `displayName`, `version` (latest available), `url`, `zipName`, `postProcess` (tag for per-component post-extract hook), `installedVersion` (filled from `inst::config::cfwInstalled` before showing the page), `defaultSelected` (default true; per-component knob — currently nothing overrides).
+`CfwComponent` struct (in `include/ui/cfwInstPage.hpp`) fields: `displayName`, `version` (latest available), `url`, `zipName`, `postProcess` (tag for per-component post-extract hook), `installedVersion` (filled from `inst::config::cfwInstalled` before showing the page), `defaultSelected` (default true; per-component knob — currently nothing overrides), `extraAssets` (bare files from the same release, e.g. Atmosphère's `fusee.bin`), `rawDest` (when set, `url` is a bare file downloaded straight to that staging-relative path, no extraction — used for Lockpick_RCM, whose releases don't always ship a zip). Lockpick_RCM is optional: if its lookup fails the row is omitted instead of failing the whole check.
 
 **Installed-version display**: each row shows the available version. If `displayName` is present in `inst::config::cfwInstalled` (a `std::map<std::string, std::string>` persisted in `config.json`, updated and `setConfig()`'d after every successful install), the row shows `installed  →  available`. We do NOT scan `/atmosphere/contents/*/toolbox.json` — that was tried and removed because most components don't ship one and Ultrahand bundles several sysmodules together, making the readout misleading.
 
