@@ -10,7 +10,7 @@
  *   1) Read sdmc:/leaf-offline-update/.autoboot-prev (the autoboot= value
  *      Leaf snapshotted before arming us). If absent, the user launched us
  *      from the hekate menu by hand — we leave the ini alone.
- *   2) Recursively move /leaf-offline-update/* into the SD root, merging
+ *   2) Recursively move the contents of /leaf-offline-update/ into the SD root, merging
  *      into existing directories and overwriting clashing files.
  *   3) If we had a saved autoboot value, rewrite the `autoboot=` line in
  *      /bootloader/hekate_ipl.ini back to it.
